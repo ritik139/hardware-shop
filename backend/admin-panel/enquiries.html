@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enquiries | Korraz Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-seal">K</div>
+        <div class="brand-word">KORRAZ<span>Admin Console</span></div>
+      </div>
+      <nav>
+        <a href="dashboard.html" data-page="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+          Dashboard
+        </a>
+        <a href="products.html" data-page="products">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5v-9Z"/><path d="M3.7 7.4 12 12l8.3-4.6M12 12v9"/></svg>
+          Products
+        </a>
+        <a href="enquiries.html" data-page="enquiries">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4.5 7 7.5 6 7.5-6"/></svg>
+          Enquiries
+        </a>
+      </nav>
+      <div class="logout">
+        <button id="logoutBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <p class="eyebrow">Customer Interest</p>
+      <div class="toolbar">
+        <div>
+          <h1>Enquiries</h1>
+          <p class="subtitle" style="margin:0;">Messages submitted from the contact form.</p>
+        </div>
+        <select id="statusFilter" class="btn btn-outline" style="cursor:pointer;">
+          <option value="">All statuses</option>
+          <option value="new">New</option>
+          <option value="seen">Seen</option>
+          <option value="replied">Replied</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Name</th><th>Phone</th><th>Interest</th><th>Message</th><th>Status</th><th>Received</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="enquiriesBody">
+            <tr><td colspan="7" class="empty-state">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+  <script>
+    async function loadEnquiries() {
+      const statusValue = document.getElementById('statusFilter').value;
+      const url = '/api/enquiries/admin/all' + (statusValue ? '?status=' + statusValue : '');
+      const res = await adminFetch(url);
+      const enquiries = await res.json();
+      const tbody = document.getElementById('enquiriesBody');
+
+      if (enquiries.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No enquiries found.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = enquiries
+        .map(
+          (e) => `
+        <tr>
+          <td>${escapeHtml(e.name)}</td>
+          <td><a href="tel:${escapeHtml(e.phone)}">${escapeHtml(e.phone)}</a></td>
+          <td>${escapeHtml(e.interest)}</td>
+          <td style="max-width:220px; white-space:normal;">${escapeHtml(e.message) || '—'}</td>
+          <td><span class="badge badge-${e.status}">${e.status}</span></td>
+          <td>${formatDate(e.createdAt)}</td>
+          <td class="row-actions">
+            ${e.status !== 'seen' ? `<button data-id="${e._id}" data-status="seen">Mark Seen</button>` : ''}
+            ${e.status !== 'replied' ? `<button data-id="${e._id}" data-status="replied">Mark Replied</button>` : ''}
+            <button class="danger" data-id="${e._id}" data-delete="1">Delete</button>
+          </td>
+        </tr>`
+        )
+        .join('');
+
+      tbody.querySelectorAll('button[data-status]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          await adminFetch('/api/enquiries/admin/' + btn.dataset.id, {
+            method: 'PATCH',
+            body: JSON.stringify({ status: btn.dataset.status }),
+          });
+          loadEnquiries();
+        });
+      });
+
+      tbody.querySelectorAll('button[data-delete]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          if (!confirm('Delete this enquiry?')) return;
+          await adminFetch('/api/enquiries/admin/' + btn.dataset.id, { method: 'DELETE' });
+          loadEnquiries();
+        });
+      });
+    }
+
+    document.getElementById('statusFilter').addEventListener('change', loadEnquiries);
+
+    (async function () {
+      await requireAdminAuth();
+      initSidebar('enquiries');
+      loadEnquiries();
+    })();
+  </script>
+</body>
+</html>

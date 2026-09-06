@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products | Korraz Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-seal">K</div>
+        <div class="brand-word">KORRAZ<span>Admin Console</span></div>
+      </div>
+      <nav>
+        <a href="dashboard.html" data-page="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+          Dashboard
+        </a>
+        <a href="products.html" data-page="products">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5v-9Z"/><path d="M3.7 7.4 12 12l8.3-4.6M12 12v9"/></svg>
+          Products
+        </a>
+        <a href="enquiries.html" data-page="enquiries">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4.5 7 7.5 6 7.5-6"/></svg>
+          Enquiries
+        </a>
+      </nav>
+      <div class="logout">
+        <button id="logoutBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <p class="eyebrow">Catalogue</p>
+      <div class="toolbar">
+        <div>
+          <h1>Products</h1>
+          <p class="subtitle" style="margin:0;">Add, edit or remove items shown on the website.</p>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <a href="product-form.html?voice=1" class="btn btn-outline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg>
+            Add by Voice
+          </a>
+          <a href="product-form.html" class="btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+            Add Product
+          </a>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th></th><th>Title</th><th>Code</th><th>Category</th><th>Price</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="productsBody">
+            <tr><td colspan="7" class="empty-state">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+  <script>
+    async function loadProducts() {
+      const res = await adminFetch('/api/products/admin/all');
+      const products = await res.json();
+      const tbody = document.getElementById('productsBody');
+
+      if (products.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No products yet. Click "Add Product" to create one.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = products
+        .map(
+          (p) => `
+        <tr>
+          <td>${p.image ? `<img src="${p.image}" alt="" style="width:42px;height:42px;object-fit:cover;border-radius:8px;border:1px solid var(--hairline);">` : ''}</td>
+          <td>${escapeHtml(p.title)}</td>
+          <td>${escapeHtml(p.code)}</td>
+          <td>${escapeHtml(p.category)}</td>
+          <td>₹${p.price}</td>
+          <td>${p.isActive ? '<span class="badge badge-new">Live</span>' : '<span class="badge badge-seen">Hidden</span>'}</td>
+          <td class="row-actions">
+            <a href="product-form.html?id=${p._id}">Edit</a>
+            <button class="danger" data-id="${p._id}" data-name="${escapeHtml(p.title)}">Delete</button>
+          </td>
+        </tr>`
+        )
+        .join('');
+
+      tbody.querySelectorAll('button.danger').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          if (!confirm(`Delete "${btn.dataset.name}"? This cannot be undone.`)) return;
+          await adminFetch('/api/products/admin/' + btn.dataset.id, { method: 'DELETE' });
+          loadProducts();
+        });
+      });
+    }
+
+    (async function () {
+      await requireAdminAuth();
+      initSidebar('products');
+      loadProducts();
+    })();
+  </script>
+</body>
+</html>

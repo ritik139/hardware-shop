@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add/Edit Product | Korraz Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-seal">K</div>
+        <div class="brand-word">KORRAZ<span>Admin Console</span></div>
+      </div>
+      <nav>
+        <a href="dashboard.html" data-page="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+          Dashboard
+        </a>
+        <a href="products.html" data-page="products">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5v-9Z"/><path d="M3.7 7.4 12 12l8.3-4.6M12 12v9"/></svg>
+          Products
+        </a>
+        <a href="enquiries.html" data-page="enquiries">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4.5 7 7.5 6 7.5-6"/></svg>
+          Enquiries
+        </a>
+      </nav>
+      <div class="logout">
+        <button id="logoutBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <p class="eyebrow">Catalogue</p>
+      <h1 id="formTitle">Add Product</h1>
+      <p class="subtitle">Fill in the details below by typing, or tap the <strong>mic icon</strong> beside any field to speak it in — in English or Hindi. Fields marked * are required.</p>
+      <div id="voiceLangToggle"></div>
+
+      <div class="form-card">
+        <form id="productForm">
+          <div class="form-section-label">Identity</div>
+          <div class="form-cols">
+            <div class="form-row">
+              <label>Title * <span>(e.g. M — 5001)</span></label>
+              <input type="text" name="title" required>
+            </div>
+            <div class="form-row">
+              <label>URL Slug * <span>(no spaces, e.g. m5001)</span></label>
+              <input type="text" name="slug" required>
+            </div>
+          </div>
+
+          <div class="form-cols">
+            <div class="form-row">
+              <label>Product Code *</label>
+              <input type="text" name="code" required>
+            </div>
+            <div class="form-row">
+              <label>Category *</label>
+              <input type="text" name="category" required placeholder="e.g. Category name">
+            </div>
+          </div>
+
+          <div class="form-section-label">Pricing &amp; Presentation</div>
+          <div class="form-cols">
+            <div class="form-row">
+              <label>Subtitle <span>(e.g. Full Brass · Set of 2)</span></label>
+              <input type="text" name="subText">
+            </div>
+            <div class="form-row">
+              <label>Price (₹) *</label>
+              <input type="number" name="price" min="0" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label>Product Image</label>
+            <input type="file" name="imageFile" accept="image/*">
+            <img id="imgPreview" class="img-preview" style="display:none;">
+          </div>
+
+          <div class="form-row">
+            <label>Show on website?</label>
+            <select name="isActive">
+              <option value="true">Yes — Live</option>
+              <option value="false">No — Hidden</option>
+            </select>
+          </div>
+
+          <div class="form-section-label">Finishes</div>
+          <div class="form-row" style="margin-bottom:4px;">
+            <div id="finishList"></div>
+            <button type="button" class="add-finish-btn" id="addFinishBtn">+ Add finish</button>
+          </div>
+
+          <div style="margin-top:28px; padding-top:22px; border-top:1px solid var(--hairline);">
+            <button type="submit" class="btn" id="saveBtn">Save Product</button>
+            <div class="form-status" id="formStatus"></div>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+  <script src="voice-assistant.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id');
+    const form = document.getElementById('productForm');
+    const finishList = document.getElementById('finishList');
+    const status = document.getElementById('formStatus');
+    let uploadedImageData = null;
+
+    function addFinishRow(name = '', color = '#c9a24b', code = '') {
+      const row = document.createElement('div');
+      row.className = 'finish-row';
+      row.innerHTML = `
+        <input type="text" placeholder="Finish name (e.g. Gold)" class="finish-name" value="${escapeHtml(name)}">
+        <input type="color" class="finish-color" value="${color}">
+        <button type="button" title="Remove">✕</button>
+      `;
+      row.querySelector('button').addEventListener('click', () => row.remove());
+      finishList.appendChild(row);
+      KorrazVoice.attachFieldMic(row.querySelector('.finish-name'), { type: 'text' });
+    }
+
+    document.getElementById('addFinishBtn').addEventListener('click', () => addFinishRow());
+
+    // Image upload -> convert to base64 so it can be stored directly in MongoDB
+    document.querySelector('input[name="imageFile"]').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        uploadedImageData = reader.result;
+        const preview = document.getElementById('imgPreview');
+        preview.src = uploadedImageData;
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    async function loadExistingProduct() {
+      if (!productId) {
+        addFinishRow(); // start with one empty row for a new product
+        return;
+      }
+      document.getElementById('formTitle').textContent = 'Edit Product';
+      const res = await adminFetch('/api/products/admin/all');
+      const products = await res.json();
+      const p = products.find((x) => x._id === productId);
+      if (!p) {
+        status.textContent = 'Product not found.';
+        status.className = 'form-status error';
+        return;
+      }
+
+      form.title.value = p.title || '';
+      form.slug.value = p.slug || '';
+      form.code.value = p.code || '';
+      form.category.value = p.category || '';
+      form.subText.value = p.subText || '';
+      form.price.value = p.price || '';
+      form.isActive.value = String(p.isActive);
+
+      if (p.image) {
+        uploadedImageData = p.image;
+        const preview = document.getElementById('imgPreview');
+        preview.src = p.image;
+        preview.style.display = 'block';
+      }
+
+      if (p.finishes && p.finishes.length) {
+        p.finishes.forEach((f) => addFinishRow(f.name, f.swatchColor, f.code));
+      } else {
+        addFinishRow();
+      }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = '';
+      status.className = 'form-status';
+      document.getElementById('saveBtn').disabled = true;
+
+      const finishes = Array.from(finishList.querySelectorAll('.finish-row'))
+        .map((row) => ({
+          name: row.querySelector('.finish-name').value.trim(),
+          swatchColor: row.querySelector('.finish-color').value,
+        }))
+        .filter((f) => f.name);
+
+      const payload = {
+        title: form.title.value.trim(),
+        slug: form.slug.value.trim().toLowerCase().replace(/\s+/g, '-'),
+        code: form.code.value.trim(),
+        category: form.category.value,
+        subText: form.subText.value.trim(),
+        price: Number(form.price.value),
+        isActive: form.isActive.value === 'true',
+        image: uploadedImageData,
+        finishes,
+      };
+
+      try {
+        const res = await adminFetch(
+          productId ? '/api/products/admin/' + productId : '/api/products/admin/create',
+          {
+            method: productId ? 'PUT' : 'POST',
+            body: JSON.stringify(payload),
+          }
+        );
+        const data = await res.json();
+
+        if (!res.ok) {
+          status.textContent = data.message || 'Something went wrong';
+          status.className = 'form-status error';
+          document.getElementById('saveBtn').disabled = false;
+          return;
+        }
+
+        status.textContent = 'Saved! Redirecting…';
+        status.className = 'form-status success';
+        setTimeout(() => (window.location.href = 'products.html'), 700);
+      } catch (err) {
+        status.textContent = 'Server error — please try again.';
+        status.className = 'form-status error';
+        document.getElementById('saveBtn').disabled = false;
+      }
+    });
+
+    // ===== Voice: English/Hindi switch (shared by every mic on this page) =====
+    KorrazVoice.mountLanguageToggle(document.getElementById('voiceLangToggle'));
+
+    // ===== Voice: every field gets its own mic button, fed straight into that field =====
+    KorrazVoice.initFieldVoice(form, {
+      title: 'text',
+      slug: 'slug',
+      code: 'text',
+      category: 'text',
+      subText: 'text',
+      price: 'price',
+      isActive: 'select-yesno',
+    });
+
+    // For a new product, keep the slug in sync with the title until the admin
+    // types/speaks their own slug. Existing products keep their saved slug.
+    form.title.addEventListener('input', () => {
+      if (!productId && !form.slug.dataset.touched) {
+        form.slug.value = form.title.value.toLowerCase().replace(/\s+/g, '-');
+      }
+    });
+    form.slug.addEventListener('input', () => { form.slug.dataset.touched = '1'; });
+
+    (async function () {
+      await requireAdminAuth();
+      initSidebar('products');
+      loadExistingProduct();
+
+      // Coming from "Add by Voice" on the products list — start speaking the title right away
+      if (params.get('voice') === '1') {
+        setTimeout(() => KorrazVoice.triggerMic(form.title), 250);
+      }
+    })();
+  </script>
+</body>
+</html>
