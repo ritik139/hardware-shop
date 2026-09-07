@@ -191,6 +191,8 @@
   .products-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
   .pcard{background:var(--ink); border:1px solid var(--hairline); border-radius:var(--r-md); overflow:hidden; transition:border-color .25s ease, transform .25s ease;}
   .pcard:hover{border-color:var(--brass); transform:translateY(-4px);}
+  .pd-sib-swatches{display:flex; gap:6px; margin-top:10px;}
+  .pd-sib-swatch{width:10px; height:10px; border-radius:50%; border:1px solid var(--hairline-2); flex-shrink:0;}
   .pcard-media{aspect-ratio:1/1; position:relative;}
   .pcard-body{padding:22px;}
   .pcard-eyebrow{font-family:'Inter',sans-serif; font-size:0.65rem; letter-spacing:.12em; text-transform:uppercase; color:var(--brass); font-weight:700;}
@@ -198,6 +200,37 @@
   .pcard-sub{font-size:0.78rem; color:var(--mute); margin-top:4px;}
   .pcard-foot{display:flex; justify-content:space-between; align-items:center; margin-top:18px; padding-top:16px; border-top:1px solid var(--hairline);}
   .price{font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:700;}
+
+  /* hover-reveal wishlist + add-to-cart icons on the "More In This Category" cards */
+  .pcard-actions{position:absolute; top:12px; right:12px; z-index:3; display:flex; flex-direction:column; gap:10px;}
+  .pcard-icon-btn{
+    position:relative; width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:rgba(20,17,13,0.55); backdrop-filter:blur(6px); color:#fff; border:1px solid rgba(255,255,255,0.14);
+    cursor:pointer; opacity:0; transform:translateX(16px) scale(.82);
+    transition:opacity .38s cubic-bezier(.22,1,.36,1), transform .38s cubic-bezier(.22,1,.36,1), background .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .pcard-icon-btn svg{width:19px; height:19px; transition:all .2s ease;}
+  .pcard:hover .pcard-icon-btn{opacity:1; transform:translateX(0) scale(1);}
+  .pcard-actions .pcard-icon-btn:nth-child(1){transition-delay:.03s;}
+  .pcard-actions .pcard-icon-btn:nth-child(2){transition-delay:.1s;}
+  .pcard-icon-btn:hover{background:var(--brass); border-color:var(--brass); color:var(--btn-ink); box-shadow:0 6px 16px rgba(0,0,0,.25);}
+  .pcard-icon-btn:active{transform:scale(.9);}
+  .pcard-icon-btn.active{background:rgba(20,17,13,0.8);}
+  .pcard-icon-btn.active svg{fill:var(--brass); stroke:var(--brass);}
+  .pcard-icon-btn.added{background:var(--brass); border-color:var(--brass); color:var(--btn-ink);}
+  .pcard-icon-btn.pop{animation:pcardIconPop .35s ease;}
+  @keyframes pcardIconPop{0%{transform:scale(1);}45%{transform:scale(1.28);}100%{transform:scale(1);}}
+  .pcard-icon-btn::after{
+    content:attr(data-tip); position:absolute; right:calc(100% + 10px); top:50%; transform:translateY(-50%) translateX(6px);
+    background:var(--ink); color:var(--bone); font-family:'Inter',sans-serif; font-size:0.64rem; font-weight:700;
+    letter-spacing:.03em; padding:6px 10px; border-radius:6px; white-space:nowrap; opacity:0; pointer-events:none;
+    box-shadow:0 6px 14px rgba(0,0,0,.3); transition:opacity .2s ease, transform .2s ease;
+  }
+  .pcard-icon-btn:hover::after{opacity:1; transform:translateY(-50%) translateX(0);}
+  @media (max-width:860px){
+    .pcard-icon-btn{opacity:1; transform:none; background:rgba(20,17,13,0.55);}
+    .pcard-icon-btn::after{display:none;}
+  }
 
   footer{background:var(--dark); border-top:1px solid var(--dark-line); padding:60px 0 0; color:var(--dark-text-dim);}
   .footer-bottom{display:flex; justify-content:space-between; align-items:center; padding:26px 0; border-top:1px solid var(--dark-line); margin-top:40px; font-size:0.76rem; color:var(--dark-mute);}
@@ -216,6 +249,12 @@
     .products-grid{grid-template-columns:repeat(2,1fr);}
     .top-bar{display:none;}
   }
+  /* mobile-only sticky add-to-cart bar — hidden by default at every width;
+     the @media (max-width:640px) block below overrides this to display:flex
+     only on small screens. This base rule was missing, which is why the
+     bar was rendering as plain unstyled content at the bottom of the page
+     on desktop instead of staying off-screen. */
+  .pd-sticky-bar{ display:none; }
   @media (max-width:640px){
     .wrap{padding:0 20px;}
     header .nav-inner{padding:14px 0; align-items:center;}
@@ -240,6 +279,12 @@
     .pd-thumbs{gap:8px;}
     .pd-thumb{width:60px; height:60px;}
     body{padding-bottom:64px;}
+    /* sticky add-to-cart bar sits fixed above the tab-bar and stays visible
+       all the way to the bottom of the page — without extra clearance here,
+       its ~64px height (plus safe-area) permanently hides the footer behind
+       the two stacked fixed bars, since body's 64px padding only accounts
+       for the tab-bar. */
+    footer{padding-bottom:calc(64px + env(safe-area-inset-bottom));}
     .mobile-tabbar{
       display:flex; position:fixed; left:0; right:0; bottom:0; z-index:150;
       background:rgba(20,17,13,0.97); backdrop-filter:blur(14px); border-top:1px solid var(--dark-line);
@@ -521,7 +566,7 @@
           <input type="text" id="qtyVal" value="1" readonly>
           <button id="qtyPlus" aria-label="Increase quantity">+</button>
         </div>
-        <span style="font-size:0.8rem; color:var(--mute);">2 sets in a pack</span>
+        <span style="font-size:0.8rem; color:var(--mute);" id="pdQtyNote">2 sets in a pack</span>
       </div>
 
       <div class="pd-actions" id="pdActionsRow">
@@ -743,7 +788,17 @@
     const others = Object.values(CATALOG).filter(p => p.id !== currentId).slice(0, 3);
     grid.innerHTML = others.map(p => `
       <a class="pcard" href="product-detail.html?id=${p.id}" style="display:block;">
-        <div class="pcard-media art">${p.image ? `<img class="real-photo" src="${p.image}" alt="${p.title}">` : artTile(p.icon, 'Hardware')}</div>
+        <div class="pcard-media art">
+          ${p.image ? `<img class="real-photo" src="${p.image}" alt="${p.title}">` : artTile(p.icon, 'Hardware')}
+          <div class="pcard-actions">
+            <button class="pcard-icon-btn pcard-wish" data-id="${p.id}" aria-label="Add to wishlist" data-tip="Wishlist">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 8 2 4.5 5.4 3.6 8 2.9 10.4 4.2 12 6.6c1.6-2.4 4-3.7 6.6-3 3.4.9 4.8 4.4 3.4 7.6-2.5 4.7-10 9.3-10 9.3Z"/></svg>
+            </button>
+            <button class="pcard-icon-btn pcard-quickcart" data-id="${p.id}" aria-label="Add to cart" data-tip="Add to Cart">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17.5" cy="19.5" r="1.4"/></svg>
+            </button>
+          </div>
+        </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">${p.eyebrow}</div>
           <div class="pcard-title">${p.title}</div>
@@ -751,12 +806,21 @@
           <div class="pcard-foot"><div class="price">${p.price}</div><span style="font-size:0.72rem; color:var(--brass); font-weight:700; text-transform:uppercase;">View →</span></div>
         </div>
       </a>`).join('');
+    syncSiblingCardStates();
   }
 
   /* ---------------- catalog-item mode (from products.html — no backend record, WhatsApp enquiry only) ---------------- */
   let IS_CATALOG_MODE = false;
   let CURRENT_PRODUCT_ID = '';
   let CURRENT_CATALOG_PRODUCT = null;
+  /* renderCatalogProduct() below keeps these in sync with whatever the person
+     has picked (color/size/finish pills) — module-scoped (not local to that
+     function) so the Add to Cart handler further down, which lives in a
+     separate init() closure, can read the current selection at click-time
+     and save it into koraaz_catalog_meta for cart.html / the WhatsApp
+     enquiry message. */
+  let CURRENT_SELECTED_COLOR = null;
+  let CURRENT_SELECTED_SIZE = null;
 
   /* size/finish/colour names sometimes contain a literal " (inch mark) —
      e.g. 202" SS Half Door Stopper — which breaks a double-quoted HTML
@@ -767,6 +831,14 @@
     return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
   }
 
+  /* single source of truth for a catalog item's id, derived the same way
+     whether it's the page's own product (buildCatalogProductFromParams) or
+     a sibling card in "More In This Category" — so wishlist/cart state
+     (keyed by this id) always matches between the two. */
+  function makeCatalogId(cat, name){
+    return (cat + '-' + name).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  }
+
   function buildCatalogProductFromParams(params){
     const cat = params.get('cat') || 'Hardware';
     const name = params.get('name') || cat;
@@ -774,7 +846,7 @@
     const note = params.get('note') || '';
     const sizesRaw = params.get('sizes') || '';
     const sizes = sizesRaw ? sizesRaw.split('|').filter(Boolean) : [];
-    const id = params.get('id') || (cat + '-' + name).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    const id = params.get('id') || makeCatalogId(cat, name);
     const subLine = [sub, note].filter(Boolean).join(' · ');
     const img = params.get('img') || '';
     const imagesRaw = params.get('images') || '';
@@ -851,7 +923,12 @@
 
   function showShopChrome(show){
     const d = show ? '' : 'none';
-    ['pdRating','pdFinishBlock','pdQtyRow','pdActionsRow','pdRelatedSection'].forEach(elId => {
+    /* pdQtyRow/pdActionsRow (the qty stepper + real Add to Cart button) are
+       intentionally NOT in this hide-list — catalog items need those too,
+       so a person can add an item to the cart from inside its own detail
+       page (with a color already picked), not only via the tiny hover
+       icon back on the products.html grid. */
+    ['pdRating','pdFinishBlock','pdRelatedSection'].forEach(elId => {
       const el = document.getElementById(elId);
       if(el) el.style.display = d;
     });
@@ -1016,6 +1093,7 @@
           selectedSize = btn.dataset.size;
           sizeNameEl.textContent = '— ' + selectedSize;
           waLinkEl.href = catalogWaLink(product, selectedSize, selectedFinish, selectedColor);
+          syncButtonStates();
           /* if we know exactly which photo belongs to this size, swap the
              large image + matching thumb — otherwise fall back to the
              count-based guess (one photo per size, same order) */
@@ -1054,6 +1132,7 @@
             selectedColor = btn.dataset.color;
             colorNameEl.textContent = '— ' + selectedColor;
             waLinkEl.href = catalogWaLink(product, selectedSize, selectedFinish, selectedColor);
+            syncButtonStates();
             const idx = Number(btn.dataset.index);
             setCatalogMain(catalogImages[idx]);
             setActiveThumbBySrc(catalogImages[idx]);
@@ -1093,11 +1172,14 @@
               selectedSize = sizeByImageIndex[i];
               sizeNameEl.textContent = '— ' + selectedSize;
               waLinkEl.href = catalogWaLink(product, selectedSize, selectedFinish, selectedColor);
+              syncButtonStates();
             }
           } else if(imagePerSize){
             sizesWrap.querySelectorAll('.pd-size-pill').forEach(b => b.classList.toggle('active', Number(b.dataset.index) === i));
+            selectedSize = product.sizes[i];
             sizeNameEl.textContent = '— ' + product.sizes[i];
             waLinkEl.href = catalogWaLink(product, product.sizes[i], selectedFinish, selectedColor);
+            syncButtonStates();
           }
           /* keep the colour pill in sync when thumbs and colors map 1:1 */
           if(imagePerColor){
@@ -1105,6 +1187,7 @@
             selectedColor = product.colors[i];
             colorNameEl.textContent = '— ' + selectedColor;
             waLinkEl.href = catalogWaLink(product, selectedSize, selectedFinish, selectedColor);
+            syncButtonStates();
           }
           /* keep the finish pill + price in sync with whichever photo was clicked */
           if(hasExplicitFinishMap){
@@ -1120,8 +1203,39 @@
     }
 
     document.getElementById('pdWaLinkText').textContent = 'Enquire on WhatsApp for Pricing';
+    /* "2 sets in a pack" is a numbered-product-specific detail (fixed pack
+       size) that doesn't apply generically across the catalog — swap it
+       for a neutral qty label. The qty input itself should NOT be hard
+       reset to 1: if this item is already sitting in the cart (added from
+       here or updated from cart.html) we want the stepper to pick up right
+       where the cart left off, so the same quantity is visible on both
+       pages until the person changes it themselves. Only fall back to 1
+       when the item isn't in the cart yet (a genuinely fresh product). */
+    const qtyNoteEl = document.getElementById('pdQtyNote');
+    if(qtyNoteEl) qtyNoteEl.textContent = 'Qty';
+    const qtyInput = document.getElementById('qtyVal');
+    if(qtyInput){
+      const savedQtyMap = getQtyMap();
+      /* keyed the same way Add to Cart saves it — base id alone is stale
+         now that colour/size get folded into the cart key, so this always
+         looked up the wrong (or missing) entry for any item added in a
+         specific colour, flashing "1" for a moment before syncButtonStates()
+         corrected it later in init(). Look it up by the exact key this
+         default colour/size combination would produce instead. */
+      const key = makeCartKey(product.id, selectedColor || '', selectedSize || '');
+      qtyInput.value = savedQtyMap[key] || '1';
+    }
     renderCategorySiblings(product);
   }
+
+  /* finish/color names used across the CATALOG (products.html) mapped to a
+     display hex so sibling cards can show a quick swatch-dot preview
+     without the person having to click through to see what's available */
+  const COLOR_HEX = {
+    'Black': '#1a1a1a', 'Rose Gold': '#caa08a', 'Gold': '#cfa03c',
+    'Antique Bronze': '#8a6a29', 'Silver Chrome': '#c8c8c8',
+    'SS': '#b0b3b8', 'SSF': '#a8a8a8', 'CP': '#cfd3d6'
+  };
 
   /* "More In This Category" — for a catalog item (e.g. one of the 5 Key Hole
      styles), show the other styles from the same category so the person can
@@ -1141,6 +1255,23 @@
     const h2El = section.querySelector('h2');
     if(eyebrowEl) eyebrowEl.textContent = 'More In This Category';
     if(h2El) h2El.textContent = product.category;
+    /* "view all" only earns its place when there are more siblings than the
+       4 shown below — otherwise every item is already on screen */
+    const headEl = section.querySelector('.section-head');
+    let viewAllEl = section.querySelector('.pd-related-viewall');
+    if(siblings.length > 4){
+      const totalCount = siblings.length + 1; /* + the item currently being viewed */
+      const viewAllUrl = 'products.html?cat=' + encodeURIComponent(product.category);
+      if(!viewAllEl && headEl){
+        viewAllEl = document.createElement('a');
+        viewAllEl.className = 'pd-related-viewall';
+        viewAllEl.style.cssText = 'font-family:"Inter",sans-serif; font-size:0.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--brass); font-weight:700; white-space:nowrap;';
+        headEl.appendChild(viewAllEl);
+      }
+      if(viewAllEl){ viewAllEl.href = viewAllUrl; viewAllEl.textContent = `View all ${totalCount} items →`; }
+    } else if(viewAllEl){
+      viewAllEl.remove();
+    }
     grid.innerHTML = siblings.slice(0, 4).map(it => {
       const params = new URLSearchParams();
       params.set('src', 'catalog');
@@ -1155,16 +1286,34 @@
       if(it.sizes && it.sizes.length) params.set('sizes', it.sizes.join('|'));
       if(it.specs && it.specs.length) params.set('specs', it.specs.map(row => row.join(':::')).join('|||'));
       const url = 'product-detail.html?' + params.toString();
+      const id = makeCatalogId(product.category, it.name);
+      const swatchesHtml = (it.colors && it.colors.length)
+        ? `<div class="pd-sib-swatches">${it.colors.map(c => `<span class="pd-sib-swatch" style="background:${COLOR_HEX[c] || 'var(--brass)'}" title="${c}"></span>`).join('')}</div>`
+        : '';
+      const safeUrl = url.replace(/&/g, '&amp;');
+      const safeSizes = escAttr((it.sizes || []).join('|'));
       return `
       <a class="pcard" href="${url}" style="display:block;">
-        <div class="pcard-media art">${it.img ? `<img class="real-photo" src="${it.img}" alt="${it.name}">` : ''}</div>
+        <div class="pcard-media art">
+          ${it.img ? `<img class="real-photo" src="${it.img}" alt="${it.name}">` : ''}
+          <div class="pcard-actions">
+            <button class="pcard-icon-btn pcard-wish" data-id="${id}" data-name="${escAttr(it.name)}" data-sub="${escAttr(it.sub || '')}" data-cat="${escAttr(product.category)}" data-url="${safeUrl}" data-sizes="${safeSizes}" aria-label="Add to wishlist" data-tip="Wishlist">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 8 2 4.5 5.4 3.6 8 2.9 10.4 4.2 12 6.6c1.6-2.4 4-3.7 6.6-3 3.4.9 4.8 4.4 3.4 7.6-2.5 4.7-10 9.3-10 9.3Z"/></svg>
+            </button>
+            <button class="pcard-icon-btn pcard-quickcart" data-id="${id}" data-name="${escAttr(it.name)}" data-sub="${escAttr(it.sub || '')}" data-cat="${escAttr(product.category)}" data-url="${safeUrl}" data-img="${escAttr(it.img || '')}" aria-label="Add to cart" data-tip="Add to Cart">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17.5" cy="19.5" r="1.4"/></svg>
+            </button>
+          </div>
+        </div>
         <div class="pcard-body">
           <div class="pcard-eyebrow">${product.category}</div>
           <div class="pcard-title">${it.name}</div>
+          ${swatchesHtml}
           <div class="pcard-foot"><span style="font-size:0.72rem; color:var(--brass); font-weight:700; text-transform:uppercase;">View →</span></div>
         </div>
       </a>`;
     }).join('');
+    syncSiblingCardStates();
   }
 
   function loadProduct(){
@@ -1195,6 +1344,14 @@
     document.getElementById('pdDescLong1').textContent = product.descLong1;
     document.getElementById('pdDescLong2').textContent = product.descLong2;
     document.querySelector('.pd-qty-row span').textContent = product.packNote;
+    /* same rule as the catalog-mode path below: if this product is already
+       in the cart, show its saved quantity instead of the static "1" the
+       markup starts with, so detail page and cart page agree. */
+    const backendQtyInput = document.getElementById('qtyVal');
+    if(backendQtyInput){
+      const savedQtyMap = getQtyMap();
+      backendQtyInput.value = savedQtyMap[product.id] || '1';
+    }
 
     document.getElementById('pdSpecs').innerHTML = product.specs.map(row => `<div class="pd-spec-row"><span>${row[0]}</span><span>${row[1]}</span></div>`).join('');
 
@@ -1232,13 +1389,29 @@
   }
   // quantity stepper
   const qtyVal = document.getElementById('qtyVal');
+  /* if this product is already in the cart, changing the stepper here
+     should update the cart's saved quantity immediately — not just at the
+     next "Add to Cart" click — so cart.html reflects it the moment the
+     person opens it, exactly the way updating the quantity on cart.html
+     already shows up back here on reload. Items not yet in the cart just
+     move the stepper as before; nothing is written until they actually add it. */
+  function syncQtyToCartIfPresent(v){
+    if(!CURRENT_PRODUCT_ID) return;
+    const key = currentCartKey();
+    if(!getCart().includes(key)) return;
+    const qtyMap = getQtyMap();
+    qtyMap[key] = v;
+    setQtyMap(qtyMap);
+  }
   document.getElementById('qtyMinus').addEventListener('click', () => {
     let v = Math.max(1, parseInt(qtyVal.value,10) - 1);
     qtyVal.value = v;
+    syncQtyToCartIfPresent(v);
   });
   document.getElementById('qtyPlus').addEventListener('click', () => {
     let v = Math.min(20, parseInt(qtyVal.value,10) + 1);
     qtyVal.value = v;
+    syncQtyToCartIfPresent(v);
   });
 
   /* ---------------- cart + wishlist (localStorage, shared with products.html / cart.html / wishlist.html) ---------------- */
@@ -1254,17 +1427,161 @@
      wishlisted, so wishlist.html can render it without hitting /api/products. */
   function getWishlistMeta(){ try{ return JSON.parse(localStorage.getItem('koraaz_wishlist_meta') || '{}'); } catch(e){ return {}; } }
   function setWishlistMeta(map){ localStorage.setItem('koraaz_wishlist_meta', JSON.stringify(map)); }
+  /* same idea, for cart.html — a catalog item added to cart from THIS page
+     (as opposed to the products.html grid's own quick-add icon, which
+     already saves this via saveCatalogMeta()) needs the same snapshot
+     stashed under the same key, or cart.html has no way to know its name/
+     photo/link and the WhatsApp enquiry line silently drops it. */
+  function getCatalogMeta(){ try{ return JSON.parse(localStorage.getItem('koraaz_catalog_meta') || '{}'); } catch(e){ return {}; } }
+  function setCatalogMeta(map){ localStorage.setItem('koraaz_catalog_meta', JSON.stringify(map)); }
+
+  /* a single product id is no longer enough to identify a CART LINE once
+     colors/sizes are selectable — "Brass Solid Material" in Rose Gold and
+     the same product in Black must live as two separate cart rows, each
+     with its own quantity, not overwrite one another. So the actual key
+     used in koraaz_cart / koraaz_cart_qty / koraaz_catalog_meta is the
+     product id PLUS whichever color/size was active when it was added.
+     Products with no selectable color/size (or the sibling-card quick-add,
+     which never picks one) just get the bare id back — identical to the
+     old behaviour, so nothing already in a person's cart breaks. */
+  function makeCartKey(id, color, size){
+    let key = id;
+    if(color) key += '::c:' + color;
+    if(size) key += '::s:' + size;
+    return key;
+  }
+  function parseCartKey(key){
+    const parts = String(key).split('::');
+    let id = parts[0], color = '', size = '';
+    for(let i = 1; i < parts.length; i++){
+      if(parts[i].startsWith('c:')) color = parts[i].slice(2);
+      else if(parts[i].startsWith('s:')) size = parts[i].slice(2);
+    }
+    return { id, color, size };
+  }
+  /* the cart key for whatever color/size pill is currently active on THIS
+     page — recomputed live so switching color instantly reflects whether
+     THAT variant (not just the base product) is already in the cart. */
+  function currentCartKey(){
+    const pickedColor = document.querySelector('#pdColors .pd-size-pill.active')?.dataset.color || '';
+    const pickedSize = document.querySelector('#pdSizes .pd-size-pill.active')?.dataset.size || '';
+    return makeCartKey(CURRENT_PRODUCT_ID, pickedColor, pickedSize);
+  }
 
   const cartBadge = document.getElementById('cartBadge');
   const wishBadge = document.getElementById('wishBadge');
   const pdAddCartBtn = document.getElementById('pdAddCart');
   const pdWishSide = document.getElementById('pdWishSide');
 
+  /* module-scope (not nested in init()'s closure) so the color/size pill
+     click handlers further up — which live in a separate function and can
+     fire before or after init() runs — can call this too and get the Add
+     to Cart button + qty stepper to reflect the NEWLY picked variant right away. */
+  function syncButtonStates(){
+    const pdWishMain = document.getElementById('pdWishMain');
+    const inWishlist = getWishlist().includes(CURRENT_PRODUCT_ID);
+    if(pdWishMain) pdWishMain.classList.toggle('active', inWishlist);
+    if(pdWishSide) pdWishSide.classList.toggle('active', inWishlist);
+    if(!pdAddCartBtn) return;
+    const key = currentCartKey();
+    const inCart = getCart().includes(key);
+    pdAddCartBtn.classList.toggle('added', inCart);
+    pdAddCartBtn.querySelector('span').textContent = inCart ? 'Added ✓' : 'Add to Cart';
+    /* show that variant's own saved quantity, not whatever the stepper
+       happened to be left at from a different color/size */
+    const qtyValEl = document.getElementById('qtyVal');
+    if(qtyValEl) qtyValEl.value = inCart ? (getQtyMap()[key] || 1) : 1;
+  }
+
   function updateHeaderBadges(){
     const cc = getCart().length, wc = getWishlist().length;
     cartBadge.textContent = cc; cartBadge.classList.toggle('zero', cc === 0);
     wishBadge.textContent = wc; wishBadge.classList.toggle('zero', wc === 0);
   }
+
+  /* ---------------- wishlist + add-to-cart icons on the "More In This
+     Category" sibling cards (renderRelated / renderCategorySiblings) ----------------
+     These cards are plain <a> links, so their icon buttons are handled via
+     delegated clicks below (survives the grid being re-rendered) rather
+     than per-element listeners. .pcard-icon-btn distinguishes these from
+     the unrelated #pdWishMain / #pdWishSide buttons, which also carry a
+     bare .pcard-wish class from an older naming scheme. */
+  function syncSiblingCardStates(){
+    const grid = document.getElementById('pdRelatedGrid');
+    if(!grid) return;
+    const cart = getCart();
+    const wishlist = getWishlist();
+    grid.querySelectorAll('.pcard-icon-btn.pcard-wish').forEach(btn => {
+      btn.classList.toggle('active', wishlist.includes(btn.dataset.id));
+    });
+    grid.querySelectorAll('.pcard-quickcart').forEach(btn => {
+      const inCart = cart.includes(btn.dataset.id);
+      btn.classList.toggle('added', inCart);
+      btn.dataset.tip = inCart ? 'Added ✓' : 'Add to Cart';
+    });
+  }
+
+  function popSiblingIcon(node){
+    node.classList.remove('pop');
+    void node.offsetWidth;
+    node.classList.add('pop');
+  }
+
+  document.addEventListener('click', function(e){
+    const quickCartBtn = e.target.closest('.pcard-quickcart');
+    if(quickCartBtn){
+      e.preventDefault();
+      const id = quickCartBtn.dataset.id;
+      /* only catalog-sourced sibling cards carry data-name (see saveCatalogMeta
+         pattern in products.html) — a numbered CATALOG product needs no
+         separate meta snapshot since cart.html can already resolve it by id. */
+      if(quickCartBtn.dataset.name){
+        const meta = getCatalogMeta();
+        meta[id] = {
+          name: quickCartBtn.dataset.name,
+          sub: quickCartBtn.dataset.sub || '',
+          icon: '',
+          img: quickCartBtn.dataset.img || '',
+          url: quickCartBtn.dataset.url || '',
+          category: quickCartBtn.dataset.cat || ''
+        };
+        setCatalogMeta(meta);
+      }
+      let cart = getCart();
+      if(!cart.includes(id)){ cart.push(id); setCart(cart); }
+      popSiblingIcon(quickCartBtn);
+      syncSiblingCardStates();
+      updateHeaderBadges();
+      return;
+    }
+    const wishBtn = e.target.closest('.pcard-icon-btn.pcard-wish');
+    if(wishBtn){
+      e.preventDefault();
+      const id = wishBtn.dataset.id;
+      let wishlist = getWishlist();
+      let nowActive;
+      if(wishlist.includes(id)){ wishlist = wishlist.filter(x => x !== id); nowActive = false; }
+      else { wishlist.push(id); nowActive = true; }
+      setWishlist(wishlist);
+      if(wishBtn.dataset.name){
+        const meta = getWishlistMeta();
+        if(nowActive){
+          const sizes = wishBtn.dataset.sizes ? wishBtn.dataset.sizes.split('|').filter(Boolean) : [];
+          meta[id] = {
+            id, category: wishBtn.dataset.cat, eyebrow: wishBtn.dataset.cat, title: wishBtn.dataset.name,
+            sub: wishBtn.dataset.sub || 'Premium solid brass hardware', sizes, url: wishBtn.dataset.url, icon: 'mortise'
+          };
+        } else {
+          delete meta[id];
+        }
+        setWishlistMeta(meta);
+      }
+      popSiblingIcon(wishBtn);
+      syncSiblingCardStates();
+      updateHeaderBadges();
+      return;
+    }
+  });
 
   /* everything below needs the catalogue loaded from the backend first */
   (async function init(){
@@ -1282,24 +1599,50 @@
     let currentId = CURRENT_PRODUCT_ID;
     const pdWishMain = document.getElementById('pdWishMain');
 
-    function syncButtonStates(){
-      const pdWishMain = document.getElementById('pdWishMain');
-      if(!pdWishMain) return;
-      const inWishlist = getWishlist().includes(currentId);
-      pdWishMain.classList.toggle('active', inWishlist);
-      if(IS_CATALOG_MODE) return;
-      const inCart = getCart().includes(currentId);
-      pdAddCartBtn.classList.toggle('added', inCart);
-      pdAddCartBtn.querySelector('span').textContent = inCart ? 'Added ✓' : 'Add to Cart';
-      pdWishSide.classList.toggle('active', inWishlist);
-    }
-
     pdAddCartBtn.addEventListener('click', function(){
+      /* stash the exact color/size the person had selected at the moment
+         they clicked Add to Cart — this is now also the CART KEY itself,
+         so picking a different color and clicking Add to Cart again
+         creates a second, independent cart line instead of overwriting
+         the first one's quantity. */
+      const pickedColor = document.querySelector('#pdColors .pd-size-pill.active')?.dataset.color || '';
+      const pickedSize = document.querySelector('#pdSizes .pd-size-pill.active')?.dataset.size || '';
+      const cartKey = makeCartKey(currentId, pickedColor, pickedSize);
       let cart = getCart();
-      if(!cart.includes(currentId)){ cart.push(currentId); setCart(cart); }
+      if(!cart.includes(cartKey)){ cart.push(cartKey); setCart(cart); }
       const qtyMap = getQtyMap();
-      qtyMap[currentId] = parseInt(qtyVal.value, 10) || 1;
+      qtyMap[cartKey] = parseInt(qtyVal.value, 10) || 1;
       setQtyMap(qtyMap);
+      if(IS_CATALOG_MODE && CURRENT_CATALOG_PRODUCT){
+        const meta = getCatalogMeta();
+        /* use whatever photo is CURRENTLY showing in the main image, not the
+           product's generic default photo — setCatalogMain() already swaps
+           this to the exact photo for the picked color/size/finish (see the
+           color-pill, size-pill and thumbnail click handlers above), so
+           reading it here means the cart thumbnail always matches what the
+           person actually saw and picked, instead of always showing e.g.
+           the black photo even when Rose Gold was added. */
+        const shownImg = document.querySelector('#pdMainArt img.real-photo')?.src || CURRENT_CATALOG_PRODUCT.img || '';
+        /* field names here must match what products.html's own saveCatalogMeta()
+           writes (name/sub/icon/img/url) — CURRENT_CATALOG_PRODUCT uses .title
+           instead of .name, so map it explicitly rather than spreading the
+           object directly (which would silently leave meta.name undefined and
+           show a blank item in the cart list). `id` is the base product id
+           (without the color/size suffix) so cart.html can still resolve
+           the product page and group things by product where it needs to. */
+        meta[cartKey] = {
+          id: currentId,
+          name: CURRENT_CATALOG_PRODUCT.title,
+          sub: CURRENT_CATALOG_PRODUCT.sub || '',
+          icon: '',
+          img: shownImg,
+          url: CURRENT_CATALOG_PRODUCT.url || '',
+          category: CURRENT_CATALOG_PRODUCT.category || '',
+          selectedColor: pickedColor,
+          selectedSize: pickedSize
+        };
+        setCatalogMeta(meta);
+      }
       syncButtonStates();
       updateHeaderBadges();
     });
@@ -1329,6 +1672,22 @@
     syncButtonStates();
     updateHeaderBadges();
   })();
+
+  /* live sync across tabs: if cart.html (open in another tab) changes this
+     product's quantity, the 'storage' event fires here automatically —
+     update the visible qty stepper right away instead of needing a reload.
+     Only touch it when this item is actually in the cart, so an unrelated
+     storage write doesn't clobber a qty the person hasn't added yet. */
+  window.addEventListener('storage', function(e){
+    if(e.key !== 'koraaz_cart_qty' && e.key !== 'koraaz_cart') return;
+    if(!CURRENT_PRODUCT_ID) return;
+    const qtyInputEl = document.getElementById('qtyVal');
+    if(!qtyInputEl) return;
+    const key = currentCartKey();
+    if(!getCart().includes(key)) return;
+    const latestQtyMap = getQtyMap();
+    if(latestQtyMap[key]) qtyInputEl.value = latestQtyMap[key];
+  });
 
   // tabs
   document.querySelectorAll('.pd-tab-btn').forEach(btn => {

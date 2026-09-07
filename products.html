@@ -483,9 +483,9 @@
   .subscribe .wrap{display:flex; justify-content:space-between; align-items:center; gap:50px;}
   .subscribe p{color:var(--mute); margin-top:10px; max-width:420px;}
   .subscribe-form{display:flex; min-width:400px; border:1px solid var(--hairline-2); border-radius:2px; overflow:hidden;}
-  .subscribe-form input{flex:1; background:transparent; border:none; padding:16px 18px; color:var(--bone); font-family:'Manrope',sans-serif; font-size:0.9rem;}
+  .subscribe-form input{flex:1; min-width:0; background:transparent; border:none; padding:16px 18px; color:var(--bone); font-family:'Manrope',sans-serif; font-size:0.9rem;}
   .subscribe-form input::placeholder{color:var(--mute-2);}
-  .subscribe-form button{background:var(--brass); border:none; padding:0 24px; color:var(--btn-ink); font-weight:700; font-size:0.76rem; letter-spacing:.05em; text-transform:uppercase;}
+  .subscribe-form button{background:var(--brass); border:none; padding:0 24px; color:var(--btn-ink); font-weight:700; font-size:0.76rem; letter-spacing:.05em; text-transform:uppercase; flex-shrink:0; white-space:nowrap;}
 
   /* ---------------- footer (matches index.html) ---------------- */
   footer{background:var(--dark); padding:80px 0 0;}
@@ -673,7 +673,7 @@
     .gfilter-tabs{gap:8px;}
     .craft-content h2, .cta-actions{text-align:center;}
     .stats-band{padding-top:44px !important; padding-bottom:44px !important;}
-    #floatTop{bottom:76px; right:16px; width:42px; height:42px;}
+    #floatTop{bottom:82px; right:16px; width:42px; height:42px;}
     .whatsapp-float{bottom:76px; left:16px; width:38px; height:38px;}
     .whatsapp-float svg{width:19px; height:19px;}
     body{padding-bottom:64px;}
@@ -702,6 +702,9 @@
     .stats-grid{grid-template-columns:1fr 1fr; gap:22px 0;}
     .btn{padding:13px 20px; font-size:0.7rem; gap:8px;}
     .mobile-nav{width:100%; max-width:100%;}
+    .subscribe-form{flex-direction:column; border:none; gap:10px;}
+    .subscribe-form input{padding:14px 16px; border:1px solid var(--hairline-2); border-radius:2px; width:100%;}
+    .subscribe-form button{padding:14px 16px; font-size:0.7rem; width:100%; border-radius:2px;}
   }
 
   @media (max-width:640px){
@@ -1397,6 +1400,7 @@ function getQuickAddTarget(p){
   };
 }
 
+
 /* stash a lightweight name/image/colors index of every multi-item category so
    product-detail.html (a separate page, loaded only with the single clicked
    item's own URL params) can still show "More In This Category" siblings
@@ -1405,7 +1409,12 @@ try {
   const catIndex = {};
   Object.keys(CATALOG).forEach(catName => {
     const entry = CATALOG[catName];
-    if (entry && entry.type === 'items' && entry.items && entry.items.length > 1) {
+    /* was 'items' only — excluded 'items-sizes' categories (e.g. "Brass Tower
+       Bolt", "Alu T-Bolt": named items that ALSO carry size options), so
+       their detail pages never had siblings to show, unlike "Key Hole"
+       ('items' only). Same condition used everywhere else this distinction
+       matters (isAmbiguousCategory, the count-sync above). */
+    if (entry && (entry.type === 'items' || entry.type === 'items-sizes') && entry.items && entry.items.length > 1) {
       catIndex[catName] = entry.items.map(it => {
         const o = (typeof it === 'object') ? it : { name: it };
         return {
@@ -1882,7 +1891,7 @@ function saveCatalogMeta(btn){
   const id = btn.dataset.id;
   let meta = {};
   try{ meta = JSON.parse(localStorage.getItem('koraaz_catalog_meta') || '{}'); }catch(e){}
-  meta[id] = { name: btn.dataset.name, sub: btn.dataset.sub || '', icon: btn.dataset.icon || '', img: btn.dataset.img || '', url: btn.dataset.url || '' };
+  meta[id] = { name: btn.dataset.name, sub: btn.dataset.sub || '', icon: btn.dataset.icon || '', img: btn.dataset.img || '', url: btn.dataset.url || '', category: btn.dataset.cat || '' };
   localStorage.setItem('koraaz_catalog_meta', JSON.stringify(meta));
 }
 

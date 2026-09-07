@@ -314,11 +314,11 @@
   .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center;}
   .contact-left p{color:var(--mute); margin-top:20px; max-width:440px;}
   .whatsapp-btn{
-    display:inline-flex; align-items:center; gap:10px; padding:15px 28px; border-radius:2px; background:#25D366;
-    color:#0b1f13; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
-    transition:opacity .25s ease;
+    display:inline-flex; align-items:center; gap:10px; padding:15px 28px; border-radius:2px; background:var(--brass);
+    border:1px solid var(--brass); color:var(--btn-ink); font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700;
+    letter-spacing:.05em; text-transform:uppercase; transition:all .3s var(--ease);
   }
-  .whatsapp-btn:hover{opacity:.85;}
+  .whatsapp-btn:hover{background:transparent; color:var(--brass); gap:15px;}
   .cinfo{display:flex; gap:16px; padding:18px 0; border-bottom:1px solid var(--hairline);}
   .cinfo:first-child{padding-top:0;}
   .cinfo-icon{width:38px; height:38px; border-radius:50%; border:1px solid var(--hairline-2); display:flex; align-items:center; justify-content:center; color:var(--brass); flex-shrink:0; font-size:1rem;}
@@ -332,9 +332,9 @@
   .subscribe .wrap{display:flex; justify-content:space-between; align-items:center; gap:50px;}
   .subscribe p{color:var(--mute); margin-top:10px; max-width:420px;}
   .subscribe-form{display:flex; min-width:400px; border:1px solid var(--hairline-2); border-radius:2px; overflow:hidden;}
-  .subscribe-form input{flex:1; background:transparent; border:none; padding:16px 18px; color:var(--bone); font-family:'Manrope',sans-serif; font-size:0.9rem;}
+  .subscribe-form input{flex:1; min-width:0; background:transparent; border:none; padding:16px 18px; color:var(--bone); font-family:'Manrope',sans-serif; font-size:0.9rem;}
   .subscribe-form input::placeholder{color:var(--mute-2);}
-  .subscribe-form button{background:var(--brass); border:none; padding:0 24px; color:var(--btn-ink); font-weight:700; font-size:0.76rem; letter-spacing:.05em; text-transform:uppercase;}
+  .subscribe-form button{background:var(--brass); border:none; padding:0 24px; color:var(--btn-ink); font-weight:700; font-size:0.76rem; letter-spacing:.05em; text-transform:uppercase; flex-shrink:0; white-space:nowrap;}
 
   /* ---------------- footer (matches index.html) ---------------- */
   footer{background:var(--dark); padding:80px 0 0;}
@@ -540,6 +540,9 @@
   }
   @media (max-width:400px){
     .wrap{padding:0 16px;} .menu-toggle{width:42px; height:42px; padding:0;} .hexbox{width:42px; height:42px;} .brand-text .tag{white-space:normal; max-width:80px; line-height:1.3;} .nav-cta{gap:6px;} .icon-btn{width:42px; height:42px; padding:0;} .icon-btn svg{width:18px; height:18px;}
+    .subscribe-form{flex-direction:column; border:none; gap:10px;}
+    .subscribe-form input{padding:14px 16px; border:1px solid var(--hairline-2); border-radius:2px; width:100%;}
+    .subscribe-form button{padding:14px 16px; font-size:0.7rem; width:100%; border-radius:2px;}
     .brand-text .name{font-size:0.95rem;}
     .brand-text .tag{font-size:0.44rem; letter-spacing:.1em;}
     .hero-content h1{font-size:1.7rem;}
@@ -599,9 +602,9 @@
   </div>
   <div class="filter-strip">
     <div class="wrap">
-      <a href="#mortise-handles">Mortise Handles</a>
-      <a href="#key-hole-covers">Key Hole Covers</a>
-      <a href="#tower-bolts">Tower Bolts</a>
+      <a href="#collections">Mortise Handles</a>
+      <a href="#collections">Key Hole Covers</a>
+      <a href="#collections">Tower Bolts</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
@@ -922,6 +925,7 @@ document.getElementById('catClearBtn').addEventListener('click', clearCategory);
 
 renderCatGrid();
 updateCatFilterUI();
+updateBadges();
 
 /* product data will be loaded here */
 function renderCards(containerId, items, eyebrow, defaultIcon){

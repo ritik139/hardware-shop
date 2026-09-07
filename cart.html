@@ -862,6 +862,32 @@ function getQtyMap(){ try{ return JSON.parse(localStorage.getItem('koraaz_cart_q
 function setQtyMap(map){ localStorage.setItem('koraaz_cart_qty', JSON.stringify(map)); }
 function priceToNumber(p){ return parseInt(String(p).replace(/[^0-9]/g, ''), 10) || 0; }
 
+/* koraaz_cart now stores CART KEYS, not bare product ids — a product with a
+   selected color/size is keyed as "id::c:Color::s:Size" so the same product
+   in two different colors becomes two independent rows (own qty, own
+   remove) instead of one overwriting the other's saved color. Plain
+   ids (no variant picked — e.g. numbered backend products, or the grid's
+   quick-add icon) come back unchanged, so this stays compatible with
+   anything already sitting in a person's cart. */
+function parseCartKey(key){
+  const parts = String(key).split('::');
+  let id = parts[0], color = '', size = '';
+  for(let i = 1; i < parts.length; i++){
+    if(parts[i].startsWith('c:')) color = parts[i].slice(2);
+    else if(parts[i].startsWith('s:')) size = parts[i].slice(2);
+  }
+  return { id, color, size };
+}
+
+/* same finish/color → hex map used on product-detail.html's sibling-card
+   swatches, duplicated here so cart rows can show a matching color dot
+   next to the finish name without needing that page's JS loaded. */
+const COLOR_HEX = {
+  'Black': '#1a1a1a', 'Rose Gold': '#caa08a', 'Gold': '#cfa03c',
+  'Antique Bronze': '#8a6a29', 'Silver Chrome': '#c8c8c8',
+  'SS': '#b0b3b8', 'SSF': '#a8a8a8', 'CP': '#cfd3d6'
+};
+
 function updateHeaderBadges(){
   const wishBadge = document.getElementById('wishBadge');
   const cartBadge = document.getElementById('cartBadge');
@@ -882,15 +908,23 @@ function updateSummary(subtotal, items){
    (which was falling through to a blank/placeholder page) */
 let CATALOG_META = {};
 
-function buildWhatsAppLink(ids, qtyMap){
+function buildWhatsAppLink(keys, qtyMap){
   let catalogMeta = {};
   try{ catalogMeta = JSON.parse(localStorage.getItem('koraaz_catalog_meta') || '{}'); }catch(e){}
-  const lines = ids.map(id => {
-    const qty = qtyMap[id] || 1;
+  const lines = keys.map(key => {
+    const qty = qtyMap[key] || 1;
+    const { id } = parseCartKey(key);
     const p = CATALOG[id];
     if(p) return `• ${p.title} (${p.eyebrow}) x${qty}`;
-    const meta = catalogMeta[id];
-    return meta ? `• ${meta.name} x${qty}` : '';
+    const meta = catalogMeta[key];
+    if(!meta) return '';
+    /* category always available now (both the grid quick-add and the
+       detail-page Add to Cart button save it); selectedColor/selectedSize
+       only exist when the person picked one on the item's own detail page
+       — the grid quick-add defaults silently to the first option, so
+       there's nothing specific to name there. */
+    const bits = [meta.category, meta.selectedColor, meta.selectedSize].filter(Boolean).join(' · ');
+    return `• ${meta.name}${bits ? ' (' + bits + ')' : ''} x${qty}`;
   }).filter(Boolean);
   const msg = 'Hi Koraaz, I would like a quote for:%0A' + lines.join('%0A') + '%0A%0APlease share pricing and availability.';
   const waBtn = document.getElementById('waCheckout');
@@ -898,17 +932,17 @@ function buildWhatsAppLink(ids, qtyMap){
 }
 
 function renderCart(){
-  const ids = getCart();
+  const keys = getCart();
   const qtyMap = getQtyMap();
   const empty = document.getElementById('cartEmpty');
   const layout = document.getElementById('cartLayout');
   const countLabel = document.getElementById('cartCountLabel');
   const list = document.getElementById('cartList');
 
-  const totalItems = ids.reduce((sum, id) => sum + (qtyMap[id] || 1), 0);
-  countLabel.textContent = ids.length + (ids.length === 1 ? ' item in cart' : ' items in cart');
+  const totalItems = keys.reduce((sum, key) => sum + (qtyMap[key] || 1), 0);
+  countLabel.textContent = keys.length + (keys.length === 1 ? ' item in cart' : ' items in cart');
 
-  if(!ids.length){
+  if(!keys.length){
     empty.style.display = 'block';
     layout.style.display = 'none';
     list.innerHTML = '';
@@ -925,39 +959,51 @@ function renderCart(){
   CATALOG_META = catalogMeta; /* exposed at module scope so the row-click handler below can resolve each catalog item's real detail-page URL */
 
   let subtotal = 0;
-  list.innerHTML = ids.map(id => {
+  list.innerHTML = keys.map(key => {
+    const { id } = parseCartKey(key);
     const p = CATALOG[id];
     if(!p){
-      /* item added from the browse-by-category grid — no live price, just enquiry */
-      const meta = catalogMeta[id] || { name: 'Product', sub: '', icon: 'mortise' };
-      const qty = qtyMap[id] || 1;
+      /* item added from the browse-by-category grid, or a specific
+         color/size picked on its own detail page — no live price, just
+         enquiry. meta is stored under the full cart KEY (not just the
+         product id) so each color/size combination keeps its own name/
+         image/link/selected-variant snapshot. */
+      const meta = catalogMeta[key] || { name: 'Product', sub: '', icon: 'mortise' };
+      const qty = qtyMap[key] || 1;
+      const variantBits = [meta.selectedColor, meta.selectedSize].filter(Boolean);
+      const variantLine = variantBits.length ? `
+        <div class="sub" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+          ${meta.selectedColor ? `<span style="width:10px;height:10px;border-radius:50%;flex-shrink:0;display:inline-block;border:1px solid var(--hairline-2); background:${COLOR_HEX[meta.selectedColor] || 'var(--brass)'};"></span>` : ''}
+          <span>${variantBits.join(' · ')}</span>
+        </div>` : '';
       return `
-      <div class="cart-row reveal" data-id="${id}">
+      <div class="cart-row reveal" data-key="${key}">
         <div class="art">${meta.img ? `<img class="real-photo" src="${meta.img}" alt="${meta.name}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">` : artTile(meta.icon, '')}</div>
         <div class="cart-info">
           <div class="pcard-eyebrow">Catalogue Item</div>
           <div class="name">${meta.name}</div>
           <div class="sub">${meta.sub}</div>
+          ${variantLine}
         </div>
         <div class="cart-side">
           <div class="cart-price">Enquire for price</div>
           <div class="qty-box">
-            <button class="qty-dec" data-id="${id}" aria-label="Decrease quantity">−</button>
-            <input type="text" inputmode="numeric" class="qty-input" data-id="${id}" value="${qty}" readonly>
-            <button class="qty-inc" data-id="${id}" aria-label="Increase quantity">+</button>
+            <button class="qty-dec" data-key="${key}" aria-label="Decrease quantity">−</button>
+            <input type="text" inputmode="numeric" class="qty-input" data-key="${key}" value="${qty}" readonly>
+            <button class="qty-inc" data-key="${key}" aria-label="Increase quantity">+</button>
           </div>
-          <button class="cart-remove" data-id="${id}">
+          <button class="cart-remove" data-key="${key}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M9 7V4h6v3m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg>
             Remove
           </button>
         </div>
       </div>`;
     }
-    const qty = qtyMap[id] || 1;
+    const qty = qtyMap[key] || 1;
     const line = priceToNumber(p.price) * qty;
     subtotal += line;
     return `
-    <div class="cart-row reveal" data-id="${p.id}">
+    <div class="cart-row reveal" data-key="${key}">
       <div class="art">${artTile(p.icon, '')}</div>
       <div class="cart-info">
         <div class="pcard-eyebrow">${p.eyebrow}</div>
@@ -968,11 +1014,11 @@ function renderCart(){
       <div class="cart-side">
         <div class="cart-price">₹${line.toLocaleString('en-IN')}</div>
         <div class="qty-box">
-          <button class="qty-dec" data-id="${p.id}" aria-label="Decrease quantity">−</button>
-          <input type="text" inputmode="numeric" class="qty-input" data-id="${p.id}" value="${qty}" readonly>
-          <button class="qty-inc" data-id="${p.id}" aria-label="Increase quantity">+</button>
+          <button class="qty-dec" data-key="${key}" aria-label="Decrease quantity">−</button>
+          <input type="text" inputmode="numeric" class="qty-input" data-key="${key}" value="${qty}" readonly>
+          <button class="qty-inc" data-key="${key}" aria-label="Increase quantity">+</button>
         </div>
-        <button class="cart-remove" data-id="${p.id}">
+        <button class="cart-remove" data-key="${key}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M9 7V4h6v3m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg>
           Remove
         </button>
@@ -982,7 +1028,7 @@ function renderCart(){
   list.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
   updateSummary(subtotal, totalItems);
-  buildWhatsAppLink(ids, qtyMap);
+  buildWhatsAppLink(keys, qtyMap);
   updateHeaderBadges();
 }
 
@@ -992,38 +1038,52 @@ document.addEventListener('click', function(e){
   const rem = e.target.closest('.cart-remove');
 
   if(dec || inc){
-    const id = (dec || inc).dataset.id;
+    const key = (dec || inc).dataset.key;
     const qtyMap = getQtyMap();
-    let qty = qtyMap[id] || 1;
+    let qty = qtyMap[key] || 1;
     qty = inc ? qty + 1 : Math.max(1, qty - 1);
-    qtyMap[id] = qty;
+    qtyMap[key] = qty;
     setQtyMap(qtyMap);
     renderCart();
     return;
   }
   if(rem){
-    const id = rem.dataset.id;
-    setCart(getCart().filter(x => x !== id));
+    const key = rem.dataset.key;
+    setCart(getCart().filter(x => x !== key));
     const qtyMap = getQtyMap();
-    delete qtyMap[id];
+    delete qtyMap[key];
     setQtyMap(qtyMap);
     renderCart();
     return;
   }
   const row = e.target.closest('.cart-row');
-  if(row && row.dataset.id && !row.dataset.id.startsWith('cat-') && !e.target.closest('.qty-box') && !e.target.closest('.cart-remove')){
-    const id = row.dataset.id;
+  if(row && row.dataset.key && !row.dataset.key.startsWith('cat-') && !e.target.closest('.qty-box') && !e.target.closest('.cart-remove')){
+    const key = row.dataset.key;
+    const { id } = parseCartKey(key);
     /* a real numbered product (found via /api/products) has its own page at ?id=;
        a catalog-grid item (e.g. one of the 5 "Key Hole" styles) has no such
        record — its real page lives at the full ?src=catalog&cat=...&name=...
-       URL saved in koraaz_catalog_meta when it was added to the cart. Falling
-       back to the bare ?id= for those was showing a blank placeholder page. */
-    const meta = CATALOG_META[id];
+       URL saved in koraaz_catalog_meta when it was added to the cart (keyed
+       by the exact color/size combination). Falling back to the bare ?id=
+       for those was showing a blank placeholder page. */
+    const meta = CATALOG_META[key];
     window.location.href = (!CATALOG[id] && meta && meta.url) ? meta.url : ('product-detail.html?id=' + id);
   }
 });
 
 loadCatalog().then(renderCart);
+
+/* live sync across tabs: if the person has this cart page open in one tab
+   and changes the quantity (or adds/removes an item) from product-detail.html
+   in another tab, the 'storage' event fires here automatically — so the
+   cart re-renders with the new quantity right away instead of needing a
+   manual refresh. (This event only fires in OTHER tabs than the one that
+   made the change, which is exactly what we want here.) */
+window.addEventListener('storage', function(e){
+  if(e.key === 'koraaz_cart_qty' || e.key === 'koraaz_cart' || e.key === 'koraaz_catalog_meta'){
+    renderCart();
+  }
+});
 
 /* subscribe demo submit */
 document.getElementById('subForm').addEventListener('submit', function(e){
