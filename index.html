@@ -236,6 +236,7 @@
   @media (max-width:640px){
     .finish-section{padding:52px 0;}
     .finish-head{margin-bottom:32px;}
+    .finish-head p{display:none;}
     .finish-grid{grid-template-columns:repeat(3,1fr); gap:16px; row-gap:26px;}
     .finish-name{font-size:0.86rem; margin-top:12px;}
     .finish-tag{font-size:0.6rem;}
@@ -492,6 +493,8 @@
   .cat-col{display:flex; flex-direction:column; gap:22px;}
   .cat-col .cat-card{min-height:199px;}
   .cat-card .art{position:absolute; inset:0;}
+  .cat-row{display:flex; gap:22px;}
+  .cat-row .cat-card{flex:1;}
   .cat-card .art .icon{width:32%;}
   .cat-card .art img.cat-photo{
     position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1;
@@ -726,7 +729,7 @@
     .hero-slide{min-height:560px; padding-bottom:56px;}
     .hero-content{padding:0 16px; max-width:100%;}
     .hero-content h1{font-size:2rem; line-height:1.14;}
-    .hero-content p{font-size:0.9rem; margin:0 auto 24px;}
+    .hero-content p{display:none;}
     .hero-divider{margin:16px auto;}
     .hero-frame{display:none;}
     .hero-arrow{width:38px; height:38px; top:auto; bottom:16px; transform:none;}
@@ -749,6 +752,7 @@
     .stat .num{font-size:2.4rem;}
     .cat-card{min-height:230px;}
     .cat-col .cat-card{min-height:140px;}
+    .cat-row{flex-direction:column;}
     .footer-grid{grid-template-columns:1fr; gap:0;}
     .footer-grid > div:first-child{padding:0; border-top:none;}
     .footer-grid > div:first-child{display:flex; flex-direction:column; align-items:center; text-align:center;}
@@ -776,6 +780,7 @@
     .gfilter-tabs{gap:8px;}
     .craft-content h2, .cta-actions{text-align:center;}
     .craft-content h2 br{display:none;}
+    .craft-content p{display:none;}
     .testi-mark{font-size:3.2rem;}
     .testi-text{font-size:1.25rem; line-height:1.45;}
     .testi-nav{gap:16px; margin-top:28px;}
@@ -1020,7 +1025,7 @@
 <section class="about-section" id="about">
   <div class="wrap about-grid">
     <div class="about-media art reveal">
-      <img class="story-photo" src="images/catalog-demo/bullet.jpg" alt="Korraz — Built On Brass, Designed For Perfection" loading="lazy">
+      <img class="story-photo" src="images/catalog-demo/brass T Bolt/Brass marble Xylo Heavy/brassmatakaheavycolor3.jpg" alt="Korraz — Built On Brass, Designed For Perfection" loading="lazy">
     </div>
     <div class="about-copy reveal">
       <div class="eyebrow">Our Story</div>
@@ -1077,7 +1082,7 @@
     <div class="cat-grid reveal">
       <a href="products.html#brass-tower-bolt" class="cat-card">
         <div class="art" style="background:#05060c;">
-          <img class="cat-photo" style="object-fit:contain;" src="images/catalog-demo/brass T Bolt/brass marble/brass marblecolor3.jpg" alt="Brass Tower Bolt — Premium brass tower bolts" loading="lazy">
+          <img class="cat-photo" style="object-fit:contain; filter:none;" src="images/catalog-demo/ourcollectionrightleft.jpg" alt="Brass Tower Bolt — Premium brass tower bolts" loading="lazy">
         </div>
         <div class="cat-body">
           <div class="n">Bolts &amp; Latches</div>
@@ -1090,8 +1095,8 @@
       </a>
       <div class="cat-col">
         <a href="products.html#key-hole" class="cat-card">
-          <div class="art">
-            <img class="cat-photo" src="images/catalog-demo/Keh hole sy-sq/item-3 cy-fancy-slim/cy-fancy-slimcolor4.png" alt="Key Hole — Durable brass key holes" loading="lazy">
+          <div class="art" style="background:#05060c;">
+            <img class="cat-photo" style="object-fit:contain; filter:none;" src="images/catalog-demo/ourcollectionrighttop.jpg" alt="Key Hole — Durable brass key holes" loading="lazy">
           </div>
           <div class="cat-body">
             <div class="n">Lock &amp; Security</div>
@@ -1102,19 +1107,34 @@
             </div>
           </div>
         </a>
-        <a href="products.html#flare-knob" class="cat-card">
-          <div class="art" style="background:#2a2b2f;">
-            <img class="cat-photo" style="object-fit:contain;" src="images/catalog-demo/flareimpactmain.jpg" alt="Flare Knob — Elegant flare knobs" loading="lazy">
-          </div>
-          <div class="cat-body">
-            <div class="n">Knobs &amp; Handles</div>
-            <h3>Flare Knob</h3>
-            <div class="d">Elegant flare knobs</div>
-            <div class="go">Explore
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <div class="cat-row">
+          <a href="products.html#flare-knob" class="cat-card">
+            <div class="art" style="background:#05060c;">
+              <img class="cat-photo" style="object-fit:contain; filter:none;" src="images/catalog-demo/ourcollectionright1.jpg" alt="Flare Knob — Elegant flare knobs" loading="lazy">
             </div>
-          </div>
-        </a>
+            <div class="cat-body">
+              <div class="n">Knobs &amp; Handles</div>
+              <h3>Flare Knob</h3>
+              <div class="d">Elegant flare knobs</div>
+              <div class="go">Explore
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </div>
+            </div>
+          </a>
+          <a href="products.html#door-stopper" class="cat-card">
+            <div class="art" style="background:#05060c;">
+              <img class="cat-photo" style="object-fit:contain; filter:none;" src="images/catalog-demo/ourcollectionright2.jpg" alt="Door Stopper — Reliable door stoppers" loading="lazy">
+            </div>
+            <div class="cat-body">
+              <div class="n">Door Fittings</div>
+              <h3>Door Stopper</h3>
+              <div class="d">Reliable door stoppers</div>
+              <div class="go">Explore
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -1136,7 +1156,7 @@
 <!-- ================= CRAFT / VIDEO BANNER ================= -->
 <section class="craft-section" id="craft">
   <div class="art">
-    <img class="cover-photo" src="images/catalog-demo/Duck hingaj/duckhingajstraight.jpg" alt="How a single Korraz hinge is shaped, finished and tested" loading="lazy">
+    <img class="cover-photo" src="images/catalog-demo/Duck hingajlastfooter.jpg" alt="How a single Korraz hinge is shaped, finished and tested" loading="lazy">
   </div>
   <div class="craft-scrim"></div>
   <div class="craft-content reveal">
@@ -1516,20 +1536,19 @@ fetch('/api/products')
   .catch(err => { console.error('Failed to load products:', err); renderFeatured([]); });
 
 const FOLIO = [
-  ['Door Stopper','Knobs & Handles','images/catalog-demo/flare knob/flarebitecolor4.jpg',''],
-  ['Door Eye','Knobs & Handles','images/catalog-demo/flare knob/flarebullcolor2.jpg',''],
-  ['SS Hinges','Knobs & Handles','images/catalog-demo/flare knob/flareplumbcolor4.jpg',''],
-  ['Keyhole Showpiece','Lock & Security','images/catalog-demo/Keh hole sy-sq/item-3 cy-fancy-slim/cy-fancy-slimcolor2.png',''],
-  ['Orange Wheels Castor','Caster Wheels','images/catalog-demo/Square Bracket/square bracketcolor3.jpg',''],
-  ['Table Chain','Chain & Accessories','images/catalog-demo/table Chainmain.jpg',''],
-  ['CY Mortise','Lock & Security','images/catalog-demo/Keh hole sy-sq/cy-mortise/cy-mortisecolor1.png',''],
-  ['Brass Tower Bolt','Bolts & Latches','images/catalog-demo/brass T Bolt/brass marble/brass marblecolor3.jpg',''],
-  ['SS Oval Socket','Glass Fittings','images/catalog-demo/oval socket.jpg',''],
-  ['SS Cylinder Socket','Glass Fittings','images/catalog-demo/ss socket/1 full size/1 full sizetype1.jpg',''],
-  ['L Bracket Clip','Brackets','images/catalog-demo/L bat/L bat Single/L batsinglecolor3.jpg',''],
+  ['Bite','Knobs & Handles','images/catalog-demo/flare knob/flarebitecolor4.jpg',''],
+  ['Bull','Knobs & Handles','images/catalog-demo/flare knob/flarebullcolor2.jpg',''],
+  ['Plumb','Knobs & Handles','images/catalog-demo/flare knob/flareplumbcolor4.jpg',''],
+  ['Mid Cup Tapper Key Hall','Lock & Security','images/catalog-demo/midcuptapperkeyhall.jpg',''],
+  ['Brass Step Xylo Heavy','Bolts & Latches','images/catalog-demo/sstowerbolt.jpg',''],
+  ['Brass Marble','Bolts & Latches','images/catalog-demo/brass T Bolt/brass marble/brass marblecolor3.jpg',''],
+  ['Oval Socket','Brackets','images/catalog-demo/oval socket.jpg',''],
+  ['SS Socket','Brackets','images/catalog-demo/ss socket/1 full size/1 full sizetype1.jpg',''],
+  ['L Bat','Door Fittings','images/catalog-demo/L batmain.jpg',''],
   ['Rod Latch','Bolts & Latches','images/catalog-demo/ROd Latch/rodlatchcolor2.jpg',''],
-  ['Alu T-Bolt','Bolts & Latches','images/catalog-demo/ALU T bolt/Super Marble/ALU supermarblecolor2.jpg',''],
-  ['Door Eye — Steel Alt','Lock & Security','images/catalog-demo/door eye/dooreyecolor4.jpg','']
+  ['Brass Mataka T Bolt','Bolts & Latches','images/catalog-demo/towerboltmain.jpg',''],
+  ['Door Eye','Lock & Security','images/catalog-demo/door eye/dooreyecolor4.jpg',''],
+  ['Key Hole','Lock & Security','images/catalog-demo/keyhole-escutcheon-ss.jpg','']
 ];
 const folioTrack = document.getElementById('folioTrack');
 folioTrack.innerHTML = FOLIO.map((f,i)=>`
@@ -1576,9 +1595,9 @@ startFolioAutoplay();
 
 /* ---------------- range carousel (generated cards) ---------------- */
 const RANGE = [
-  ['SQ Tower Bolt','#101','images/catalog-demo/brass T Bolt/brass  Square/brass squarecolor4.jpg',['#6b5335','#8a6d3f']],
-  ['CY Square Lock','#102','images/catalog-demo/Keh hole sy-sq/item -1  cy-sq/cy-sq-lockcolor2.webp',['#d4af37']],
-  ['L Bat Hockey Clip','#104','images/catalog-demo/L bat/L Bat hockey/L bat Hockey color3.jpg',['#1c1c1c']],
+  ['Step Xylo Tower Bolt','#101','images/catalog-demo/brass T Bolt/brass Xylo/brassxylocolor3.jpg',['#c8c8c8','#caa08a','#8a6a29','#1a1a1a','#cfa03c']],
+  ['Mid Cup Tapper Key Hall','#102','images/catalog-demo/Keh hole sy-sq/midh cup tapper key hall/brasstopperkeyhallglossygold.jpg',['#8a6a29','#3a3a3a','#cfa03c','#caa08a']],
+  ['Brass Solid Material','#104','images/catalog-demo/brasssolidcolor4.jpg',['#1a1a1a','#caa08a','#cfa03c','#8a6a29','#c8c8c8']],
   ['Brass Square Bracket','#105','images/catalog-demo/Square Bracket/Brass Square Bracket/brass square bracketcolor3jpg.jfif',['#b0b3b6']],
   ['SS L Bracket — Half Round','#106','images/catalog-demo/SSL Bracket/Ss L bracket half roundcolor1.jpg',['#c0c0c0']],
   ['Brass W-Hinges','#107',null,['#8a8f98']]

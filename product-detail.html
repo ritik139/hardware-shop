@@ -139,7 +139,9 @@
   .pd-gallery-main .pcard-wish:hover{background:rgba(20,17,13,0.8);}
   .pd-gallery-main .pcard-wish:active{transform:scale(.9);}
   .pd-gallery-main .pcard-wish.active svg{fill:var(--brass); stroke:var(--brass);}
-  .pd-thumbs{display:flex; gap:12px; margin-top:14px;}
+  .pd-thumbs{display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:4px; scrollbar-width:thin;}
+  .pd-thumbs::-webkit-scrollbar{height:4px;}
+  .pd-thumbs::-webkit-scrollbar-thumb{background:var(--hairline-2); border-radius:2px;}
   .pd-thumb{width:76px; height:76px; border-radius:var(--r-sm); overflow:hidden; border:1.5px solid var(--hairline-2); cursor:pointer; transition:border-color .2s ease; flex-shrink:0;}
   .pd-thumb.active{border-color:var(--brass);}
   .pd-thumb .art{width:100%; height:100%;}
@@ -167,7 +169,7 @@
   .pd-size-block{margin-top:26px;}
   .pd-size-label{font-family:'Inter',sans-serif; font-size:0.72rem; letter-spacing:.1em; text-transform:uppercase; font-weight:700; color:var(--bone); display:flex; gap:8px; align-items:baseline;}
   .pd-size-label span{color:var(--brass); text-transform:none; letter-spacing:0; font-weight:600; font-family:'Manrope',sans-serif; font-size:0.82rem;}
-  .pd-sizes{display:flex; gap:8px; margin-top:14px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:2px;}
+  .pd-sizes{display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; overflow-x:visible; -webkit-overflow-scrolling:touch; padding-bottom:2px;}
   .pd-sizes::-webkit-scrollbar{height:4px;}
   .pd-size-pill{min-width:54px; height:46px; padding:0 14px; border-radius:var(--r-sm); border:1px solid var(--hairline-2); background:transparent; color:var(--bone); font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:.03em; cursor:pointer; transition:all .2s ease; text-align:center; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; flex-shrink:0;}
   .pd-size-pill:hover{border-color:var(--brass); color:var(--brass);}
@@ -296,12 +298,20 @@
     .pd-price{font-size:1.7rem;}
     .pd-actions{flex-direction:column;}
     .pd-wish-btn{width:100%; height:50px;}
-    .products-grid{grid-template-columns:1fr; max-width:360px; margin:0 auto;}
+    .products-grid{grid-template-columns:1fr 1fr; gap:14px; max-width:100%; margin:0;}
+    .pcard-body{padding:14px 12px;}
+    .pcard-title{font-size:1.05rem;}
+    .pcard-sub{font-size:0.7rem;}
+    .pcard-foot{margin-top:10px; padding-top:10px; gap:10px;}
     .pd-tabs-nav{gap:20px; overflow-x:auto;}
     .pd-tab-btn{white-space:nowrap; font-size:0.7rem;}
     .breadcrumb{font-size:0.68rem; overflow-x:auto; white-space:nowrap;}
-    .pd-thumbs{gap:8px;}
-    .pd-thumb{width:60px; height:60px;}
+    .pd-thumbs{gap:8px; flex-wrap:wrap; overflow-x:visible; padding-bottom:0;}
+    .pd-thumb{width:60px; height:60px; scroll-snap-align:none;}
+    /* color / finish / size pill rows: wrap to next line instead of
+       horizontal-scrolling off the edge of the screen */
+    .pd-sizes{flex-wrap:wrap; overflow-x:visible; -webkit-overflow-scrolling:auto; padding-bottom:0;}
+    .pd-size-pill{flex:0 0 auto;}
     body{padding-bottom:64px;}
     /* sticky add-to-cart bar sits fixed above the tab-bar and stays visible
        all the way to the bottom of the page — without extra clearance here,
@@ -360,9 +370,8 @@
     .pd-size-pill{ transition:all .2s var(--ease); }
     .pd-size-pill:active{ transform:scale(.93); }
 
-    /* ---- gallery: swipeable thumbs + dot indicator ---- */
-    .pd-thumbs{ scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; }
-    .pd-thumb{ scroll-snap-align:start; transition:transform .2s var(--ease), border-color .2s ease; }
+    /* ---- gallery: thumbs wrap onto multiple lines (no horizontal scroll); dot indicator still mirrors the active photo ---- */
+    .pd-thumb{ transition:transform .2s var(--ease), border-color .2s ease; }
     .pd-thumb:active{ transform:scale(.94); }
     .pd-gallery-dots{ display:flex; justify-content:center; gap:6px; margin-top:12px; }
     .pd-gallery-dots .dot{ width:5px; height:5px; border-radius:50%; background:var(--hairline-2); transition:all .25s var(--ease); }
@@ -450,6 +459,58 @@
     .pd-sticky-price .amt{ font-size:1.05rem; }
     .pd-trust-item{ font-size:0.76rem; }
     .pd-tab-btn{ font-size:0.72rem; padding:15px 2px; }
+  }
+
+  /* ============================================================
+     MOBILE TEXT DECLUTTER (320px–480px)
+     Trims repeated/low-value text so the info column reads as a
+     short scan instead of a wall of text on small phones. Nothing
+     here removes functionality — only what's genuinely redundant
+     at this width.
+     ============================================================ */
+  .pdt-short{ display:none; }
+  @media (max-width:640px){
+    /* subtitle line (material/pack/finish-count) — keep it, but as a
+       single scannable line instead of wrapping to 2-3 lines */
+    .pd-sub{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    /* review count repeats info nobody needs to act on right away —
+       keep the star rating + score, drop the "(32 reviews)" text */
+    .pdr-count{ display:none; }
+    /* "/ set onward" — the qty-row note just below already explains
+       the pack, so this second unit label is redundant on mobile */
+    .pd-price-unit{ display:none; }
+    /* warranty line is repeated verbatim in the Specifications tab
+       right below — keep just the dispatch-time line here */
+    .pdt-warranty{ display:none; }
+  }
+  @media (max-width:480px){
+    /* breadcrumb: "Home / Products / Category / Product" repeats
+       the header nav and the tab-bar link that's already on screen.
+       Below 480px, keep just "Category / Product" — still a working
+       link back to the category, just without the repeated trail. */
+    .breadcrumb .wrap > a:nth-child(1),
+    .breadcrumb .wrap > .sep:nth-child(2),
+    .breadcrumb .wrap > a:nth-child(3),
+    .breadcrumb .wrap > .sep:nth-child(4){ display:none; }
+
+    /* tighten the vertical rhythm between info blocks so the page
+       feels like one compact card rather than a long stack */
+    .pd-finish{ margin-top:22px; }
+    .pd-size-block{ margin-top:20px; }
+    .pd-qty-row{ margin-top:22px; }
+    .pd-actions{ margin-top:20px; }
+    .pd-wa-row{ margin-top:16px; }
+    .pd-trust{ margin-top:22px; padding-top:20px; gap:10px; }
+  }
+  @media (max-width:360px){
+    /* swap the full sentence for a shorter equivalent instead of
+       letting it wrap onto a second line on the narrowest phones */
+    .pdt-full{ display:none; }
+    .pdt-short{ display:inline; }
+    /* WhatsApp button becomes icon-only here — aria-label on the
+       link still announces it for screen readers */
+    #pdWaLinkText{ display:none; }
+    .pd-wa-row a{ gap:0; }
   }
   /* page-transition loading bar (feedback while the next page loads) */
   #pageLoadBar{position:fixed; top:0; left:0; height:3px; width:0%; background:linear-gradient(90deg,var(--brass),#e0b968); z-index:400; transition:width .4s ease, opacity .3s ease; opacity:0; pointer-events:none;}
@@ -544,7 +605,7 @@
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5.2 4.9 1.4 7-6.2-3.5-6.2 3.5 1.4-7L2 9.4l7-.9z"/></svg>
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5.2 4.9 1.4 7-6.2-3.5-6.2 3.5 1.4-7L2 9.4l7-.9z"/></svg>
         </div>
-        <span>4.8 (32 reviews)</span>
+        <span><span class="pdr-score">4.8</span> <span class="pdr-count">(32 reviews)</span></span>
       </div>
 
       <div class="pd-price-row" id="pdPriceRow">
@@ -600,12 +661,12 @@
       </div>
 
       <div class="pd-wa-row">
-        <a href="#" id="pdWaLink"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.01 3C9.38 3 4 8.38 4 15.01c0 2.38.7 4.6 1.9 6.47L4 29l7.7-1.85a11.9 11.9 0 0 0 4.31.8h.01c6.63 0 12.01-5.38 12.01-12.01C28.03 8.38 22.65 3.01 16.01 3Z"/></svg><span id="pdWaLinkText">Ask on WhatsApp for Bulk Pricing</span></a>
+        <a href="#" id="pdWaLink" aria-label="Ask on WhatsApp for bulk pricing"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.01 3C9.38 3 4 8.38 4 15.01c0 2.38.7 4.6 1.9 6.47L4 29l7.7-1.85a11.9 11.9 0 0 0 4.31.8h.01c6.63 0 12.01-5.38 12.01-12.01C28.03 8.38 22.65 3.01 16.01 3Z"/></svg><span id="pdWaLinkText">Ask on WhatsApp for Bulk Pricing</span></a>
       </div>
 
       <div class="pd-trust">
-        <div class="pd-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>Dispatched in 2–4 business days</div>
-        <div class="pd-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>5-year finish warranty</div>
+        <div class="pd-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg><span class="pdt-full">Dispatched in 2–4 business days</span><span class="pdt-short">Dispatch in 2–4 days</span></div>
+        <div class="pd-trust-item pdt-warranty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>5-year finish warranty</div>
       </div>
     </div>
   </div>

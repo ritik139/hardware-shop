@@ -568,6 +568,10 @@
     .cart-row{grid-template-columns:60px 1fr;}
     .cart-row .art{width:60px; height:60px;}
   }
+  /* mobile text declutter: hero intro sentence is decorative under the
+     H1 — hidden below 640px to match products.html, which already trims
+     this same line so the mobile page opens on a shorter, scannable hero. */
+  @media (max-width:640px){ .util-hero p{ display:none; } }
 </style>
 </head>
 <body>

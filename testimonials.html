@@ -368,6 +368,10 @@
     .btn{padding:13px 20px; font-size:0.7rem; gap:8px;}
     .mobile-nav{width:100%; max-width:100%;}
   }
+  /* mobile text declutter: hero intro sentence is decorative under the
+     H1 — hidden below 640px to match products.html, which already trims
+     this same line so the mobile page opens on a shorter, scannable hero. */
+  @media (max-width:640px){ .page-hero-content p{ display:none; } }
 
 </style>
 </head>
