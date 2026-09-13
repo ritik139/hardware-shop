@@ -198,6 +198,19 @@
   .pd-size-more{min-width:70px; height:46px; padding:0 16px; border-radius:var(--r-sm); border:1px solid var(--hairline-2); background:transparent; color:var(--brass); font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:.03em; cursor:pointer; transition:all .2s ease; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; flex-shrink:0;}
   .pd-size-more:hover{border-color:var(--brass);}
 
+  /* ---- mobile-only (<=400px) "+N more" collapse for color circles &
+     thumbnails on select catalog items (currently: Brass Tower Bolt only,
+     as a trial before rolling out further) — desktop/tablet always show
+     every circle/thumbnail, untouched. ---- */
+  .pd-mobile-more{display:none;}
+  #pdColorBlock .pd-color-pill .pd-color-dot.pd-color-more-dot{display:flex; align-items:center; justify-content:center; background:transparent; border:1.5px dashed var(--hairline-2); color:var(--brass); font-family:'Inter',sans-serif; font-weight:700; font-size:0.62rem;}
+  .pd-thumb-more-inner{display:none; width:100%; height:100%; align-items:center; justify-content:center; background:rgba(0,0,0,.35); color:var(--brass); font-family:'Inter',sans-serif; font-weight:700; font-size:0.7rem;}
+  @media (max-width:400px){
+    .pd-color-pill.pd-mobile-hide, .pd-thumb.pd-mobile-hide{display:none;}
+    .pd-mobile-more{display:inline-flex;}
+    .pd-thumb-more-inner{display:flex;}
+  }
+
   .pd-qty-label{display:none;}
   .pd-qty-row{display:flex; align-items:center; gap:20px; margin-top:30px;}
   .pd-qty{display:flex; align-items:center; border:1px solid var(--hairline-2); border-radius:var(--r-sm); overflow:hidden;}
@@ -1225,6 +1238,11 @@
      (like the numbered-product finish swatches) instead of plain text pills.
      Unmatched names fall back to a neutral grey dot; the text label is always
      shown too, so nothing is ever ambiguous. */
+  /* trial: collapse color circles + thumbnails to 5 + "more" on mobile
+     (<=400px) for these categories only, before rolling out further */
+  const MOBILE_COLLAPSE_CATEGORIES = ['Brass Tower Bolt', 'Alu T-Bolt', 'Key Hole'];
+  const MOBILE_COLLAPSE_LIMIT = 5;
+
   function getColorHex(name){
     const n = String(name || '').toLowerCase();
     const table = [
@@ -1638,9 +1656,11 @@
         if(colorLabelWordEl) colorLabelWordEl.textContent = product.colorLabel || 'Color';
         selectedColor = product.colors[0];
         colorNameEl.textContent = '— ' + selectedColor;
+        const collapseColors = MOBILE_COLLAPSE_CATEGORIES.includes(product.category);
         colorsWrap.innerHTML = product.colors.map((c,i) => {
           const hex = getColorHex(c);
-          return `<button type="button" class="pd-size-pill pd-color-pill${i===0?' active':''}" data-color="${escAttr(c)}" data-index="${i}"><span class="pd-color-dot" style="background:${hex || 'var(--hairline-2)'}"></span><span class="pd-color-label">${c}</span></button>`;
+          const hideCls = (collapseColors && i >= MOBILE_COLLAPSE_LIMIT) ? ' pd-mobile-hide' : '';
+          return `<button type="button" class="pd-size-pill pd-color-pill${i===0?' active':''}${hideCls}" data-color="${escAttr(c)}" data-index="${i}"><span class="pd-color-dot" style="background:${hex || 'var(--hairline-2)'}"></span><span class="pd-color-label">${c}</span></button>`;
         }).join('');
         colorsWrap.querySelectorAll('.pd-size-pill').forEach(btn => {
           btn.addEventListener('click', () => {
@@ -1655,6 +1675,27 @@
             setActiveThumbBySrc(catalogImages[idx]);
           });
         });
+        if(collapseColors && product.colors.length > MOBILE_COLLAPSE_LIMIT){
+          const extraCount = product.colors.length - MOBILE_COLLAPSE_LIMIT;
+          const colorMoreBtn = document.createElement('button');
+          colorMoreBtn.type = 'button';
+          colorMoreBtn.className = 'pd-size-pill pd-color-pill pd-mobile-more';
+          colorMoreBtn.innerHTML = `<span class="pd-color-dot pd-color-more-dot">+${extraCount}</span><span class="pd-color-label">more</span>`;
+          colorMoreBtn.addEventListener('click', () => {
+            const hidden = colorsWrap.querySelectorAll('.pd-color-pill.pd-mobile-hide');
+            const isExpanded = hidden.length === 0;
+            if(isExpanded){
+              colorsWrap.querySelectorAll('.pd-color-pill[data-index]').forEach((b,i) => {
+                if(Number(b.dataset.index) >= MOBILE_COLLAPSE_LIMIT) b.classList.add('pd-mobile-hide');
+              });
+              colorMoreBtn.innerHTML = `<span class="pd-color-dot pd-color-more-dot">+${extraCount}</span><span class="pd-color-label">more</span>`;
+            } else {
+              hidden.forEach(b => b.classList.remove('pd-mobile-hide'));
+              colorMoreBtn.innerHTML = `<span class="pd-color-dot pd-color-more-dot">–</span><span class="pd-color-label">less</span>`;
+            }
+          });
+          colorsWrap.appendChild(colorMoreBtn);
+        }
       } else {
         colorBlock.style.display = 'none';
       }
@@ -1672,9 +1713,10 @@
     }
 
     /* thumbs: one per image we have (e.g. one per colour/finish); clicking a thumb swaps the large photo */
+    const collapseThumbs = MOBILE_COLLAPSE_CATEGORIES.includes(product.category);
     if(thumbsWrap){
       thumbsWrap.innerHTML = catalogImages.length
-        ? catalogImages.map((src,i) => `<div class="pd-thumb${i===defaultImageIdx?' active':''}" data-src="${src}"><img class="real-photo" src="${src}" alt="${product.title} view ${i+1}" style="object-fit:cover;background:#fff;" loading="lazy"></div>`).join('')
+        ? catalogImages.map((src,i) => `<div class="pd-thumb${i===defaultImageIdx?' active':''}${(collapseThumbs && i >= MOBILE_COLLAPSE_LIMIT) ? ' pd-mobile-hide' : ''}" data-src="${src}"><img class="real-photo" src="${src}" alt="${product.title} view ${i+1}" style="object-fit:cover;background:#fff;" loading="lazy"></div>`).join('')
         : Array.from({length:4}).map((_,i) => `<div class="pd-thumb${i===0?' active':''}"><div class="art"><div class="icon">${ICONS.mortise}</div></div></div>`).join('');
       thumbsWrap.querySelectorAll('.pd-thumb').forEach((t,i) => {
         t.addEventListener('click', () => {
@@ -1725,6 +1767,26 @@
           }
         });
       });
+      if(collapseThumbs && catalogImages.length > MOBILE_COLLAPSE_LIMIT){
+        const extraThumbCount = catalogImages.length - MOBILE_COLLAPSE_LIMIT;
+        const thumbMoreBtn = document.createElement('div');
+        thumbMoreBtn.className = 'pd-thumb pd-mobile-more';
+        thumbMoreBtn.innerHTML = `<div class="pd-thumb-more-inner">+${extraThumbCount}</div>`;
+        thumbMoreBtn.addEventListener('click', () => {
+          const hidden = thumbsWrap.querySelectorAll('.pd-thumb.pd-mobile-hide');
+          const isExpanded = hidden.length === 0;
+          if(isExpanded){
+            thumbsWrap.querySelectorAll('.pd-thumb[data-src]').forEach((t,i) => {
+              if(i >= MOBILE_COLLAPSE_LIMIT) t.classList.add('pd-mobile-hide');
+            });
+            thumbMoreBtn.querySelector('.pd-thumb-more-inner').textContent = `+${extraThumbCount}`;
+          } else {
+            hidden.forEach(t => t.classList.remove('pd-mobile-hide'));
+            thumbMoreBtn.querySelector('.pd-thumb-more-inner').textContent = '−';
+          }
+        });
+        thumbsWrap.appendChild(thumbMoreBtn);
+      }
     }
 
     document.getElementById('pdWaLinkText').textContent = 'Enquire on WhatsApp for Pricing';
