@@ -850,6 +850,145 @@
     .prod-card-body{ padding:16px 12px 14px; }
     .mobile-cat-item{ padding:13px 6px; }
   }
+
+/* =========================================================================
+   SITE SEARCH OVERLAY
+   Full-screen, app-style search sheet used on phones; on wider screens it
+   settles into a dropdown panel anchored under the header search icon.
+   ========================================================================= */
+.search-overlay{
+  position:fixed; inset:0; z-index:10000;
+  background:var(--panel);
+  display:flex; flex-direction:column;
+  opacity:0; visibility:hidden; pointer-events:none;
+  transform:translateY(-12px);
+  transition:opacity .28s var(--ease), transform .28s var(--ease), visibility 0s linear .28s;
+}
+.search-overlay.active{
+  opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0);
+  transition:opacity .28s var(--ease), transform .28s var(--ease), visibility 0s linear 0s;
+}
+.search-ov-head{
+  display:flex; align-items:center; gap:10px;
+  padding:16px 16px 12px; flex-shrink:0;
+  border-bottom:1px solid var(--hairline);
+  background:var(--panel);
+}
+.search-ov-back{
+  width:38px; height:38px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--hairline-2); background:transparent; color:var(--bone);
+  transition:border-color .25s ease, background .25s ease;
+}
+.search-ov-back:active{ background:var(--panel-2); }
+.search-ov-back svg{ width:18px; height:18px; }
+.search-ov-input-wrap{
+  flex:1; position:relative; display:flex; align-items:center;
+  background:#fff; border:1px solid var(--hairline-2); border-radius:999px;
+  padding:0 14px; height:44px;
+}
+.search-ov-input-wrap svg.ico-search{ width:17px; height:17px; color:var(--mute); flex-shrink:0; }
+.search-ov-input{
+  flex:1; border:none; outline:none; background:transparent;
+  font-family:'Manrope',sans-serif; font-size:0.86rem; color:var(--bone);
+  padding:0 8px; height:100%;
+}
+.search-ov-input::placeholder{ color:var(--mute-2); }
+.search-ov-clear{
+  width:22px; height:22px; border-radius:50%; flex-shrink:0; display:none;
+  align-items:center; justify-content:center; border:none; background:var(--panel-2); color:var(--mute);
+}
+.search-ov-clear.show{ display:flex; }
+.search-ov-clear svg{ width:12px; height:12px; }
+.search-ov-body{ flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:18px 16px 40px; }
+.search-ov-label{
+  font-family:'Manrope',sans-serif; font-size:0.66rem; font-weight:800; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--mute); margin:0 0 12px;
+}
+.search-chip-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px; }
+.search-chip{
+  font-family:'Manrope',sans-serif; font-size:0.74rem; font-weight:600; color:var(--bone-dim);
+  padding:8px 14px; border-radius:999px; border:1px solid var(--hairline-2); background:#fff;
+  cursor:pointer; transition:border-color .2s ease, color .2s ease, background .2s ease;
+}
+.search-chip:active, .search-chip:hover{ border-color:var(--brass); color:var(--brass-2); background:var(--panel-2); }
+.search-ov-section-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+.search-ov-section-head .search-ov-label{ margin:0; }
+.search-view-all{
+  font-family:'Manrope',sans-serif; font-size:0.7rem; font-weight:700; color:var(--brass-2);
+  display:flex; align-items:center; gap:4px; white-space:nowrap;
+}
+.search-view-all svg{ width:12px; height:12px; }
+.search-results{ display:flex; flex-direction:column; gap:2px; }
+.search-result-item{
+  display:flex; align-items:center; gap:12px; padding:10px 4px;
+  border-bottom:1px solid var(--hairline); text-align:left; background:none; border-left:none; border-right:none; border-top:none;
+  cursor:pointer;
+}
+.search-result-thumb{
+  width:52px; height:52px; border-radius:10px; object-fit:cover; flex-shrink:0;
+  background:var(--panel-2); border:1px solid var(--hairline);
+}
+.search-result-info{ flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+.search-result-name{ font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:700; color:var(--bone); line-height:1.2; display:block; }
+.search-result-sub{ font-family:'Manrope',sans-serif; font-size:0.72rem; color:var(--mute); margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.search-result-arrow{ width:16px; height:16px; color:var(--mute-2); flex-shrink:0; }
+.search-ov-empty{ text-align:center; padding:60px 20px; color:var(--mute); }
+.search-ov-empty svg{ width:40px; height:40px; color:var(--mute-2); margin-bottom:14px; }
+.search-ov-empty p{ font-family:'Manrope',sans-serif; font-size:0.82rem; }
+.search-ov-empty b{ color:var(--bone-dim); }
+body.search-lock{ overflow:hidden; }
+.search-backdrop{
+  position:fixed; inset:0; z-index:9999; background:rgba(20,17,13,0.35);
+  opacity:0; visibility:hidden; pointer-events:none; transition:opacity .28s ease, visibility 0s linear .28s;
+}
+.search-backdrop.active{ opacity:1; visibility:visible; pointer-events:auto; transition:opacity .28s ease, visibility 0s linear 0s; }
+@media (max-width:900px){ .search-backdrop{ display:none; } }
+
+@media (min-width:901px){
+  .search-overlay{
+    inset:auto; top:0; right:0; left:auto;
+    width:420px; max-width:calc(100vw - 32px);
+    max-height:calc(100vh - 24px);
+    margin:12px 12px 0 0;
+    border-radius:16px; box-shadow:0 24px 60px rgba(20,17,13,0.28);
+    border:1px solid var(--hairline-2);
+    transform:translateY(-8px) scale(.98);
+  }
+  .search-overlay.active{ transform:translateY(0) scale(1); }
+  .search-ov-head{ border-radius:16px 16px 0 0; }
+  .search-ov-body{ max-height:70vh; }
+}
+
+/* ---------------- desktop inline search bar (replaces icon-only trigger on wide screens) ---------------- */
+.nav-search-desktop{ display:none; }
+@media (min-width:901px){
+  .nav-cta .icon-btn[aria-label="Search"]{ display:none; }
+  .nav-search-desktop{
+    display:flex; align-items:center; gap:8px;
+    background:#fff; border:1px solid var(--dark-line-2); border-radius:999px;
+    padding:0 14px; height:40px; width:220px; flex-shrink:0;
+    transition:width .25s var(--ease), border-color .25s ease;
+  }
+  .nav-search-desktop:focus-within{ width:264px; border-color:var(--brass); }
+  .nav-search-desktop svg.ico-search{ width:15px; height:15px; color:var(--mute); flex-shrink:0; }
+  .nav-search-desktop input{
+    flex:1; min-width:0; border:none; outline:none; background:transparent;
+    font-family:'Manrope',sans-serif; font-size:0.8rem; color:#1c1812; height:100%;
+  }
+  .nav-search-desktop input::placeholder{ color:var(--mute-2); }
+  .nav-search-clear{
+    width:18px; height:18px; border-radius:50%; flex-shrink:0; display:none;
+    align-items:center; justify-content:center; border:none; background:var(--panel-2); color:var(--mute);
+  }
+  .nav-search-clear.show{ display:flex; }
+  .nav-search-clear svg{ width:10px; height:10px; }
+  header#siteHeader.search-nav-active{ z-index:10002; }
+  .search-ov-head{ display:none; }
+  .search-overlay{ overflow:hidden; }
+  .search-ov-body{ padding:20px 20px 24px; max-height:min(70vh, 520px); }
+}
+
 </style>
 </head>
 <body>
@@ -881,6 +1020,7 @@
       </ul>
     </nav>
     <div class="nav-cta">
+      <div class="nav-search-desktop" id="navSearchDesktop"><svg class="ico-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input type="text" id="navSearchInput" placeholder="Search tower bolts, hinges, key hole…" autocomplete="off"><button type="button" class="nav-search-clear" id="navSearchClear" aria-label="Clear search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
       <button class="icon-btn" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
       <a href="wishlist.html" class="icon-btn" id="headerWishBtn" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 8 2 4.5 5.4 3.6 8 2.9 10.4 4.2 12 6.6c1.6-2.4 4-3.7 6.6-3 3.4.9 4.8 4.4 3.4 7.6-2.5 4.7-10 9.3-10 9.3Z"/></svg><span class="icon-badge zero" id="wishBadge">0</span></a>
       <a href="cart.html" class="icon-btn cart-btn" id="headerCartBtn" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17.5" cy="19.5" r="1.4"/></svg><span class="icon-badge zero" id="cartBadge">0</span></a>
@@ -1227,8 +1367,8 @@ function iconForCategory(name){
 
 /* every product range shown in the main grid */
 const PRODUCTS = [
-  {name:'Brass Tower Bolt', sub:'Premium brass tower bolts', count:7, icon:'bolt', parent:'Bolts & Latches', img:'images/catalog-demo/brass T Bolt/brass marble/brass marble.jpg'},
-  {name:'Alu T-Bolt', sub:'High quality aluminium T-bolts', count:5, icon:'bolt', parent:'Bolts & Latches', img:'images/catalog-demo/alu-neck.jpg'},
+  {name:'Brass Tower Bolt', sub:'Premium brass tower bolts', count:6, icon:'bolt', parent:'Bolts & Latches', img:'images/catalog-demo/brass T Bolt/brass marble/brass marblecolor3.jpg'},
+  {name:'Alu T-Bolt', sub:'High quality aluminium T-bolts', count:5, icon:'bolt', parent:'Bolts & Latches', img:'images/catalog-demo/ALU T bolt/10mm/10mmmain.jpg'},
   {name:'Key Hole', sub:'Durable brass key holes', count:9, icon:'lock', parent:'Lock & Security', img:'images/catalog-demo/key-hole.jpg'},
   {name:'Duck Hinges', sub:'Strong & smooth duck hinges', count:1, icon:'hinge', parent:'Hinges', img:'images/catalog-demo/Duck hingaj/duckhingajmain.jpg'},
   {name:'SS Hinges', sub:'Stainless steel hinges', count:1, icon:'hinge', parent:'Hinges', img:'images/catalog-demo/ss-hinges.jpg'},
@@ -1274,17 +1414,16 @@ const CATALOG = {
     {name:'Brass Capsule Tower Bolt', sub:'Available in SSF & Antique Finish · Strong Grip · Smooth Operation · Long Life', specs:[['Finish','Antique Bronze / SSF'],['Features','Strong Grip, Premium Finish, Smooth Movement, Rust Resistant']], img:'images/catalog-demo/brass T Bolt/brass capsule towerbolt/brasscapsuletbltmain.jpg', images:['images/catalog-demo/brass T Bolt/brass capsule towerbolt/brasscapsuletbltmain.jpg','images/catalog-demo/brass T Bolt/brass capsule towerbolt/brasscapsuletbltcolor1.jpg'], colors:['Antique Bronze','Silver Chrome'], colorLabel:'Finish', sizes:['3"','4"','6"','8"','10"','12"','15"','18"','24"']},
     {name:'Step Xylo', img:'images/catalog-demo/brass T Bolt/brass Xylo/brassxylomain.jpg', images:['images/catalog-demo/brass T Bolt/brass Xylo/brassxylomain.jpg','images/catalog-demo/brass T Bolt/brass Xylo/brassxylocolor1.jpg','images/catalog-demo/brass T Bolt/brass Xylo/brassxylocolor2.jpg','images/catalog-demo/brass T Bolt/brass Xylo/brassxylocolor3.jpg','images/catalog-demo/brass T Bolt/brass Xylo/brassxylocolor4.jpg','images/catalog-demo/brass T Bolt/brass Xylo/brassxylocolor6.jpg','images/catalog-demo/brass T Bolt/brass Xylo/brassxylocolor5.jpg'], colors:['Silver Chrome','Rose Gold','Antique Bronze','Black','Gold','PVD Gold','PVD Rose Gold'], colorLabel:'Finish'},
     {name:'SQ Tower Bolt', img:'images/catalog-demo/brass T Bolt/brass  Square/brass squarecolor1.jpg', images:['images/catalog-demo/brass T Bolt/brass  Square/brass squarecolor1.jpg','images/catalog-demo/brass T Bolt/brass  Square/brass squarecolor2.jpg','images/catalog-demo/brass T Bolt/brass  Square/brass squarecolor3.jpg','images/catalog-demo/brass T Bolt/brass  Square/brass squarecolor4.jpg','images/catalog-demo/brass T Bolt/brass  Square/brass squaremain.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], colorLabel:'Finish'},
-    {name:'Brass Marble', img:'images/catalog-demo/brass T Bolt/brass marble/brass marble.jpg', images:['images/catalog-demo/brass T Bolt/brass marble/brass marble.jpg','images/catalog-demo/brass T Bolt/brass marble/brass marblecolor2.jpg','images/catalog-demo/brass T Bolt/brass marble/brass marblecolor1.jpg','images/catalog-demo/brass T Bolt/brass marble/brass marblecolor3.jpg','images/catalog-demo/brass T Bolt/brass marble/brass marblecolor4.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], colorLabel:'Finish', sizes:['4"','6"','8"','10"','12"','15"','18"','24"']},
+    {name:'Brass Marble', img:'images/catalog-demo/brass T Bolt/brass marble/brass marblecolor3.jpg', images:['images/catalog-demo/brass T Bolt/brass marble/brass marblecolor3.jpg','images/catalog-demo/brass T Bolt/brass marble/brass marblecolor4.jpg'], colors:['Antique Bronze','Silver Chrome'], colorLabel:'Finish', sizes:['4"','6"','8"','10"','12"','15"','18"','24"']},
     {name:'Brass Solid Material', img:'images/catalog-demo/brasssolidcolormain.jpg', images:['images/catalog-demo/brasssolidcolormain.jpg','images/catalog-demo/brasssolidcolor1.jpg','images/catalog-demo/brasssolidcolor2.jpg','images/catalog-demo/brasssolidcolor3.jpg','images/catalog-demo/brasssolidcolor4.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], colorLabel:'Finish'},
     {name:'Brass Mataka', img:'images/catalog-demo/brass T Bolt/Brass Mataka/brass matakacolor2.jpg', images:['images/catalog-demo/brass T Bolt/Brass Mataka/brass matakacolor3.jpg','images/catalog-demo/brass T Bolt/Brass Mataka/brass matakacolor1.jpg','images/catalog-demo/brass T Bolt/Brass Mataka/brass matakacolor2.jpg','images/catalog-demo/brass T Bolt/Brass Mataka/brass matakacolor4.jpg','images/catalog-demo/brass T Bolt/Brass Mataka/brass matakacolor5.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], colorLabel:'Finish'},
-    {name:'Brass Step Xylo Heavy', img:'images/catalog-demo/brass T Bolt/Brass marble Xylo Heavy/brassmatakaheavycolor4.jpg', images:['images/catalog-demo/brass T Bolt/Brass marble Xylo Heavy/brassmatakaheavycolor4.jpg','images/catalog-demo/brass T Bolt/Brass marble Xylo Heavy/brassmatakaheavy.jpg','images/catalog-demo/brass T Bolt/Brass marble Xylo Heavy/brassmatakaheavycolor1.jpg','images/catalog-demo/brass T Bolt/Brass marble Xylo Heavy/brassmatakaheavycolor2.jpg','images/catalog-demo/brass T Bolt/Brass marble Xylo Heavy/brassmatakaheavycolor3.jpg'], colors:['Antique Bronze','Silver Chrome','Rose Gold','Gold','Black'], colorLabel:'Finish'},
     {name:'Brass Step Xylo Marble Heavy', img:'images/catalog-demo/brass T Bolt/Brass step xylo marble tower bolt Heavy/BrassstepxylomarbletowerboltHeavymain.jpg', images:['images/catalog-demo/brass T Bolt/Brass step xylo marble tower bolt Heavy/BrassstepxylomarbletowerboltHeavymain.jpg','images/catalog-demo/brass T Bolt/Brass step xylo marble tower bolt Heavy/BrassstepxylomarbletowerboltHeavycolor1.jpg','images/catalog-demo/brass T Bolt/Brass step xylo marble tower bolt Heavy/BrassstepxylomarbletowerboltHeavycolor2.jpg','images/catalog-demo/brass T Bolt/Brass step xylo marble tower bolt Heavy/BrassstepxylomarbletowerboltHeavycolor3.jpg','images/catalog-demo/brass T Bolt/Brass step xylo marble tower bolt Heavy/BrassstepxylomarbletowerboltHeavycolor4.jpg'], colors:['Antique Bronze','Silver Chrome','Rose Gold','Black','Gold'], colorLabel:'Finish', sizes:['4"','6"','8"','10"','12"','15"','18"','24"']}
   ]},
   'Alu T-Bolt': { type:'items-sizes', note:'Available 4" to 48"', items:[
     {name:'Super Marble', img:'images/catalog-demo/ALU T bolt/Super Marble/ALU supermarblemain.jpg', images:['images/catalog-demo/ALU T bolt/Super Marble/ALU supermarblemain.jpg','images/catalog-demo/ALU T bolt/Super Marble/ALU supermarblecolor1.jpg','images/catalog-demo/ALU T bolt/Super Marble/ALU supermarblecolor3.jpg','images/catalog-demo/ALU T bolt/Super Marble/ALU supermarblecolor4.jpg'], colors:['Rose Gold','Antique','SSF','Z Black'], colorLabel:'Finish', sizes:['4"','6"','8"','10"','12"','24"','30"','36"','48"']},
     {name:'Xylo', img:'images/catalog-demo/ALU T bolt/Xylo/ALU XYLOcolor2.jpg', images:['images/catalog-demo/ALU T bolt/Xylo/ALU XYLOcolor2.jpg','images/catalog-demo/ALU T bolt/Xylo/ALU XYLOcolor1.jpg','images/catalog-demo/ALU T bolt/Xylo/ALU XYLOcolor3.jpg'], colors:['Black','Antique Bronze','Silver Chrome'], colorLabel:'Finish', sizes:['4\"','6\"','8\"','10\"','12\"','14\"','16\"','18\"','20\"','22\"','24\"']},
-    {name:'Sylo', img:'images/catalog-demo/alu-full-round.jpg'},
-    {name:'10mm', img:'images/catalog-demo/alu-neck.jpg', shrink:true},
+    {name:'Sylo', img:'images/catalog-demo/ALU T bolt/sylo/alusylomain.jpg', images:['images/catalog-demo/ALU T bolt/sylo/alusylomain.jpg','images/catalog-demo/ALU T bolt/sylo/alusylocolor1.jpg','images/catalog-demo/ALU T bolt/sylo/alusylocolor2.jpg'], colors:['Z Black','Antique','SSF'], colorLabel:'Finish', sizes:['4"','6"','8"','10"','12"']},
+    {name:'10mm', img:'images/catalog-demo/ALU T bolt/10mm/10mmmain.jpg', images:['images/catalog-demo/ALU T bolt/10mm/10mmmain.jpg','images/catalog-demo/ALU T bolt/10mm/10mmcolor1.jpg','images/catalog-demo/ALU T bolt/10mm/10mmcolor2.jpg'], colors:['Antique','SSF','Z Black'], colorLabel:'Finish', sizes:['4×10mm','6×10mm','8×10mm','10×10mm','12×10mm','15×10mm','18×10mm','24×10mm','15×12mm','18×12mm','24×12mm'], shrink:true},
     {name:'Aluminium Baby Latch', img:'images/catalog-demo/Aluminim baby latch/Aluminim baby lacthcolor2.jpg', images:['images/catalog-demo/Aluminim baby latch/Aluminim baby lacthcolor2.jpg','images/catalog-demo/Aluminim baby latch/Aluminim baby lacthmain.jpg','images/catalog-demo/Aluminim baby latch/Aluminim baby lacthcolor1.jpg','images/catalog-demo/Aluminim baby latch/Aluminim baby lacthcolor3.jpg','images/catalog-demo/Aluminim baby latch/Aluminim baby lacthcolor4.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], colorLabel:'Finish'}
   ]},
   'Key Hole': { type:'items', img:'images/catalog-demo/key-hole.jpg', items:[
@@ -2023,5 +2162,223 @@ document.getElementById('subForm').addEventListener('submit', function(e){
 
 </script>
 <script src="js/ai-chatbot.js" defer></script>
+
+<!-- ============================= SITE SEARCH OVERLAY ============================= -->
+<div class="search-backdrop" id="searchBackdrop"></div>
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search products">
+  <div class="search-ov-head">
+    <button class="search-ov-back" id="searchOvBack" aria-label="Close search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m15 18-6-6 6-6"/></svg></button>
+    <div class="search-ov-input-wrap">
+      <svg class="ico-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" class="search-ov-input" id="searchOvInput" placeholder="Search tower bolts, hinges, key hole…" autocomplete="off">
+      <button class="search-ov-clear" id="searchOvClear" aria-label="Clear search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="search-ov-body" id="searchOvBody">
+    <div id="searchOvSuggest">
+      <p class="search-ov-label">Quick Suggestions</p>
+      <div class="search-chip-row" id="searchChipRow"></div>
+    </div>
+    <div class="search-ov-section-head">
+      <p class="search-ov-label" id="searchSectionLabel">Products</p>
+      <a href="products.html" class="search-view-all">View all results <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 6 6 6-6 6"/></svg></a>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    <div class="search-ov-empty" id="searchOvEmpty" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <p>No products found for "<b id="searchOvEmptyTerm"></b>"<br>Try a different keyword.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var FALLBACK_SEARCH_INDEX = [
+    {name:'Brass Tower Bolt', sub:'Premium brass tower bolts', img:'images/catalog-demo/brass T Bolt/brass marble/brass marblecolor3.jpg'},
+    {name:'Alu T-Bolt', sub:'High quality aluminium T-bolts', img:'images/catalog-demo/ALU T bolt/10mm/10mmmain.jpg'},
+    {name:'Key Hole', sub:'Durable brass key holes', img:'images/catalog-demo/key-hole.jpg'},
+    {name:'Duck Hinges', sub:'Strong & smooth duck hinges', img:'images/catalog-demo/Duck hingaj/duckhingajmain.jpg'},
+    {name:'SS Hinges', sub:'Stainless steel hinges', img:'images/catalog-demo/ss-hinges.jpg'},
+    {name:'Rod Latch', sub:'Heavy duty rod latches', img:'images/catalog-demo/ROd Latch/rodlatchcolor1.jpg'},
+    {name:'SS Socket', sub:'Stainless steel sockets', img:'images/catalog-demo/ss socket/1 full size/1 full size.jpg'},
+    {name:'SS Pane Lock', sub:'Secure stainless steel locks', img:'images/catalog-demo/ss panle lock.jpg'},
+    {name:'Key', sub:'High quality brass keys', img:'images/catalog-demo/key/key small/flarekeysmallmain.jpg'},
+    {name:'Brass Pane Lock', sub:'Durable brass pane locks', img:'images/catalog-demo/brass lock.jpg'},
+    {name:'Door Stopper', sub:'Reliable door stoppers', img:'images/catalog-demo/doorstoppermain.jpg'},
+    {name:'L Bat', sub:'Sturdy L bats for doors', img:'images/catalog-demo/L batmain.jpg'},
+    {name:'Cam Bolt', sub:'Precision cam bolts', img:'images/catalog-demo/Cam bolt/Cam bolt.jpg'},
+    {name:'Pivot', sub:'Smooth door pivots', img:'images/catalog-demo/pivot_main.jpg'},
+    {name:'Flare Knob', sub:'Elegant flare knobs', img:'images/catalog-demo/flare knob/flareberlicolor1.jpg'},
+    {name:'Folding Bracket', sub:'Space-saving folding brackets', img:'images/catalog-demo/Folding Bracket/Square folding bracketmain.jpg'},
+    {name:'Bracket', sub:'General purpose brackets', img:'images/catalog-demo/Square Bracket/square bracketmain.jpg'},
+    {name:'Orange Wheels Castor', sub:'Durable caster wheels', img:'images/catalog-demo/OrangeWheelCastor.jpg'},
+    {name:'Oval Socket', sub:'Smooth oval sockets', img:'images/catalog-demo/oval-socket.jpg'},
+    {name:'Glass Hinges', sub:'Sturdy glass hinges', img:'images/catalog-demo/Glass Hingas/Glass Hingasmain.jpg'},
+    {name:'Door Eye', sub:'Secure door eye viewers', img:'images/catalog-demo/door eye/door-eye.jpg'},
+    {name:'SS L Bracket', sub:'Stainless steel L brackets', img:'images/catalog-demo/SSL Bracket/Ss L bracket heavy.jpg'},
+    {name:'Mirror Cap', sub:'Polished mirror caps', img:'images/catalog-demo/Mirror Cap/mirror capmain.jpg'},
+    {name:'Mirror Holder', sub:'Durable mirror holders', img:'images/catalog-demo/Mirror Holder/Mirror Holdermain.jpg'},
+    {name:'Floor Magnet', sub:'Strong floor door magnets', img:'images/catalog-demo/flaremagnetmain.jpg'},
+    {name:'Table Chain', sub:'Durable table chains', img:'images/catalog-demo/table Chainmain.jpg'},
+    {name:'Rope Wire Chain', sub:'Flexible rope wire chains', img:'images/catalog-demo/Rope Wire Chian/Rope Wire Chain.jpg'},
+    {name:'Flare Products', sub:'Flare hardware collection', img:'images/catalog-demo/Flare BRass/Flarepvtblack.jpg'},
+    {name:'Chest Handle', sub:'Solid brass chest handle', img:'images/catalog-demo/cheshhandlemain-hero.jpg'},
+    {name:'Big Vaccum', sub:'Heavy duty vacuum fitting', img:'images/catalog-demo/big vaccum/big vaccummain.jpg'},
+    {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'}
+  ];
+  var SEARCH_INDEX = (typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX;
+  var CHIP_NAMES = ['Brass Tower Bolt','Alu T-Bolt','SS Hinges','Key Hole','Door Stopper','Flare Knob'];
+
+  var overlay = document.getElementById('searchOverlay');
+  var backdrop = document.getElementById('searchBackdrop');
+  var input = document.getElementById('searchOvInput');
+  var clearBtn = document.getElementById('searchOvClear');
+  var backBtn = document.getElementById('searchOvBack');
+  var resultsEl = document.getElementById('searchResults');
+  var emptyEl = document.getElementById('searchOvEmpty');
+  var emptyTermEl = document.getElementById('searchOvEmptyTerm');
+  var suggestEl = document.getElementById('searchOvSuggest');
+  var sectionLabel = document.getElementById('searchSectionLabel');
+  var chipRow = document.getElementById('searchChipRow');
+  var openBtn = document.querySelector('[data-search-trigger]');
+  var navSearchWrap = document.getElementById('navSearchDesktop');
+  var navInput = document.getElementById('navSearchInput');
+  var navClear = document.getElementById('navSearchClear');
+  var siteHeaderEl = document.getElementById('siteHeader');
+
+  function renderChips(){
+    chipRow.innerHTML = CHIP_NAMES.map(function(n){
+      return '<button type="button" class="search-chip" data-chip="'+n.replace(/"/g,'&quot;')+'">'+n+'</button>';
+    }).join('');
+    chipRow.querySelectorAll('.search-chip').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        input.value = chip.dataset.chip;
+        runSearch(chip.dataset.chip);
+        input.focus();
+      });
+    });
+  }
+
+  function itemUrl(item){
+    return 'products.html?cat=' + encodeURIComponent(item.name);
+  }
+
+  function renderResults(list, term){
+    resultsEl.innerHTML = list.map(function(item){
+      var img = item.img || '';
+      var sub = item.sub || item.parent || '';
+      return '<a class="search-result-item" href="'+itemUrl(item)+'">'+
+        '<img class="search-result-thumb" src="'+img+'" alt="'+item.name+'" loading="lazy" onerror="this.style.visibility=\'hidden\'">'+
+        '<span class="search-result-info"><span class="search-result-name">'+item.name+'</span><span class="search-result-sub">'+sub+'</span></span>'+
+        '<svg class="search-result-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 6 6 6-6 6"/></svg>'+
+      '</a>';
+    }).join('');
+  }
+
+  function runSearch(term){
+    term = (term || '').trim().toLowerCase();
+    var list;
+    if(!term){
+      list = SEARCH_INDEX.slice(0,5);
+      sectionLabel.textContent = 'Popular Products';
+      suggestEl.style.display = '';
+    } else {
+      list = SEARCH_INDEX.filter(function(item){
+        return item.name.toLowerCase().indexOf(term) !== -1 ||
+               (item.sub && item.sub.toLowerCase().indexOf(term) !== -1) ||
+               (item.parent && item.parent.toLowerCase().indexOf(term) !== -1);
+      }).slice(0,8);
+      sectionLabel.textContent = 'Products';
+      suggestEl.style.display = 'none';
+    }
+    clearBtn.classList.toggle('show', !!term);
+    if(list.length === 0){
+      resultsEl.style.display = 'none';
+      emptyEl.style.display = '';
+      emptyTermEl.textContent = term;
+    } else {
+      resultsEl.style.display = '';
+      emptyEl.style.display = 'none';
+      renderResults(list, term);
+    }
+  }
+
+  function isDesktop(){ return window.innerWidth > 900; }
+  function positionDesktopOverlay(){
+    if(isDesktop() && navSearchWrap){
+      var wrapR = navSearchWrap.getBoundingClientRect();
+      var headerBottom = siteHeaderEl ? siteHeaderEl.getBoundingClientRect().bottom : wrapR.bottom;
+      var top = Math.max(headerBottom, wrapR.bottom) + 10;
+      overlay.style.top = top + 'px';
+      overlay.style.right = (window.innerWidth - wrapR.right) + 'px';
+      overlay.style.left = 'auto';
+      overlay.style.margin = '0';
+      overlay.style.maxHeight = Math.max(240, window.innerHeight - top - 16) + 'px';
+    } else {
+      overlay.style.top = '';
+      overlay.style.right = '';
+      overlay.style.left = '';
+      overlay.style.margin = '';
+      overlay.style.maxHeight = '';
+    }
+  }
+  function openOverlay(fromNavInput){
+    positionDesktopOverlay();
+    overlay.classList.add('active');
+    backdrop.classList.add('active');
+    document.body.classList.add('search-lock');
+    if(siteHeaderEl) siteHeaderEl.classList.add('search-nav-active');
+    var term = (fromNavInput && isDesktop() && navInput) ? navInput.value : '';
+    runSearch(term);
+    if(!(fromNavInput && isDesktop())){
+      setTimeout(function(){ input.focus(); }, 260);
+    }
+  }
+  function closeOverlay(){
+    overlay.classList.remove('active');
+    backdrop.classList.remove('active');
+    document.body.classList.remove('search-lock');
+    if(siteHeaderEl) siteHeaderEl.classList.remove('search-nav-active');
+  }
+
+  document.querySelectorAll('.icon-btn[aria-label="Search"]').forEach(function(btn){
+    btn.setAttribute('type','button');
+    btn.addEventListener('click', function(e){ e.preventDefault(); openOverlay(); });
+  });
+  backBtn.addEventListener('click', closeOverlay);
+  backdrop.addEventListener('click', closeOverlay);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && overlay.classList.contains('active')) closeOverlay();
+  });
+  input.addEventListener('input', function(){ runSearch(input.value); });
+  clearBtn.addEventListener('click', function(){ input.value=''; runSearch(''); input.focus(); });
+
+  if(navInput){
+    navInput.addEventListener('focus', function(){
+      if(!overlay.classList.contains('active')) openOverlay(true);
+    });
+    navInput.addEventListener('input', function(){
+      if(!overlay.classList.contains('active')) openOverlay(true);
+      else positionDesktopOverlay();
+      runSearch(navInput.value);
+      navClear.classList.toggle('show', !!navInput.value);
+    });
+  }
+  if(navClear){
+    navClear.addEventListener('click', function(){
+      navInput.value = '';
+      navClear.classList.remove('show');
+      runSearch('');
+      navInput.focus();
+    });
+  }
+  window.addEventListener('resize', function(){
+    if(overlay.classList.contains('active')) positionDesktopOverlay();
+  });
+
+  renderChips();
+})();
+</script>
+
 </body>
 </html>
