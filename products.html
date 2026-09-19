@@ -1380,14 +1380,14 @@ const PRODUCTS = [
   {name:'Door Stopper', sub:'Reliable door stoppers', count:2, icon:'stopper', parent:'Door Fittings', img:'images/catalog-demo/doorstoppermain.jpg'},
   {name:'L Bat', sub:'Sturdy L bats for doors', count:5, icon:'bracket', parent:'Door Fittings', img:'images/catalog-demo/L batmain.jpg'},
   {name:'Cam Bolt', sub:'Precision cam bolts', count:5, icon:'bolt', parent:'Bolts & Latches', img:'images/catalog-demo/Cam bolt/Cam bolt.jpg'},
-  {name:'Pivot', sub:'Smooth door pivots', count:1, icon:'pivot', parent:'Door Fittings', img:'images/catalog-demo/pivot_main.jpg'},
+  {name:'Pivot', sub:'Smooth door pivots', count:3, icon:'pivot', parent:'Door Fittings', img:'images/catalog-demo/Pivot/pivot_main.jpg'},
   {name:'Flare Knob', sub:'Elegant flare knobs', count:7, icon:'knob', parent:'Knobs & Handles', img:'images/catalog-demo/flare knob/flareberlicolor1.jpg'},
   {name:'Folding Bracket', sub:'Space-saving folding brackets', count:3, icon:'bracket', parent:'Brackets', img:'images/catalog-demo/Folding Bracket/Square folding bracketmain.jpg'},
   {name:'Bracket', sub:'General purpose brackets', count:2, icon:'bracket', parent:'Brackets', img:'images/catalog-demo/Square Bracket/square bracketmain.jpg'},
   {name:'Orange Wheels Castor', sub:'Durable caster wheels', count:1, icon:'wheel', parent:'Caster Wheels', img:'images/catalog-demo/OrangeWheelCastor.jpg'},
   {name:'Oval Socket', sub:'Smooth oval sockets', count:1, icon:'socket', parent:'Brackets', img:'images/catalog-demo/oval-socket.jpg'},
   {name:'Glass Hinges', sub:'Sturdy glass hinges', count:1, icon:'hinge', parent:'Glass Fittings', img:'images/catalog-demo/Glass Hingas/Glass Hingasmain.jpg'},
-  {name:'Door Eye', sub:'Secure door eye viewers', count:1, icon:'eye', parent:'Lock & Security', img:'images/catalog-demo/door eye/door-eye.jpg'},
+  {name:'Door Eye', sub:'Secure door eye viewers', count:1, icon:'eye', parent:'Lock & Security', img:'images/catalog-demo/door eye/dooreyecolor1.jpg'},
   {name:'SS L Bracket', sub:'Stainless steel L brackets', count:2, icon:'bracket', parent:'Brackets', img:'images/catalog-demo/SSL Bracket/Ss L bracket heavy.jpg'},
   {name:'Mirror Cap', sub:'Polished mirror caps', count:1, icon:'mirror', parent:'Miscellaneous', img:'images/catalog-demo/Mirror Cap/mirror capmain.jpg'},
   {name:'Mirror Holder', sub:'Durable mirror holders', count:1, icon:'mirror', parent:'Miscellaneous', img:'images/catalog-demo/Mirror Holder/Mirror Holdermain.jpg'},
@@ -1397,7 +1397,8 @@ const PRODUCTS = [
   {name:'Flare Products', sub:'Flare hardware collection', count:2, icon:'bracket', parent:'Flare Products', img:'images/catalog-demo/Flare BRass/Flarepvtblack.jpg'},
   {name:'Chest Handle', count:1, img:'images/catalog-demo/cheshhandlemain-hero.jpg'},
   {name:'Big Vaccum', count:1, img:'images/catalog-demo/big vaccum/big vaccummain.jpg'},
-  {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', count:1, icon:'bolt', parent:'Bolts & Latches', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'}
+  {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', count:1, icon:'bolt', parent:'Bolts & Latches', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'},
+  {name:'SS New Consil Socket', sub:'Heavy duty stainless steel consil socket', count:1, icon:'socket', parent:'Brackets', img:'images/catalog-demo/ss rod consil/1ssrodconsilmain.jpg'}
 ];
 const TOTAL_PRODUCTS = PRODUCTS.length;
 
@@ -1489,7 +1490,7 @@ const CATALOG = {
     {name:'Brass Square Bracket', sub:'General purpose brackets', img:'images/catalog-demo/Square Bracket/Brass Square Bracket/brass square bracketcolor1jpg.jfif', images:['images/catalog-demo/Square Bracket/Brass Square Bracket/brass square bracketcolor1jpg.jfif','images/catalog-demo/Square Bracket/Brass Square Bracket/brass square bracketcolor4jpg.jfif','images/catalog-demo/Square Bracket/Brass Square Bracket/brass square bracketjpg.jfif','images/catalog-demo/Square Bracket/Brass Square Bracket/brass square bracketcolor2jpg.jfif','images/catalog-demo/Square Bracket/Brass Square Bracket/brass square bracketcolor3jpg.jfif'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], colorLabel:'Finish'}
   ]},
   'Orange Wheels Castor': { type:'sizes', img:'images/catalog-demo/OrangeWheelCastor.jpg', sizes:['1.5"','2"'] },
-  'Door Eye': { type:'sizes', img:'images/catalog-demo/door eye/door-eye.jpg', images:['images/catalog-demo/door eye/door-eye.jpg','images/catalog-demo/door eye/dooreyecolor3.jpg','images/catalog-demo/door eye/dooreyecolor1.jpg','images/catalog-demo/door eye/dooreyecolor2.jpg','images/catalog-demo/door eye/dooreyecolor4.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], colorLabel:'Finish', sizes:['3" (SSF/AB)','2.5" (SSF/AB/Black/Gold/R.Gold)'] },
+  'Door Eye': { type:'sizes', img:'images/catalog-demo/door eye/dooreyecolor1.jpg', images:['images/catalog-demo/door eye/dooreyecolor1.jpg','images/catalog-demo/door eye/dooreyecolor2.jpg','images/catalog-demo/door eye/dooreyecolor3.jpg','images/catalog-demo/door eye/dooreyecolor4.jpg','images/catalog-demo/door eye/dooreyecolor5.jpg'], colors:['Antique','Z Black','SSF','Rose Gold','Gold'], colorLabel:'Finish', sizes:['3" (SSF/AB)','2.5" (SSF/AB/Black/Gold/R.Gold)'] },
   'SS L Bracket': { type:'items-sizes', img:'images/catalog-demo/SSL Bracket/Ss L bracket heavy.jpg', items:[
     {name:'Heavy L Bracket', img:'images/catalog-demo/SSL Bracket/Ss L bracket heavy.jpg', sizes:['6"']},
     {name:'Half Round Bracket', img:'images/catalog-demo/SSL Bracket/SSl Bracket half round L bracket.jpg', sizes:['9"','12"','15"','18"']}
@@ -1499,7 +1500,11 @@ const CATALOG = {
   'Table Chain': { type:'sizes', note:'CP / SSF', img:'images/catalog-demo/table Chainmain.jpg', sizes:['6"','8"','10"','12"'] },
   'Rope Wire Chain': { type:'sizes', note:'SSF/AB · Black · Gold · Rose Gold', img:'images/catalog-demo/Rope Wire Chian/Rope Wire Chain.jpg', images:['images/catalog-demo/Rope Wire Chian/Rope Wire ChainColor2.jpg','images/catalog-demo/Rope Wire Chian/Rope Wire ChainColor1.jpg','images/catalog-demo/Rope Wire Chian/Rope Wire ChainColor3.jpg','images/catalog-demo/Rope Wire Chian/Rope Wire ChainColor4.jpg','images/catalog-demo/Rope Wire Chian/Rope Wire Chain.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], sizes:['6"','8"','10"','12"'] },
   'Oval Socket': { type:'sizes', note:'Size: 5/8" (16 MM)', img:'images/catalog-demo/oval-socket.jpg', sizes:['CP'] },
-  'Pivot': { type:'sizes', img:'images/catalog-demo/pivot_main.jpg', sizes:['12mm','8mm','2.5x1.5x6mm'] },
+  'Pivot': { type:'items', items:[
+    {name:'SS Door Pivot', sub:'Smooth Operation · Premium Chrome Finish · Strong & Durable', img:'images/catalog-demo/Pivot/pivot_main.jpg', colors:['Chrome'], colorLabel:'Finish', sizes:['12mm','8mm','2.5x1.5x6mm']},
+    {name:'Brass Fancy Pivot Mid', sub:'Premium Brass · Strong & Durable · Smooth Operation · Long Lasting', img:'images/catalog-demo/Pivot/pivotcolor1.jpg', colors:['SSF'], colorLabel:'Finish', sizes:['2×6mm','2×8mm']},
+    {name:'Brass Glass Pivot Heavy', sub:'Premium Brass · Strong & Durable · Perfect for Glass Doors', img:'images/catalog-demo/Pivot/pivotcolor2.jpg', colors:['SSF'], colorLabel:'Finish', sizes:['2×6mm']}
+  ]},
   'Flare Products': { type:'items', items:[
     {name:'Flare Brass', note:'Z Black · PVD Gold · PVD Rose Gold', sizes:['3"','4"'], img:'images/catalog-demo/Flare BRass/Flarepvtblack.jpg', images:['images/catalog-demo/Flare BRass/Flarepvtblack.jpg','images/catalog-demo/Flare BRass/Flarepvtrose.jpg','images/catalog-demo/Flare BRass/Flarepvtgold.jpg'], colors:['Black','Rose Gold','Gold'], colorLabel:'Finish'},
     {name:'Flare Brass Square', img:'images/catalog-demo/Flare brass Sqare/flaresquare.jpg', images:['images/catalog-demo/Flare brass Sqare/flaresquare.jpg','images/catalog-demo/Flare brass Sqare/flarequare2.jpg']}
@@ -1509,6 +1514,7 @@ const CATALOG = {
   'Chest Handle': { type:'sizes', note:'CP', img:'images/catalog-demo/cheshhandlemain-hero.jpg', sizes:['3"','4"'] },
   'Big Vaccum': { type:'sizes', img:'images/catalog-demo/big vaccum/big vaccumcolor1.jpg', images:['images/catalog-demo/big vaccum/big vaccumcolor1.jpg','images/catalog-demo/big vaccum/big vaccummain.jpg','images/catalog-demo/big vaccum/big vaccumcolor2.jpg','images/catalog-demo/big vaccum/big vaccumcolor4.jpg','images/catalog-demo/big vaccum/big vaccumcolor3.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], colorLabel:'Finish', sizes:[] },
   'BR Concealed Flat Lat': { type:'sizes', note:'SSF', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg', images:['images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg','images/catalog-demo/brass conceld flat lat/brass conceled flatmain.jpg'], sizes:['8\" (Round)'] },
+  'SS New Consil Socket': { type:'sizes', note:'1" SS New Consil Socket Heavy · Rust Resistant · Smooth Operation', img:'images/catalog-demo/ss rod consil/1ssrodconsilmain.jpg', images:['images/catalog-demo/ss rod consil/1ssrodconsilmain.jpg','images/catalog-demo/ss rod consil/1ssrodconsilcolo1.jpg'], colors:['SSF Matt','CP'], colorLabel:'Finish', sizes:['1"'] },
   /* Oval Socket: single product, no variation */
 };
 
@@ -2210,14 +2216,14 @@ document.getElementById('subForm').addEventListener('submit', function(e){
     {name:'Door Stopper', sub:'Reliable door stoppers', img:'images/catalog-demo/doorstoppermain.jpg'},
     {name:'L Bat', sub:'Sturdy L bats for doors', img:'images/catalog-demo/L batmain.jpg'},
     {name:'Cam Bolt', sub:'Precision cam bolts', img:'images/catalog-demo/Cam bolt/Cam bolt.jpg'},
-    {name:'Pivot', sub:'Smooth door pivots', img:'images/catalog-demo/pivot_main.jpg'},
+    {name:'Pivot', sub:'Smooth door pivots', img:'images/catalog-demo/Pivot/pivot_main.jpg'},
     {name:'Flare Knob', sub:'Elegant flare knobs', img:'images/catalog-demo/flare knob/flareberlicolor1.jpg'},
     {name:'Folding Bracket', sub:'Space-saving folding brackets', img:'images/catalog-demo/Folding Bracket/Square folding bracketmain.jpg'},
     {name:'Bracket', sub:'General purpose brackets', img:'images/catalog-demo/Square Bracket/square bracketmain.jpg'},
     {name:'Orange Wheels Castor', sub:'Durable caster wheels', img:'images/catalog-demo/OrangeWheelCastor.jpg'},
     {name:'Oval Socket', sub:'Smooth oval sockets', img:'images/catalog-demo/oval-socket.jpg'},
     {name:'Glass Hinges', sub:'Sturdy glass hinges', img:'images/catalog-demo/Glass Hingas/Glass Hingasmain.jpg'},
-    {name:'Door Eye', sub:'Secure door eye viewers', img:'images/catalog-demo/door eye/door-eye.jpg'},
+    {name:'Door Eye', sub:'Secure door eye viewers', img:'images/catalog-demo/door eye/dooreyecolor1.jpg'},
     {name:'SS L Bracket', sub:'Stainless steel L brackets', img:'images/catalog-demo/SSL Bracket/Ss L bracket heavy.jpg'},
     {name:'Mirror Cap', sub:'Polished mirror caps', img:'images/catalog-demo/Mirror Cap/mirror capmain.jpg'},
     {name:'Mirror Holder', sub:'Durable mirror holders', img:'images/catalog-demo/Mirror Holder/Mirror Holdermain.jpg'},
@@ -2227,7 +2233,8 @@ document.getElementById('subForm').addEventListener('submit', function(e){
     {name:'Flare Products', sub:'Flare hardware collection', img:'images/catalog-demo/Flare BRass/Flarepvtblack.jpg'},
     {name:'Chest Handle', sub:'Solid brass chest handle', img:'images/catalog-demo/cheshhandlemain-hero.jpg'},
     {name:'Big Vaccum', sub:'Heavy duty vacuum fitting', img:'images/catalog-demo/big vaccum/big vaccummain.jpg'},
-    {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'}
+    {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'},
+    {name:'SS New Consil Socket', sub:'Heavy duty stainless steel consil socket', img:'images/catalog-demo/ss rod consil/1ssrodconsilmain.jpg'}
   ];
   var SEARCH_INDEX = (typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX;
   var CHIP_NAMES = ['Brass Tower Bolt','Alu T-Bolt','SS Hinges','Key Hole','Door Stopper','Flare Knob'];
