@@ -16,7 +16,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Korraz","alternateName":"Korras Enterprises","url":"https://www.korraz.in/","email":"korrasenterprises@gmail.com","telephone":"+91-90246-55202","address":{"@type":"PostalAddress","streetAddress":"42/336, Ground Floor, Unnat Nagar No.4, M. G. Road, Goregaon (W)","addressLocality":"Mumbai","addressRegion":"Maharashtra","postalCode":"400104","addressCountry":"IN"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0e0c09;--bg2:#15120d;--line:rgba(201,162,75,.16);--gold:#c9a24b;--tx:#f3ecdc;--mu:#b8935a;--cream:#f3ede3;--ser:'Cormorant Garamond',Georgia,serif;--san:'Inter',system-ui,sans-serif;--pad:clamp(16px,4vw,48px);--sec:clamp(44px,6vw,84px)}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -32,20 +32,20 @@ em{font-style:italic;color:var(--gold)}
 .btn{display:inline-block;padding:13px 22px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;border:1px solid var(--gold);color:var(--tx);transition:.25s;text-align:center}
 .btn.s{background:var(--gold);color:#16110a}.btn:hover{background:var(--gold);color:#16110a}.btn.s:hover{background:#dcb85e}
 .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-.top{border-bottom:1px solid var(--line);font-size:.62rem;letter-spacing:.1em;color:var(--mu);padding:7px 0}
-.top .w{display:flex;justify-content:space-between;gap:12px}
-header{position:sticky;top:0;z-index:50;background:rgba(14,12,9,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+
+
+
+
 .logo{font-family:var(--ser);font-size:1.5rem;letter-spacing:.3em;line-height:1}
 .logo small{display:block;font:600 .5rem var(--san);letter-spacing:.24em;color:var(--gold);margin-top:5px}
-nav ul{display:flex;gap:30px;font-size:.72rem;letter-spacing:.04em}
-nav a:hover,.cart:hover{color:var(--gold)}
-.acts{display:flex;align-items:center;gap:16px}
-.cart{font-size:.72rem;position:relative}
-.cart b{background:var(--gold);color:#16110a;border-radius:9px;font-size:.6rem;padding:1px 6px;margin-left:4px}
-.cart b.z{display:none}
-.burger{display:none;background:none;border:0;width:36px;height:36px;cursor:pointer}
-.burger i{display:block;height:1.5px;background:var(--tx);margin:6px 8px;transition:.25s}
+
+
+
+
+
+
+
+
 .hero{padding:clamp(32px,5vw,64px) 0 clamp(28px,4vw,48px)}
 .hero .w{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,64px);align-items:center}
 .hero .p{margin-top:20px;font-size:.88rem}
@@ -105,17 +105,8 @@ footer .p{margin-top:12px;font-size:.78rem}
 @media(max-width:960px){
 .cols{grid-template-columns:repeat(2,1fr)}.fin{grid-template-columns:repeat(3,1fr);row-gap:24px}.fg{grid-template-columns:1fr 1fr}
 .trust .w{grid-template-columns:1fr 1fr}}
-@media(max-width:820px){
-.burger{display:block}
-nav{position:absolute;top:100%;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);max-height:0;overflow:hidden;transition:max-height .3s}
-nav.o{max-height:320px}nav ul{flex-direction:column;gap:0;padding:6px var(--pad) 14px}nav li a{display:block;padding:12px 0;border-bottom:1px solid var(--line)}
-.hero .w,.feat .w,.craft .w{grid-template-columns:1fr}
-.hero .frame{order:-1;aspect-ratio:4/3}.c3{grid-template-columns:1fr}
-.acts .btn{display:none}}
-@media(max-width:520px){
-.top .w span:last-child{display:none}.hd{flex-direction:column;align-items:flex-start}
-.cols{gap:10px}.card div{padding:11px 12px 14px}.card h3{font-size:1.02rem}
-.btns .btn{flex:1 1 100%}.fg{grid-template-columns:1fr}.fin{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:820px){.hero .w,.feat .w,.craft .w{grid-template-columns:1fr}.hero .frame{order:-1;aspect-ratio:4/3}.c3{grid-template-columns:1fr}}
+@media(max-width:520px){.hd{flex-direction:column;align-items:flex-start}.cols{gap:10px}.card div{padding:11px 12px 14px}.card h3{font-size:1.02rem}.btns .btn{flex:1 1 100%}.fg{grid-template-columns:1fr}.fin{grid-template-columns:repeat(2,1fr)}}
 
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
 .rv.in{opacity:1;transform:none}
@@ -131,8 +122,8 @@ nav.o{max-height:320px}nav ul{flex-direction:column;gap:0;padding:6px var(--pad)
 .feat .frame{animation:flt 6s ease-in-out infinite}
 .card img{transition:transform .7s}.card:hover img{transform:scale(1.07)}.card{overflow:hidden}
 .card:hover{box-shadow:0 14px 34px rgba(201,162,75,.12)}
-nav a{position:relative}nav a:after{content:"";position:absolute;left:0;bottom:-4px;height:1px;width:0;background:var(--gold);transition:.3s}nav a:hover:after{width:100%}
-header.sh .nav{height:56px}.nav{transition:height .3s}
+
+
 .fin i{transition:transform .4s}.fin div:hover i{transform:translateY(-8px) scale(1.08)}
 .box{transition:.3s}.box:hover{border-color:var(--gold);transform:translateY(-4px)}
 .btn.s{box-shadow:0 0 0 rgba(201,162,75,0)}.btn.s:hover{box-shadow:0 8px 24px rgba(201,162,75,.3)}
@@ -178,22 +169,10 @@ header.sh .nav{height:56px}.nav{transition:height .3s}
 .dl{margin-top:20px;display:grid;gap:10px}.dl li{display:flex;gap:12px;font-size:.8rem;color:var(--mu)}.dl li:before{content:"";flex:none;width:6px;height:6px;background:var(--gold);transform:rotate(45deg);margin-top:8px}
 @media(max-width:820px){.demo .w{grid-template-columns:1fr}.scr{height:clamp(280px,70vw,400px)}}
 @media(prefers-reduced-motion:reduce){.trk,.bar i{animation:none!important}}
-@media(max-width:820px){footer{padding-bottom:96px}.burger{width:44px;height:44px;margin-right:-8px}.burger i{margin:7px 10px}}
+@media(max-width:820px){footer{padding-bottom:96px}}
 @media(max-width:520px){.pg{font-size:2.3cqw}.pg .mh{font-size:2cqw}.pg .mh b{font-size:3.4cqw}.pg .mh span{display:none}.pg h4{font-size:6cqw}.pg h5{font-size:4.2cqw}.pg figure span{font-size:3cqw}.pg .bt{font-size:2cqw}.bc span{font-size:.58rem}}
-@media(max-width:360px){:root{--pad:14px}h1{font-size:2.15rem}.logo{font-size:1.3rem;letter-spacing:.24em}.btn{padding:13px 14px}.cart{font-size:.68rem}.acts{gap:8px}}
-@media(max-width:480px){
-.top{display:none}
-.nav{height:58px}
-.hero{padding:20px 0 24px}
-.hero .w{gap:20px}
-.hero .p{display:none}
-.hero .eb{margin-bottom:8px}
-.hero h1{font-size:clamp(2rem,10vw,2.5rem)}
-.hero .btns{margin-top:18px;gap:10px}
-.hero .btn{padding:12px 14px;flex:1 1 100%}
-.hero .frame{order:0;aspect-ratio:16/10}
-.trust .w{padding-top:18px;padding-bottom:18px;gap:14px}
-}
+@media(max-width:360px){:root{--pad:14px}h1{font-size:2.15rem}.logo{font-size:1.3rem;letter-spacing:.24em}.btn{padding:13px 14px}}
+@media(max-width:480px){.hero{padding:20px 0 24px}.hero .w{gap:20px}.hero .p{display:none}.hero .eb{margin-bottom:8px}.hero h1{font-size:clamp(2rem,10vw,2.5rem)}.hero .btns{margin-top:18px;gap:10px}.hero .btn{padding:12px 14px;flex:1 1 100%}.hero .frame{order:0;aspect-ratio:16/10}.trust .w{padding-top:18px;padding-bottom:18px;gap:14px}}
 @media(max-width:480px){
 .feat .p,.craft .p,.demo .p,.dl,.box p,.card p,.trust p,.craft li p,footer .p{display:none}
 .feat .lbl{margin:14px 0 8px}
@@ -228,18 +207,278 @@ header.sh .nav{height:56px}.nav{transition:height .3s}
 .fd button.on{background:var(--gold);width:20px;border-radius:4px}
 @media(prefers-reduced-motion:reduce){.hero .frame img{transform:none}}
 </style>
+<style id="header-sync">
+:root{        --ink:#ffffff;    --panel:#f7f3ea;    --panel-2:#efe8d9;    --hairline:rgba(24,21,15,0.10);    --hairline-2:rgba(24,21,15,0.18);    --bone:#1c1812;    --bone-dim:#524b3d;    --mute:#726b5c;    --mute-2:#a49c89;    --brass:#b8863c;    --brass-2:#8a6529;    --brass-deep:#8a6a29;    --azure:#1c8fb8;        --dark:#14110d;    --dark-2:#1c1813;    --dark-line:rgba(255,255,255,0.10);    --dark-line-2:rgba(255,255,255,0.18);    --dark-text:#f5f1e6;    --dark-text-dim:#cdc4b0;    --dark-mute:#a49a86;    --dark-mute-2:#7a715f;    --btn-ink:#17140d;    --r-lg:18px;    --r-md:10px;    --ease:cubic-bezier(.16,.84,.44,1);  }
+.top-bar,#siteHeader,.mobile-nav,.search-overlay,.search-backdrop{font-family:'Manrope',sans-serif;font-size:15px;line-height:1.6;}
+:where(.top-bar,#siteHeader,.mobile-nav,.search-overlay) button{font-family:inherit;cursor:pointer;background:none;border:none;appearance:none;-webkit-appearance:none;padding:1px 6px;}
+:where(.top-bar,#siteHeader,.mobile-nav,.search-overlay) input{padding:1px 2px;}
+:where(.search-overlay) p{margin:1em 0;}
+:where(.top-bar,#siteHeader,.mobile-nav,.search-overlay) svg{display:block;max-width:100%;}
+:where(#siteHeader,.top-bar) .wrap{max-width:1280px;margin:0 auto;padding:0 48px;}
+@media (max-width:1100px){.wrap:where(#siteHeader *,.top-bar *){padding:0 32px;}}
+@media (max-width:640px){.wrap:where(#siteHeader *,.top-bar *){padding:0 20px;}}
+@media (max-width:400px){.wrap:where(#siteHeader *,.top-bar *){padding:0 16px;}}
+.mobile-nav .btn{display:inline-flex; align-items:center; gap:10px; padding:15px 30px; border-radius:2px; font-family:'Inter',sans-serif; font-size:0.78rem; letter-spacing:0.06em; text-transform:uppercase; font-weight:700; border:1px solid var(--brass); color:var(--btn-ink); background:var(--brass); transition:all .3s var(--ease);}
+.mobile-nav .btn:hover{background:transparent; color:var(--brass); gap:15px;}
+.top-bar{background:var(--dark); border-bottom:1px solid var(--dark-line); font-size:0.72rem;}
+.top-bar-inner{display:flex; justify-content:center; gap:44px; padding:9px 0; color:var(--dark-mute); letter-spacing:.02em;}
+.top-bar-item{display:flex; align-items:center; gap:7px;}
+.top-bar-item svg{width:12px; height:12px; color:var(--brass);}
+header{position:sticky; top:0; z-index:80; background:rgba(20,17,13,0.94); backdrop-filter:blur(14px); border-bottom:1px solid var(--dark-line); transition:padding .3s var(--ease);}
+.nav-inner{display:flex; align-items:center; justify-content:space-between; padding:22px 0; transition:padding .3s var(--ease);}
+header.shrink .nav-inner{padding:13px 0;}
+.brandmark{display:flex; align-items:center; gap:12px;}
+.hexbox{width:40px; height:40px; position:relative; flex-shrink:0;}
+.hexbox svg{width:100%; height:100%;}
+.brand-text .name{font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.5rem; letter-spacing:.05em; line-height:1; color:var(--dark-text);}
+.brand-text .tag{font-size:0.56rem; letter-spacing:.18em; color:var(--brass); text-transform:uppercase; font-weight:700; margin-top:5px;}
+.main-nav ul{display:flex; gap:38px;}
+.main-nav a{font-size:0.82rem; letter-spacing:.02em; color:var(--dark-mute); transition:color .25s ease; padding-bottom:4px; position:relative;}
+.main-nav a:hover, .main-nav a.active{color:var(--dark-text);}
+.main-nav a.active::after{content:''; position:absolute; left:0; right:0; bottom:-4px; height:1px; background:var(--brass);}
+.icon-btn{width:38px; height:38px; display:flex; align-items:center; justify-content:center; color:var(--dark-text); transition:all .25s ease;}
+.icon-btn:hover{color:var(--brass);}
+.icon-btn svg{width:16px; height:16px;}
+.nav-cta{display:flex; align-items:center; gap:18px;}
+.icon-btn{position:relative;}
+.icon-badge{position:absolute; top:-2px; right:-2px; min-width:16px; height:16px; padding:0 3px; border-radius:999px;
+    background:var(--brass); color:var(--btn-ink); font-family:'Inter',sans-serif; font-size:0.6rem; font-weight:800;
+    display:flex; align-items:center; justify-content:center; line-height:1; transition:transform .2s ease;}
+.icon-badge.zero{display:none;}
+header.nav-open{z-index:160;}
+.menu-toggle{display:none; width:38px; height:38px; position:relative; align-items:center; justify-content:center; border:1px solid var(--dark-line-2); border-radius:50%; background:transparent; color:var(--dark-text); flex-shrink:0; transition:border-color .3s ease, transform .3s var(--ease);}
+.menu-toggle:active{transform:scale(.92);}
+.menu-toggle.active{border-color:var(--brass);}
+.menu-toggle .bar{position:absolute; left:50%; width:16px; height:1.5px; background:currentColor; border-radius:2px; transform:translateX(-50%); transition:top .3s var(--ease), transform .3s var(--ease), opacity .2s ease .1s, background .3s ease;}
+.menu-toggle .bar:nth-child(1){top:13px;}
+.menu-toggle .bar:nth-child(2){top:18.5px;}
+.menu-toggle .bar:nth-child(3){top:24px;}
+.menu-toggle.active .bar{background:var(--brass); transition:top .3s var(--ease), transform .3s var(--ease) .1s, opacity .2s ease, background .3s ease;}
+.menu-toggle.active .bar:nth-child(1){top:18.5px; transform:translateX(-50%) rotate(45deg);}
+.menu-toggle.active .bar:nth-child(2){opacity:0; transform:translateX(-50%) scaleX(0);}
+.menu-toggle.active .bar:nth-child(3){top:18.5px; transform:translateX(-50%) rotate(-45deg);}
+.mobile-nav{position:fixed; left:0; right:0; top:0; z-index:150; background:var(--dark-2); border-top:1px dashed var(--dark-line-2); max-height:0; opacity:0; overflow:hidden; transition:max-height .5s var(--ease), opacity .4s ease; box-shadow:0 20px 40px rgba(0,0,0,.3);}
+.mobile-nav.open{max-height:80vh; opacity:1; overflow-y:auto;}
+.mobile-nav-inner{padding:6px 24px 24px;}
+.mobile-nav ul{display:flex; flex-direction:column;}
+.mobile-nav li{opacity:0; transform:translateY(-10px); transition:opacity .4s ease, transform .45s var(--ease);}
+.mobile-nav.open li{opacity:1; transform:translateY(0);}
+.mobile-nav.open li:nth-child(1){transition-delay:.08s;}
+.mobile-nav.open li:nth-child(2){transition-delay:.13s;}
+.mobile-nav.open li:nth-child(3){transition-delay:.18s;}
+.mobile-nav.open li:nth-child(4){transition-delay:.23s;}
+.mobile-nav.open li:nth-child(5){transition-delay:.28s;}
+.mobile-nav a{display:flex; align-items:center; justify-content:space-between; padding:18px 2px; font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:600; color:var(--dark-text); border-bottom:1px solid var(--dark-line); letter-spacing:.01em; transition:color .25s ease, padding-left .25s ease;}
+.mobile-nav a svg{width:16px; height:16px; color:var(--dark-mute); flex-shrink:0; transition:transform .25s ease, color .25s ease;}
+.mobile-nav a:active{padding-left:6px;}
+.mobile-nav a.active{color:var(--brass);}
+.mobile-nav a.active svg{color:var(--brass); transform:translateX(3px);}
+.mobile-nav .btn{margin-top:22px; width:100%; justify-content:center; opacity:0; transform:translateY(10px); transition:opacity .4s ease, transform .4s var(--ease);}
+.mobile-nav.open .btn{opacity:1; transform:translateY(0); transition-delay:.33s;}
+.mobile-nav-scrim{position:fixed; inset:0; background:rgba(10,8,5,.5); z-index:140; opacity:0; pointer-events:none; transition:opacity .4s ease;}
+.mobile-nav-scrim.open{opacity:1; pointer-events:auto;}
+@media (max-width:1150px){
+.main-nav{display:none;}
+.nav-cta{gap:10px;}
+.nav-cta .btn{display:none;}
+.menu-toggle{display:flex;}
+}
+@media (max-width:900px){
+.main-nav{display:none;}
+.nav-cta{gap:10px;}
+.nav-cta .btn{display:none;}
+.menu-toggle{display:flex;}
+.top-bar-inner{justify-content:flex-start; gap:24px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+.top-bar-inner::-webkit-scrollbar{display:none;}
+.top-bar-item{flex-shrink:0;}
+}
+@media (max-width:640px){
+.top-bar{display:none;}
+header .nav-inner{padding:16px 0; align-items:center;}
+.menu-toggle{margin-top:0; padding:0; width:42px; height:42px;}
+.nav-cta{align-items:center;}
+.brand-text .name{font-size:1.05rem;}
+.brand-text .tag{white-space:nowrap; font-size:0.5rem; letter-spacing:.14em;}
+.hexbox{width:42px; height:42px; margin-top:0;}
+.brandmark{align-items:center;}
+.brand-text{display:flex; flex-direction:column; justify-content:center;}
+.nav-cta{gap:8px;}
+.icon-btn{width:42px; height:42px; padding:0; margin-top:0;}
+.icon-btn svg{width:16px; height:16px;}
+}
+@media (max-width:400px){
+.menu-toggle{width:42px; height:42px; padding:0;}
+.hexbox{width:42px; height:42px;}
+.brand-text .tag{white-space:normal; max-width:80px; line-height:1.3;}
+.nav-cta{gap:6px;}
+.icon-btn{width:42px; height:42px; padding:0;}
+.icon-btn svg{width:18px; height:18px;}
+.brand-text .name{font-size:0.95rem;}
+.brand-text .tag{font-size:0.44rem; letter-spacing:.1em;}
+.mobile-nav{width:100%; max-width:100%;}
+}
+.search-overlay{position:fixed; inset:0; z-index:10000;
+  background:var(--panel);
+  display:flex; flex-direction:column;
+  opacity:0; visibility:hidden; pointer-events:none;
+  transform:translateY(-12px);
+  transition:opacity .28s var(--ease), transform .28s var(--ease), visibility 0s linear .28s;}
+.search-overlay.active{opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0);
+  transition:opacity .28s var(--ease), transform .28s var(--ease), visibility 0s linear 0s;}
+.search-ov-head{display:flex; align-items:center; gap:10px;
+  padding:16px 16px 12px; flex-shrink:0;
+  border-bottom:1px solid var(--hairline);
+  background:var(--panel);}
+.search-ov-back{width:38px; height:38px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--hairline-2); background:transparent; color:var(--bone);
+  transition:border-color .25s ease, background .25s ease;}
+.search-ov-back:active{background:var(--panel-2);}
+.search-ov-back svg{width:18px; height:18px;}
+.search-ov-input-wrap{flex:1; position:relative; display:flex; align-items:center;
+  background:#fff; border:1px solid var(--hairline-2); border-radius:999px;
+  padding:0 14px; height:44px;}
+.search-ov-input-wrap svg.ico-search{width:17px; height:17px; color:var(--mute); flex-shrink:0;}
+.search-ov-input{flex:1; border:none; outline:none; background:transparent;
+  font-family:'Manrope',sans-serif; font-size:0.86rem; color:var(--bone);
+  padding:0 8px; height:100%;}
+.search-ov-input::placeholder{color:var(--mute-2);}
+.search-ov-clear{width:22px; height:22px; border-radius:50%; flex-shrink:0; display:none;
+  align-items:center; justify-content:center; border:none; background:var(--panel-2); color:var(--mute);}
+.search-ov-clear.show{display:flex;}
+.search-ov-clear svg{width:12px; height:12px;}
+.search-ov-body{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:18px 16px 40px;}
+.search-ov-label{font-family:'Manrope',sans-serif; font-size:0.66rem; font-weight:800; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--mute); margin:0 0 12px;}
+.search-chip-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px;}
+.search-chip{font-family:'Manrope',sans-serif; font-size:0.74rem; font-weight:600; color:var(--bone-dim);
+  padding:8px 14px; border-radius:999px; border:1px solid var(--hairline-2); background:#fff;
+  cursor:pointer; transition:border-color .2s ease, color .2s ease, background .2s ease;}
+.search-chip:active, .search-chip:hover{border-color:var(--brass); color:var(--brass-2); background:var(--panel-2);}
+.search-ov-section-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+.search-ov-section-head .search-ov-label{margin:0;}
+.search-view-all{font-family:'Manrope',sans-serif; font-size:0.7rem; font-weight:700; color:var(--brass-2);
+  display:flex; align-items:center; gap:4px; white-space:nowrap;}
+.search-view-all svg{width:12px; height:12px;}
+.search-results{display:flex; flex-direction:column; gap:2px;}
+.search-result-item{display:flex; align-items:center; gap:12px; padding:10px 4px;
+  border-bottom:1px solid var(--hairline); text-align:left; background:none; border-left:none; border-right:none; border-top:none;
+  cursor:pointer;}
+.search-result-thumb{width:52px; height:52px; border-radius:10px; object-fit:cover; flex-shrink:0;
+  background:var(--panel-2); border:1px solid var(--hairline);}
+.search-result-info{flex:1; min-width:0; display:flex; flex-direction:column; gap:2px;}
+.search-result-name{font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:700; color:var(--bone); line-height:1.2; display:block;}
+.search-result-sub{font-family:'Manrope',sans-serif; font-size:0.72rem; color:var(--mute); margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.search-result-arrow{width:16px; height:16px; color:var(--mute-2); flex-shrink:0;}
+.search-ov-empty{text-align:center; padding:60px 20px; color:var(--mute);}
+.search-ov-empty svg{width:40px; height:40px; color:var(--mute-2); margin-bottom:14px;}
+.search-ov-empty p{font-family:'Manrope',sans-serif; font-size:0.82rem;}
+.search-ov-empty b{color:var(--bone-dim);}
+body.search-lock{overflow:hidden;}
+.search-backdrop{position:fixed; inset:0; z-index:9999; background:rgba(20,17,13,0.35);
+  opacity:0; visibility:hidden; pointer-events:none; transition:opacity .28s ease, visibility 0s linear .28s;}
+.search-backdrop.active{opacity:1; visibility:visible; pointer-events:auto; transition:opacity .28s ease, visibility 0s linear 0s;}
+@media (max-width:900px){
+.search-backdrop{display:none;}
+}
+@media (min-width:901px){
+.search-overlay{inset:auto; top:0; right:0; left:auto;
+    width:420px; max-width:calc(100vw - 32px);
+    max-height:calc(100vh - 24px);
+    margin:12px 12px 0 0;
+    border-radius:16px; box-shadow:0 24px 60px rgba(20,17,13,0.28);
+    border:1px solid var(--hairline-2);
+    transform:translateY(-8px) scale(.98);}
+.search-overlay.active{transform:translateY(0) scale(1);}
+.search-ov-head{border-radius:16px 16px 0 0;}
+.search-ov-body{max-height:70vh;}
+}
+.nav-search-desktop{display:none;}
+@media (min-width:901px){
+.nav-cta .icon-btn[aria-label="Search"]{display:none;}
+.nav-search-desktop{display:flex; align-items:center; gap:8px;
+    background:#fff; border:1px solid var(--dark-line-2); border-radius:999px;
+    padding:0 14px; height:40px; width:220px; flex-shrink:0;
+    transition:width .25s var(--ease), border-color .25s ease;}
+.nav-search-desktop:focus-within{width:264px; border-color:var(--brass);}
+.nav-search-desktop svg.ico-search{width:15px; height:15px; color:var(--mute); flex-shrink:0;}
+.nav-search-desktop input{flex:1; min-width:0; border:none; outline:none; background:transparent;
+    font-family:'Manrope',sans-serif; font-size:0.8rem; color:#1c1812; height:100%;}
+.nav-search-desktop input::placeholder{color:var(--mute-2);}
+.nav-search-clear{width:18px; height:18px; border-radius:50%; flex-shrink:0; display:none;
+    align-items:center; justify-content:center; border:none; background:var(--panel-2); color:var(--mute);}
+.nav-search-clear.show{display:flex;}
+.nav-search-clear svg{width:10px; height:10px;}
+header#siteHeader.search-nav-active{z-index:10002;}
+.search-ov-head{display:none;}
+.search-overlay{overflow:hidden;}
+.search-ov-body{padding:20px 20px 24px; max-height:min(70vh, 520px);}
+}
+@media (min-width:1101px){
+.nav-inner{gap:24px;}
+.nav-cta{gap:20px;}
+}
+header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px); padding-right:clamp(16px,3.4vw,48px);}
+.main-nav{flex:1; min-width:0;}
+.main-nav ul{justify-content:center; gap:clamp(18px,2.4vw,38px);}
+.nav-cta{flex-shrink:0;}
+@media (max-width:360px){
+.icon-btn{width:36px; height:36px;}
+.menu-toggle{width:38px; height:38px;}
+.hexbox{width:38px; height:38px;}
+.brandmark{gap:8px;}
+}
+.nav-search-desktop{width:clamp(170px,16vw,240px) !important;}
+</style>
 </head>
 <body>
-<div class="top"><div class="w"><span>Mumbai · Pan-India delivery</span><span>Six premium PVD finishes</span></div></div>
 <div id="pb"></div>
-<header><div class="w nav">
-  <a href="index.html" class="logo">KORRAZ<small>PREMIUM BRASS FITTINGS</small></a>
-  <nav id="nav"><ul>
-    <li><a href="products.html">Products</a></li><li><a href="collection.html">Collections</a></li><li><a href="#finishes">Finishes</a></li><li><a href="#craft">Craft</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li>
-  </ul></nav>
-  <div class="acts"><a href="cart.html" class="cart">Cart<b class="z" id="cb">0</b></a><a href="contact.html" class="btn">Enquire</a>
-  <button class="burger" id="bg" aria-label="Menu"><i></i><i></i><i></i></button></div>
-</div></header>
+<div class="top-bar">
+  <div class="wrap top-bar-inner">    <div class="top-bar-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>6 Premium PVD Finishes</div>
+    <div class="top-bar-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>Pan-India Delivery</div>
+  </div>
+</div>
+
+<header id="siteHeader">
+  <div class="wrap nav-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+    <div class="brandmark">
+      <div class="hexbox">
+        <svg viewBox="0 0 100 100"><polygon points="50,4 91,27 91,73 50,96 9,73 9,27" fill="none" stroke="#c9a24b" stroke-width="3"/><text x="50" y="62" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="38" fill="#f5f1e6" font-weight="700">K</text></svg>
+      </div>
+      <div class="brand-text"><div class="name">KORRAZ</div><div class="tag">Premium Brass Fitting</div></div>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="collection.html">Collections</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <div class="nav-search-desktop" id="navSearchDesktop"><svg class="ico-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input type="text" id="navSearchInput" placeholder="Search tower bolts, hinges, key hole…" autocomplete="off"><button type="button" class="nav-search-clear" id="navSearchClear" aria-label="Clear search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+      <button class="icon-btn" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
+      <a href="wishlist.html" class="icon-btn" id="headerWishBtn" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 8 2 4.5 5.4 3.6 8 2.9 10.4 4.2 12 6.6c1.6-2.4 4-3.7 6.6-3 3.4.9 4.8 4.4 3.4 7.6-2.5 4.7-10 9.3-10 9.3Z"/></svg><span class="icon-badge zero" id="wishBadge">0</span></a>
+      <a href="cart.html" class="icon-btn cart-btn" id="headerCartBtn" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17.5" cy="19.5" r="1.4"/></svg><span class="icon-badge zero" id="cartBadge">0</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-inner">
+    <ul>
+          <li><a href="index.html" class="active">Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
+          <li><a href="about.html">About <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
+          <li><a href="products.html">Products <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
+          <li><a href="collection.html">Collections <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
+          <li><a href="contact.html">Contact <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
+    </ul>
+    <a href="contact.html" class="btn">Enquire Now</a>
+  </div>
+</div>
+<div class="mobile-nav-scrim" id="mobileNavScrim"></div>
 
 <section class="hero"><div class="w">
   <div>
@@ -361,7 +600,7 @@ header.sh .nav{height:56px}.nav{transition:height .3s}
   <div class="fg">
     <div><a href="index.html" class="logo">KORRAZ</a><p class="p">Premium brass fittings crafted with precision, finished to perfection. Mumbai-based, shipped pan-India.</p></div>
     <div><h4>Products</h4><ul><li><a href="products.html">Tower Bolts</a></li><li><a href="products.html">Mortise Handles</a></li><li><a href="products.html">Key Hole Covers</a></li></ul></div>
-    <div><h4>Help</h4><ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="testimonials.html">Testimonials</a></li></ul></div>
+    <div><h4>Help</h4><ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
     <div><h4>Contact</h4><ul><li>Goregaon (W), Mumbai</li><li><a href="tel:+919024655202">+91 90246 55202</a></li><li><a href="mailto:korrasenterprises@gmail.com">korrasenterprises@gmail.com</a></li></ul></div>
   </div>
   <div class="cp">© 2026 Korraz. All rights reserved.</div>
@@ -371,9 +610,6 @@ header.sh .nav{height:56px}.nav{transition:height .3s}
 
 <script>
 (function(){
-var n=document.getElementById('nav'),b=document.getElementById('bg');
-b.onclick=function(){n.classList.toggle('o')};
-n.addEventListener('click',function(e){if(e.target.tagName==='A')n.classList.remove('o')});
 try{var c=JSON.parse(localStorage.getItem('koraaz_cart')||'[]').length,e=document.getElementById('cb');e.textContent=c;e.classList.toggle('z',!c)}catch(x){}
 (function(){var f=document.getElementById('hs');if(!f)return;var im=f.querySelectorAll('img'),d=f.querySelectorAll('.fd button'),i=0,t;
 function go(n){im[i].classList.remove('on');d[i].classList.remove('on');i=(n+im.length)%im.length;im[i].classList.add('on');d[i].classList.add('on')}
@@ -392,5 +628,244 @@ document.querySelectorAll('[data-n]').forEach(function(e){co.observe(e)});
 })();
 </script>
 <script src="js/ai-chatbot.js" defer></script>
+<!-- ============================= SITE SEARCH OVERLAY ============================= -->
+<div class="search-backdrop" id="searchBackdrop"></div>
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search products">
+  <div class="search-ov-head">
+    <button class="search-ov-back" id="searchOvBack" aria-label="Close search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m15 18-6-6 6-6"/></svg></button>
+    <div class="search-ov-input-wrap">
+      <svg class="ico-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" class="search-ov-input" id="searchOvInput" placeholder="Search tower bolts, hinges, key hole…" autocomplete="off">
+      <button class="search-ov-clear" id="searchOvClear" aria-label="Clear search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="search-ov-body" id="searchOvBody">
+    <div id="searchOvSuggest">
+      <p class="search-ov-label">Quick Suggestions</p>
+      <div class="search-chip-row" id="searchChipRow"></div>
+    </div>
+    <div class="search-ov-section-head">
+      <p class="search-ov-label" id="searchSectionLabel">Products</p>
+      <a href="products.html" class="search-view-all">View all results <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 6 6 6-6 6"/></svg></a>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    <div class="search-ov-empty" id="searchOvEmpty" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <p>No products found for "<b id="searchOvEmptyTerm"></b>"<br>Try a different keyword.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var FALLBACK_SEARCH_INDEX = [
+    {name:'Brass Tower Bolt', sub:'Premium brass tower bolts', img:'images/catalog-demo/brass T Bolt/brass marble/brass marblecolor3.jpg'},
+    {name:'Alu T-Bolt', sub:'High quality aluminium T-bolts', img:'images/catalog-demo/ALU T bolt/10mm/10mmmain.jpg'},
+    {name:'Key Hole', sub:'Durable brass key holes', img:'images/catalog-demo/key-hole.jpg'},
+    {name:'Duck Hinges', sub:'Strong & smooth duck hinges', img:'images/catalog-demo/Duck hingaj/duckhingajmain.jpg'},
+    {name:'SS Hinges', sub:'Stainless steel hinges', img:'images/catalog-demo/ss-hinges.jpg'},
+    {name:'Rod Latch', sub:'Heavy duty rod latches', img:'images/catalog-demo/ROd Latch/rodlatchcolor1.jpg'},
+    {name:'SS Socket', sub:'Stainless steel sockets', img:'images/catalog-demo/ss socket/1 full size/1 full size.jpg'},
+    {name:'SS Pane Lock', sub:'Secure stainless steel locks', img:'images/catalog-demo/ss panle lock.jpg'},
+    {name:'Key', sub:'High quality brass keys', img:'images/catalog-demo/key/key small/flarekeysmallmain.jpg'},
+    {name:'Brass Pane Lock', sub:'Durable brass pane locks', img:'images/catalog-demo/brass lock.jpg'},
+    {name:'Door Stopper', sub:'Reliable door stoppers', img:'images/catalog-demo/doorstoppermain.jpg'},
+    {name:'L Bat', sub:'Sturdy L bats for doors', img:'images/catalog-demo/L batmain.jpg'},
+    {name:'Cam Bolt', sub:'Precision cam bolts', img:'images/catalog-demo/Cam bolt/Cam bolt.jpg'},
+    {name:'Pivot', sub:'Smooth door pivots', img:'images/catalog-demo/pivot_main.jpg'},
+    {name:'Flare Knob', sub:'Elegant flare knobs', img:'images/catalog-demo/flare knob/flareberlicolor1.jpg'},
+    {name:'Folding Bracket', sub:'Space-saving folding brackets', img:'images/catalog-demo/Folding Bracket/Square folding bracketmain.jpg'},
+    {name:'Bracket', sub:'General purpose brackets', img:'images/catalog-demo/Square Bracket/square bracketmain.jpg'},
+    {name:'Orange Wheels Castor', sub:'Durable caster wheels', img:'images/catalog-demo/OrangeWheelCastor.jpg'},
+    {name:'Oval Socket', sub:'Smooth oval sockets', img:'images/catalog-demo/oval-socket.jpg'},
+    {name:'Glass Hinges', sub:'Sturdy glass hinges', img:'images/catalog-demo/Glass Hingas/Glass Hingasmain.jpg'},
+    {name:'Door Eye', sub:'Secure door eye viewers', img:'images/catalog-demo/door eye/door-eye.jpg'},
+    {name:'SS L Bracket', sub:'Stainless steel L brackets', img:'images/catalog-demo/SSL Bracket/Ss L bracket heavy.jpg'},
+    {name:'Mirror Cap', sub:'Polished mirror caps', img:'images/catalog-demo/Mirror Cap/mirror capmain.jpg'},
+    {name:'Mirror Holder', sub:'Durable mirror holders', img:'images/catalog-demo/Mirror Holder/Mirror Holdermain.jpg'},
+    {name:'Floor Magnet', sub:'Strong floor door magnets', img:'images/catalog-demo/flaremagnetmain.jpg'},
+    {name:'Table Chain', sub:'Durable table chains', img:'images/catalog-demo/table Chainmain.jpg'},
+    {name:'Rope Wire Chain', sub:'Flexible rope wire chains', img:'images/catalog-demo/Rope Wire Chian/Rope Wire Chain.jpg'},
+    {name:'Flare Products', sub:'Flare hardware collection', img:'images/catalog-demo/Flare BRass/Flarepvtblack.jpg'},
+    {name:'Chest Handle', sub:'Solid brass chest handle', img:'images/catalog-demo/cheshhandlemain-hero.jpg'},
+    {name:'Big Vaccum', sub:'Heavy duty vacuum fitting', img:'images/catalog-demo/big vaccum/big vaccummain.jpg'},
+    {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'}
+  ];
+  var SEARCH_INDEX = (typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX;
+  var CHIP_NAMES = ['Brass Tower Bolt','Alu T-Bolt','SS Hinges','Key Hole','Door Stopper','Flare Knob'];
+
+  var overlay = document.getElementById('searchOverlay');
+  var backdrop = document.getElementById('searchBackdrop');
+  var input = document.getElementById('searchOvInput');
+  var clearBtn = document.getElementById('searchOvClear');
+  var backBtn = document.getElementById('searchOvBack');
+  var resultsEl = document.getElementById('searchResults');
+  var emptyEl = document.getElementById('searchOvEmpty');
+  var emptyTermEl = document.getElementById('searchOvEmptyTerm');
+  var suggestEl = document.getElementById('searchOvSuggest');
+  var sectionLabel = document.getElementById('searchSectionLabel');
+  var chipRow = document.getElementById('searchChipRow');
+  var openBtn = document.querySelector('[data-search-trigger]');
+  var navSearchWrap = document.getElementById('navSearchDesktop');
+  var navInput = document.getElementById('navSearchInput');
+  var navClear = document.getElementById('navSearchClear');
+  var siteHeaderEl = document.getElementById('siteHeader');
+
+  function renderChips(){
+    chipRow.innerHTML = CHIP_NAMES.map(function(n){
+      return '<button type="button" class="search-chip" data-chip="'+n.replace(/"/g,'&quot;')+'">'+n+'</button>';
+    }).join('');
+    chipRow.querySelectorAll('.search-chip').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        input.value = chip.dataset.chip;
+        runSearch(chip.dataset.chip);
+        input.focus();
+      });
+    });
+  }
+
+  function itemUrl(item){
+    return 'products.html?cat=' + encodeURIComponent(item.name);
+  }
+
+  function renderResults(list, term){
+    resultsEl.innerHTML = list.map(function(item){
+      var img = item.img || '';
+      var sub = item.sub || item.parent || '';
+      return '<a class="search-result-item" href="'+itemUrl(item)+'">'+
+        '<img class="search-result-thumb" src="'+img+'" alt="'+item.name+'" loading="lazy" onerror="this.style.visibility=\'hidden\'">'+
+        '<span class="search-result-info"><span class="search-result-name">'+item.name+'</span><span class="search-result-sub">'+sub+'</span></span>'+
+        '<svg class="search-result-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 6 6 6-6 6"/></svg>'+
+      '</a>';
+    }).join('');
+  }
+
+  function runSearch(term){
+    term = (term || '').trim().toLowerCase();
+    var list;
+    if(!term){
+      list = SEARCH_INDEX.slice(0,5);
+      sectionLabel.textContent = 'Popular Products';
+      suggestEl.style.display = '';
+    } else {
+      list = SEARCH_INDEX.filter(function(item){
+        return item.name.toLowerCase().indexOf(term) !== -1 ||
+               (item.sub && item.sub.toLowerCase().indexOf(term) !== -1) ||
+               (item.parent && item.parent.toLowerCase().indexOf(term) !== -1);
+      }).slice(0,8);
+      sectionLabel.textContent = 'Products';
+      suggestEl.style.display = 'none';
+    }
+    clearBtn.classList.toggle('show', !!term);
+    if(list.length === 0){
+      resultsEl.style.display = 'none';
+      emptyEl.style.display = '';
+      emptyTermEl.textContent = term;
+    } else {
+      resultsEl.style.display = '';
+      emptyEl.style.display = 'none';
+      renderResults(list, term);
+    }
+  }
+
+  function isDesktop(){ return window.innerWidth > 900; }
+  function positionDesktopOverlay(){
+    if(isDesktop() && navSearchWrap){
+      var wrapR = navSearchWrap.getBoundingClientRect();
+      var headerBottom = siteHeaderEl ? siteHeaderEl.getBoundingClientRect().bottom : wrapR.bottom;
+      var top = Math.max(headerBottom, wrapR.bottom) + 10;
+      overlay.style.top = top + 'px';
+      overlay.style.right = (window.innerWidth - wrapR.right) + 'px';
+      overlay.style.left = 'auto';
+      overlay.style.margin = '0';
+      overlay.style.maxHeight = Math.max(240, window.innerHeight - top - 16) + 'px';
+    } else {
+      overlay.style.top = '';
+      overlay.style.right = '';
+      overlay.style.left = '';
+      overlay.style.margin = '';
+      overlay.style.maxHeight = '';
+    }
+  }
+  function openOverlay(fromNavInput){
+    positionDesktopOverlay();
+    overlay.classList.add('active');
+    backdrop.classList.add('active');
+    document.body.classList.add('search-lock');
+    if(siteHeaderEl) siteHeaderEl.classList.add('search-nav-active');
+    var term = (fromNavInput && isDesktop() && navInput) ? navInput.value : '';
+    runSearch(term);
+    if(!(fromNavInput && isDesktop())){
+      setTimeout(function(){ input.focus(); }, 260);
+    }
+  }
+  function closeOverlay(){
+    overlay.classList.remove('active');
+    backdrop.classList.remove('active');
+    document.body.classList.remove('search-lock');
+    if(siteHeaderEl) siteHeaderEl.classList.remove('search-nav-active');
+  }
+
+  document.querySelectorAll('.icon-btn[aria-label="Search"]').forEach(function(btn){
+    btn.setAttribute('type','button');
+    btn.addEventListener('click', function(e){ e.preventDefault(); openOverlay(); });
+  });
+  backBtn.addEventListener('click', closeOverlay);
+  backdrop.addEventListener('click', closeOverlay);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && overlay.classList.contains('active')) closeOverlay();
+  });
+  input.addEventListener('input', function(){ runSearch(input.value); });
+  clearBtn.addEventListener('click', function(){ input.value=''; runSearch(''); input.focus(); });
+
+  if(navInput){
+    navInput.addEventListener('focus', function(){
+      if(!overlay.classList.contains('active')) openOverlay(true);
+    });
+    navInput.addEventListener('input', function(){
+      if(!overlay.classList.contains('active')) openOverlay(true);
+      else positionDesktopOverlay();
+      runSearch(navInput.value);
+      navClear.classList.toggle('show', !!navInput.value);
+    });
+  }
+  if(navClear){
+    navClear.addEventListener('click', function(){
+      navInput.value = '';
+      navClear.classList.remove('show');
+      runSearch('');
+      navInput.focus();
+    });
+  }
+  window.addEventListener('resize', function(){
+    if(overlay.classList.contains('active')) positionDesktopOverlay();
+  });
+
+  renderChips();
+})();
+</script>
+<script>
+/* header: shrink-on-scroll, mobile menu, cart + wishlist badges (same as every other page) */
+(function(){
+  var header=document.getElementById('siteHeader');
+  if(!header) return;
+  window.addEventListener('scroll',function(){ header.classList.toggle('shrink',window.scrollY>60); },{passive:true});
+  var toggle=document.getElementById('menuToggle'),panel=document.getElementById('mobileNav'),scrim=document.getElementById('mobileNavScrim'),isOpen=false;
+  if(toggle&&panel){
+    var pos=function(){ panel.style.top=header.getBoundingClientRect().bottom+'px'; };
+    var openNav=function(){ pos(); panel.classList.add('open'); if(scrim)scrim.classList.add('open'); toggle.classList.add('active'); header.classList.add('nav-open'); document.body.style.overflow='hidden'; isOpen=true; };
+    var closeNav=function(){ panel.classList.remove('open'); if(scrim)scrim.classList.remove('open'); toggle.classList.remove('active'); header.classList.remove('nav-open'); document.body.style.overflow=''; isOpen=false; };
+    toggle.addEventListener('click',function(){ isOpen?closeNav():openNav(); });
+    if(scrim) scrim.addEventListener('click',closeNav);
+    panel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',closeNav); });
+    window.addEventListener('resize',function(){ if(isOpen) pos(); });
+  }
+  function cnt(k){ try{ return JSON.parse(localStorage.getItem(k)||'[]').length; }catch(e){ return 0; } }
+  var cb=document.getElementById('cartBadge'),wb=document.getElementById('wishBadge'),c=cnt('koraaz_cart'),w=cnt('koraaz_wishlist');
+  if(cb){ cb.textContent=c; cb.classList.toggle('zero',c===0); }
+  if(wb){ wb.textContent=w; wb.classList.toggle('zero',w===0); }
+})();
+</script>
+
 </body>
 </html>

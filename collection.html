@@ -182,14 +182,6 @@
   .icon-btn svg{width:16px; height:16px;}
   .nav-cta{display:flex; align-items:center; gap:18px;}
 
-  .filter-strip{background:var(--dark-2); border-bottom:1px solid var(--dark-line);}
-  .filter-strip .wrap{display:flex; gap:0; overflow-x:auto;}
-  .filter-strip a{
-    padding:13px 22px; font-family:'Inter',sans-serif; font-size:0.7rem; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--dark-mute); font-weight:700; white-space:nowrap; border-bottom:2px solid transparent; transition:all .25s ease;
-  }
-  .filter-strip a:hover{color:var(--dark-text);}
-  .filter-strip a.active{color:var(--brass); border-bottom-color:var(--brass);}
 
   section{padding:100px 0;}
   .section-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:50px; gap:40px;}
@@ -274,40 +266,71 @@
   .icon-badge.zero{display:none;}
 
   /* ---------------- category grid (Browse By Category) ---------------- */
-  .cat-browse{padding:56px 0 44px; border-bottom:1px solid var(--hairline);}
-  .cat-browse-head{margin-bottom:26px;}
-  .cat-browse-head h2{font-size:clamp(1.7rem,2.4vw,2.1rem);}
-  .cat-grid-browse{display:grid; grid-template-columns:repeat(6,1fr); gap:12px; overflow:hidden; transition:max-height .4s var(--ease);}
-  .cat-tile{
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
-    padding:20px 10px; background:var(--panel); border:1px solid var(--hairline); border-radius:var(--r-md);
-    text-align:center; transition:all .25s var(--ease); cursor:pointer;
+
+
+  /* ---------------- collections page ---------------- */
+  .col-hero{background:var(--panel); border-bottom:1px solid var(--hairline); padding:64px 0 56px;}
+  .col-hero-grid{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:56px; align-items:center;}
+  .col-hero h1{font-size:clamp(2.3rem,4vw,3.4rem); line-height:1.1;}
+  .col-hero p{color:var(--mute); margin-top:20px; max-width:46ch; font-size:1.02rem;}
+  .col-hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:32px;}
+  .col-collage{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:12px; height:440px;}
+  .col-collage figure{margin:0; overflow:hidden; border-radius:var(--r-md); background:var(--dark);}
+  .col-collage figure:first-child{grid-row:1 / span 2;}
+  .col-collage img{width:100%; height:100%; object-fit:cover;}
+  .col-jump{padding:22px 0; border-bottom:1px solid var(--hairline);}
+  .col-jump .wrap{display:flex; flex-wrap:wrap; gap:8px;}
+  .col-jump a{display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border:1px solid var(--hairline-2); border-radius:999px; font-family:'Inter',sans-serif; font-size:0.76rem; font-weight:600; color:var(--bone); transition:border-color .2s ease, color .2s ease;}
+  .col-jump a span{color:var(--mute-2); font-weight:500;}
+  .col-jump a:hover{border-color:var(--brass); color:var(--brass-deep);}
+  .shelf{padding:72px 0; border-bottom:1px solid var(--hairline); scroll-margin-top:90px;}
+  .shelf:nth-child(even){background:var(--panel);}
+  .shelf-grid{display:grid; grid-template-columns:280px minmax(0,1fr); gap:56px; align-items:start;}
+  .shelf-head{position:sticky; top:130px;}
+  .shelf-head h2{font-size:clamp(1.9rem,2.8vw,2.5rem); line-height:1.08;}
+  .shelf-meta{margin-top:14px; font-family:'Inter',sans-serif; font-size:0.74rem; font-weight:700; letter-spacing:.03em; color:var(--brass-deep);}
+  .shelf-head p{margin-top:12px; color:var(--mute); font-size:0.95rem; max-width:30ch;}
+  .shelf-cards{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px;}
+  .rcard{display:flex; flex-direction:column; background:var(--ink); border:1px solid var(--hairline); border-radius:var(--r-md); overflow:hidden; transition:border-color .25s ease, box-shadow .25s ease;}
+  .rcard:hover{border-color:var(--brass); box-shadow:0 16px 32px -20px rgba(20,17,13,.5);}
+  .rcard-media{aspect-ratio:1/1; overflow:hidden; background:var(--dark);}
+  .rcard-media img{width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease);}
+  .rcard:hover .rcard-media img{transform:scale(1.05);}
+  .rcard-body{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; padding:16px 18px 18px;}
+  .rcard h3{font-size:1.28rem; line-height:1.15;}
+  .rcard-sub{margin-top:4px; color:var(--mute); font-size:0.8rem; line-height:1.4;}
+  .rcard-go{flex-shrink:0; display:flex; align-items:center; gap:6px; font-family:'Inter',sans-serif; font-size:0.7rem; font-weight:700; color:var(--brass-deep); white-space:nowrap;}
+  .rcard-go svg{width:14px; height:14px; transition:transform .25s ease;}
+  .rcard:hover .rcard-go svg{transform:translateX(3px);}
+  .rcard:focus-visible, .col-jump a:focus-visible{outline:2px solid var(--brass); outline-offset:3px;}
+  @media (max-width:1100px){
+    .col-hero-grid{grid-template-columns:1fr; gap:36px;}
+    .col-collage{height:340px;}
+    .shelf-grid{grid-template-columns:1fr; gap:28px;}
+    .shelf-head{position:static;}
+    .shelf-head p{max-width:60ch;}
   }
-  .cat-tile:hover{border-color:var(--brass); transform:translateY(-3px);}
-  .cat-tile.active{background:var(--brass); border-color:var(--brass);}
-  .cat-tile.active .cat-tile-icon{color:var(--btn-ink);}
-  .cat-tile.active .cat-tile-name{color:var(--btn-ink);}
-  .cat-tile-icon{width:26px; height:26px; color:var(--brass); transition:color .25s ease;}
-  .cat-tile-icon svg{width:100%; height:100%;}
-  .cat-tile-name{font-family:'Inter',sans-serif; font-size:0.68rem; font-weight:700; letter-spacing:.02em; color:var(--bone); line-height:1.25; transition:color .25s ease;}
-  .cat-toggle-wrap{text-align:center; margin-top:22px;}
-  .cat-toggle-btn{
-    display:inline-flex; align-items:center; gap:8px; padding:11px 24px; border-radius:30px; border:1px solid var(--hairline-2);
-    font-family:'Inter',sans-serif; font-size:0.7rem; letter-spacing:.1em; text-transform:uppercase; font-weight:700;
-    color:var(--brass); background:transparent; transition:all .25s ease;
+  @media (max-width:700px){
+    .col-hero{padding:44px 0 40px;}
+    .col-collage{height:260px; gap:8px;}
+    .shelf{padding:48px 0;}
+    .shelf-cards{grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px;}
+    .rcard-body{padding:12px 12px 14px;}
+    .rcard h3{font-size:1.08rem;}
+    .rcard-go span{display:none;}
+    .col-hero p, .shelf-head p, .rcard-sub, .col-h1-long, .col-btn-2{display:none;}
+    .col-hero{padding:28px 0 28px;}
+    .col-hero h1{font-size:1.75rem; line-height:1.15;}
+    .col-hero-actions{margin-top:18px;}
+    .col-hero-actions .btn{padding:12px 20px; font-size:0.72rem;}
+    .col-hero-grid{gap:22px;}
+    .col-collage{height:230px;}
+    .shelf-head h2{font-size:1.7rem;}
+    .shelf-meta{margin-top:8px;}
   }
-  .cat-toggle-btn:hover{border-color:var(--brass); background:var(--panel);}
-  .cat-toggle-btn svg{width:13px; height:13px; transition:transform .25s ease;}
-  .cat-toggle-btn.open svg{transform:rotate(180deg);}
-  .cat-active-bar{display:flex; align-items:center; justify-content:space-between; margin-top:32px; padding-top:22px; border-top:1px solid var(--hairline);}
-  .cat-active-label{font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:700; color:var(--bone);}
-  .cat-active-label span{color:var(--brass);}
-  .cat-clear-btn{font-family:'Inter',sans-serif; font-size:0.68rem; letter-spacing:.08em; text-transform:uppercase; font-weight:700; color:var(--mute); display:none; align-items:center; gap:6px; background:none; border:none; cursor:pointer;}
-  .cat-clear-btn.show{display:inline-flex;}
-  .cat-clear-btn:hover{color:var(--brass);}
-  .cat-empty-state{padding:60px 20px; text-align:center; border:1px dashed var(--hairline-2); border-radius:var(--r-md); margin-top:22px;}
-  .cat-empty-state h3{font-size:1.4rem; margin-bottom:10px;}
-  .cat-empty-state p{color:var(--mute); font-size:0.9rem; max-width:440px; margin:12px auto 0;}
+  @media (prefers-reduced-motion:reduce){
+    .rcard-media img, .rcard-go svg{transition:none;}
+  }
 
   /* ---------------- coming-soon placeholder category ---------------- */
   .coming-soon{
@@ -449,8 +472,6 @@
     .nav-cta{gap:10px;}
     .nav-cta .btn{display:none;}
     .menu-toggle{display:flex;}
-    .filter-strip .wrap{scroll-snap-type:x proximity;}
-    .filter-strip a{scroll-snap-align:start;}
     .top-bar-inner{justify-content:flex-start; gap:24px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
     .top-bar-inner::-webkit-scrollbar{display:none;}
     .top-bar-item{flex-shrink:0;}
@@ -473,11 +494,9 @@
     .footer-grid{grid-template-columns:1fr 1fr; gap:34px 24px;}
     .folio-card{flex:0 0 230px;}
     .range-card{flex:0 0 260px;}
-    .cat-grid-browse{grid-template-columns:repeat(4,1fr);}
   }
   @media (max-width:640px){
     .wrap{padding:0 20px;}
-    .cat-grid-browse{grid-template-columns:repeat(3,1fr); gap:10px;}
     .top-bar{display:none;}
     header .nav-inner{padding:16px 0; align-items:center;}
     .menu-toggle{margin-top:0; padding:0; width:42px; height:42px;}
@@ -560,9 +579,6 @@
     .tab-item.active svg{transform:translateY(-2px);}
   }
   @media (max-width:480px){
-    .cat-grid-browse{grid-template-columns:repeat(2,1fr); gap:10px;}
-    .cat-tile{padding:16px 8px;}
-    .cat-tile-name{font-size:0.64rem;}
   }
   @media (max-width:400px){
     .wrap{padding:0 16px;} .menu-toggle{width:42px; height:42px; padding:0;} .hexbox{width:42px; height:42px;} .brand-text .tag{white-space:normal; max-width:80px; line-height:1.3;} .nav-cta{gap:6px;} .icon-btn{width:42px; height:42px; padding:0;} .icon-btn svg{width:18px; height:18px;}
@@ -729,6 +745,15 @@ body.search-lock{ overflow:hidden; }
   .search-ov-body{ padding:20px 20px 24px; max-height:min(70vh, 520px); }
 }
 
+
+  /* header spacing: brand left, links centred in the free space, tools right */
+  @media (min-width:1101px){ .nav-inner{gap:24px;} .nav-cta{gap:20px;} }
+  header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px); padding-right:clamp(16px,3.4vw,48px);}
+  .main-nav{flex:1; min-width:0;}
+  .main-nav ul{justify-content:center; gap:clamp(18px,2.4vw,38px);}
+  .nav-cta{flex-shrink:0;}
+  @media (max-width:360px){ .icon-btn{width:36px; height:36px;} .menu-toggle{width:38px; height:38px;} .hexbox{width:38px; height:38px;} .brandmark{gap:8px;} }
+  .nav-search-desktop{width:clamp(170px,16vw,240px) !important;}
 </style>
 </head>
 <body>
@@ -754,7 +779,6 @@ body.search-lock{ overflow:hidden; }
         <li><a href="about.html">About</a></li>
         <li><a href="products.html">Products</a></li>
         <li><a href="collection.html" class="active">Collections</a></li>
-        <li><a href="testimonials.html">Testimonials</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
@@ -763,16 +787,6 @@ body.search-lock{ overflow:hidden; }
       <button class="icon-btn" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
       <a href="wishlist.html" class="icon-btn" id="headerWishBtn" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 8 2 4.5 5.4 3.6 8 2.9 10.4 4.2 12 6.6c1.6-2.4 4-3.7 6.6-3 3.4.9 4.8 4.4 3.4 7.6-2.5 4.7-10 9.3-10 9.3Z"/></svg><span class="icon-badge zero" id="wishBadge">0</span></a>
       <a href="cart.html" class="icon-btn cart-btn" id="headerCartBtn" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17.5" cy="19.5" r="1.4"/></svg><span class="icon-badge zero" id="cartBadge">0</span></a>
-      <a href="contact.html" class="btn">Enquire Now</a>
-    </div>
-  </div>
-  <div class="filter-strip">
-    <div class="wrap">
-      <a href="products.html?cat=Brass%20Tower%20Bolt">Tower Bolts</a>
-      <a href="products.html?cat=Key%20Hole">Key Hole Covers</a>
-      <a href="products.html?cat=SS%20Hinges">Hinges</a>
-      <a href="#collections">All Collections</a>
-      <a href="#contact">Contact</a>
     </div>
   </div>
 </header>
@@ -784,7 +798,6 @@ body.search-lock{ overflow:hidden; }
           <li><a href="about.html">About <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
           <li><a href="products.html">Products <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
           <li><a href="collection.html" class="active">Collections <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
-          <li><a href="testimonials.html">Testimonials <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
           <li><a href="contact.html">Contact <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
     </ul>
     <a href="contact.html" class="btn">Enquire Now</a>
@@ -793,43 +806,29 @@ body.search-lock{ overflow:hidden; }
 <div class="mobile-nav-scrim" id="mobileNavScrim"></div>
 
 
-<!-- ================= PAGE HERO ================= -->
-<section class="page-hero">
-  <div class="wrap">
-    <div class="eyebrow">Collections</div>
-    <h1 style="margin-top:14px;">Curated by finish, curated by fit — <span style="color:var(--brass);">explore Korraz collections.</span></h1>
-    <p>Full brass mortise handles, cylinder key hole covers and door hardware, grouped into collections and each available across six premium PVD finishes.</p>
+<!-- ================= COLLECTIONS HERO ================= -->
+<section class="col-hero">
+  <div class="wrap col-hero-grid">
+    <div>
+      <h1><span class="col-h1-long">Curated by finish, curated by fit — </span><span style="color:var(--brass);">explore Korraz collections.</span></h1>
+      <p>Full brass mortise handles, cylinder key hole covers and door hardware, grouped into collections and each available across six premium PVD finishes.</p>
+      <div class="col-hero-actions">
+        <a href="products.html" class="btn">Browse all products</a>
+        <a href="#contact" class="btn ghost col-btn-2">Ask for the catalogue</a>
+      </div>
+    </div>
+    <div class="col-collage" aria-hidden="true">
+      <figure><img src="images/catalog-demo/Flare BRass/Flarepvtblack.jpg" alt=""></figure>
+      <figure><img src="images/catalog-demo/key-hole.jpg" alt=""></figure>
+      <figure><img src="images/catalog-demo/flare knob/flareberlicolor1.jpg" alt=""></figure>
+    </div>
   </div>
 </section>
 
-<!-- ================= BROWSE BY COLLECTION ================= -->
-<section class="cat-browse" id="collections">
-  <div class="wrap">
-    <div class="cat-browse-head reveal">
-      <div class="eyebrow">Collections</div>
-      <h2 style="margin-top:10px;">Browse By Collection</h2>
-    </div>
-    <div class="cat-grid-browse" id="catGridBrowse"></div>
-    <div class="cat-toggle-wrap">
-      <button class="cat-toggle-btn" id="catToggleBtn" type="button">
-        <span id="catToggleLabel">View all collections</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-    </div>
-    <div class="cat-active-bar">
-      <div class="cat-active-label" id="catActiveLabel">Select a collection above to view products</div>
-      <button class="cat-clear-btn" id="catClearBtn" type="button">
-        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        Clear filter
-      </button>
-    </div>
-    <div class="cat-empty-state" id="catEmptyState">
-      <h3 id="catEmptyTitle">Products coming soon</h3>
-      <p id="catEmptyText">We're adding products and finishes to this collection. WhatsApp us for early access to the catalogue.</p>
-      <a href="https://wa.me/919024655202" target="_blank" class="btn ghost" style="margin-top:20px;">Ask About This Collection</a>
-    </div>
-  </div>
-</section>
+<nav class="col-jump" id="colJump" aria-label="Jump to a collection"><div class="wrap"></div></nav>
+
+<!-- ================= COLLECTION SHELVES ================= -->
+<div id="collections"><div id="colShelves"></div></div>
 
 <!-- ================= BANNER ================= -->
 <section class="banner">
@@ -939,7 +938,7 @@ body.search-lock{ overflow:hidden; }
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="7" width="17" height="13" rx="1.5"/><path d="M8 7V5.5A2.5 2.5 0 0 1 10.5 3h3A2.5 2.5 0 0 1 16 5.5V7"/></svg>
     <span>Products</span>
   </a>
-  <a href="#collections" class="tab-item active">
+  <a href="collection.html" class="tab-item active">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><rect x="13.5" y="13.5" width="7" height="7" rx="1"/></svg>
     <span>Collections</span>
   </a>
@@ -986,108 +985,101 @@ function artTile(iconKey, tag){
   return `<div class="ring" style="width:70%;height:70%;top:15%;left:15%;"></div><div class="icon">${ICONS[iconKey]}</div><div class="tag">${tag}</div>`;
 }
 
-/* ---------------- Browse By Category grid ---------------- */
-const CAT_ICONS = {
-  bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v5M9 4h6M9 20h6M12 16v5M8 9h8M8 15h8M8 9v6M16 9v6"/></svg>',
-  hinge: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="6" height="16" rx="1"/><path d="M10 6l10 2.5v7L10 18"/></svg>',
-  key: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M12 12v9M9 18h6M9 21h6"/></svg>',
-  lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>',
-  bracket: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4v14a2 2 0 002 2h12M5 12h14"/></svg>',
-  knob: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="9" r="5"/><path d="M12 14v7"/></svg>',
-  chain: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="7" height="7" rx="3"/><rect x="13" y="13" width="7" height="7" rx="3"/></svg>',
-  magnet: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 4v9a5 5 0 0010 0V4"/><path d="M5 4h4M15 4h4"/></svg>',
-  socket: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><path d="M12 7v10M7 12h10"/></svg>',
-  wheel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/></svg>',
-  mirror: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="10" rx="7" ry="8"/><path d="M9 20h6"/></svg>',
-  glass: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 4l16 16"/></svg>',
-  eye: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>',
-  pivot: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="2.5"/><path d="M12 4v5.5M12 14.5V20M4 12h5.5M14.5 12H20"/></svg>',
-  stopper: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 20h12M12 20V4a3 3 0 013 3"/></svg>'
-};
-function iconForCategory(name){
-  const n = name.toLowerCase();
-  if(n.includes('bolt')) return CAT_ICONS.bolt;
-  if(n.includes('hinge')) return CAT_ICONS.hinge;
-  if(n.includes('key') && !n.includes('hole')) return CAT_ICONS.key;
-  if(n.includes('hole') || n.includes('lock')) return CAT_ICONS.lock;
-  if(n.includes('bracket')) return CAT_ICONS.bracket;
-  if(n.includes('knob') || n.includes('handle')) return CAT_ICONS.knob;
-  if(n.includes('chain')) return CAT_ICONS.chain;
-  if(n.includes('magnet')) return CAT_ICONS.magnet;
-  if(n.includes('socket')) return CAT_ICONS.socket;
-  if(n.includes('wheel') || n.includes('castor')) return CAT_ICONS.wheel;
-  if(n.includes('mirror')) return CAT_ICONS.mirror;
-  if(n.includes('glass')) return CAT_ICONS.glass;
-  if(n.includes('eye')) return CAT_ICONS.eye;
-  if(n.includes('pivot')) return CAT_ICONS.pivot;
-  if(n.includes('stopper')) return CAT_ICONS.stopper;
-  return CAT_ICONS.bracket;
-}
-
-const CATEGORIES = [
-  'Brass Tower Bolt','Alu T-Bolt','Key Hole','Duck Hinges','SS Hinges','Rod Latch',
-  'SS Socket','SS Pane Lock','Key','Brass Pane Lock','Door Stopper',
-  'L Bat','Cam Bolt','Flare Knob','Pivot','Folding Bracket','Bracket','Orange Wheels Castor',
-  'Oval Socket','Glass Hinges','Door Eye','SS L Bracket','Mirror Cap',
-  'Mirror Holder','Floor Magnet','Table Chain','Rope Wire Chain'
+/* ---------------- Collections (edit this list to change the page) ---------------- */
+const COLLECTIONS = [
+  {id:'bolts-latches', name:'Bolts & Latches', blurb:'Tower bolts, T-bolts, cam bolts and latches in brass and aluminium.', ranges:[
+    {name:'Brass Tower Bolt', sub:'Premium brass tower bolts', count:9, img:'images/catalog-demo/brass T Bolt/brass marble/brass marblecolor3.jpg'},
+    {name:'Alu T-Bolt', sub:'High quality aluminium T-bolts', count:5, img:'images/catalog-demo/ALU T bolt/10mm/10mmmain.jpg'},
+    {name:'Rod Latch', sub:'Heavy duty rod latches', count:1, img:'images/catalog-demo/ROd Latch/rodlatchcolor1.jpg'},
+    {name:'Cam Bolt', sub:'Precision cam bolts', count:5, img:'images/catalog-demo/Cam bolt/Cam bolt.jpg'},
+    {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', count:1, img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'}
+  ]},
+  {id:'lock-security', name:'Lock & Security', blurb:'Key hole covers, pane locks, keys and door eyes.', ranges:[
+    {name:'Key Hole', sub:'Durable brass key holes', count:9, img:'images/catalog-demo/key-hole.jpg'},
+    {name:'SS Pane Lock', sub:'Secure stainless steel locks', count:1, img:'images/catalog-demo/ss panle lock.jpg'},
+    {name:'Key', sub:'High quality brass keys', count:3, img:'images/catalog-demo/key/key small/flarekeysmallmain.jpg'},
+    {name:'Brass Pane Lock', sub:'Durable brass pane locks', count:1, img:'images/catalog-demo/brass lock.jpg'},
+    {name:'Door Eye', sub:'Secure door eye viewers', count:1, img:'images/catalog-demo/door eye/dooreyecolor1.jpg'}
+  ]},
+  {id:'hinges', name:'Hinges', blurb:'Duck hinges and stainless steel hinges.', ranges:[
+    {name:'Duck Hinges', sub:'Strong & smooth duck hinges', count:1, img:'images/catalog-demo/Duck hingaj/duckhingajmain.jpg'},
+    {name:'SS Hinges', sub:'Stainless steel hinges', count:1, img:'images/catalog-demo/ss-hinges.jpg'}
+  ]},
+  {id:'knobs-handles', name:'Knobs & Handles', blurb:'Flare knobs and chest handles.', ranges:[
+    {name:'Flare Knob', sub:'Elegant flare knobs', count:7, img:'images/catalog-demo/flare knob/flareberlicolor1.jpg'},
+    {name:'Chest Handle', sub:'Chest handles', count:1, img:'images/catalog-demo/cheshhandlemain-hero.jpg'}
+  ]},
+  {id:'flare-products', name:'Flare Products', blurb:'The Flare hardware collection.', ranges:[
+    {name:'Flare Products', sub:'Flare hardware collection', count:2, img:'images/catalog-demo/Flare BRass/Flarepvtblack.jpg'}
+  ]},
+  {id:'brackets', name:'Brackets', blurb:'Sockets and brackets: fixed, folding and L-shaped.', ranges:[
+    {name:'SS Socket', sub:'Stainless steel sockets', count:3, img:'images/catalog-demo/ss socket/1 full size/1 full size.jpg'},
+    {name:'Oval Socket', sub:'Smooth oval sockets', count:1, img:'images/catalog-demo/oval-socket.jpg'},
+    {name:'SS New Consil Socket', sub:'Heavy duty stainless steel consil socket', count:1, img:'images/catalog-demo/ss rod consil/1ssrodconsilmain.jpg'},
+    {name:'Folding Bracket', sub:'Space-saving folding brackets', count:3, img:'images/catalog-demo/Folding Bracket/Square folding bracketmain.jpg'},
+    {name:'Bracket', sub:'General purpose brackets', count:2, img:'images/catalog-demo/Square Bracket/square bracketmain.jpg'},
+    {name:'SS L Bracket', sub:'Stainless steel L brackets', count:2, img:'images/catalog-demo/SSL Bracket/Ss L bracket heavy.jpg'}
+  ]},
+  {id:'door-fittings', name:'Door Fittings', blurb:'Door stoppers, L bats and pivots.', ranges:[
+    {name:'Door Stopper', sub:'Reliable door stoppers', count:2, img:'images/catalog-demo/doorstoppermain.jpg'},
+    {name:'L Bat', sub:'Sturdy L bats for doors', count:5, img:'images/catalog-demo/L batmain.jpg'},
+    {name:'Pivot', sub:'Smooth door pivots', count:3, img:'images/catalog-demo/PIvot/pivot_main.jpg'}
+  ]},
+  {id:'glass-fittings', name:'Glass Fittings', blurb:'Hinges for glass doors.', ranges:[
+    {name:'Glass Hinges', sub:'Sturdy glass hinges', count:1, img:'images/catalog-demo/Glass Hingas/Glass Hingasmain.jpg'}
+  ]},
+  {id:'chain-accessories', name:'Chain & Accessories', blurb:'Table chains and rope wire chains.', ranges:[
+    {name:'Table Chain', sub:'Durable table chains', count:1, img:'images/catalog-demo/table Chainmain.jpg'},
+    {name:'Rope Wire Chain', sub:'Flexible rope wire chains', count:1, img:'images/catalog-demo/Rope Wire Chian/Rope Wire Chain.jpg'}
+  ]},
+  {id:'caster-wheels', name:'Caster Wheels', blurb:'Orange caster wheels.', ranges:[
+    {name:'Orange Wheels Castor', sub:'Durable caster wheels', count:1, img:'images/catalog-demo/OrangeWheelCastor.jpg'}
+  ]},
+  {id:'miscellaneous', name:'Miscellaneous', blurb:'Mirror caps and holders, floor magnets and more.', ranges:[
+    {name:'Mirror Cap', sub:'Polished mirror caps', count:1, img:'images/catalog-demo/Mirror Cap/mirror capmain.jpg'},
+    {name:'Mirror Holder', sub:'Durable mirror holders', count:1, img:'images/catalog-demo/Mirror Holder/Mirror Holdermain.jpg'},
+    {name:'Floor Magnet', sub:'Strong floor door magnets', count:1, img:'images/catalog-demo/flaremagnetmain.jpg'},
+    {name:'Big Vaccum', sub:'', count:1, img:'images/catalog-demo/big vaccum/big vaccummain.jpg'}
+  ]}
 ];
-const CAT_COLLAPSED_COUNT = 12;
-let catExpanded = false;
-let activeCategory = null;
 
-function renderCatGrid(){
-  const grid = document.getElementById('catGridBrowse');
-  if(!grid) return;
-  const visible = catExpanded ? CATEGORIES : CATEGORIES.slice(0, CAT_COLLAPSED_COUNT);
-  grid.innerHTML = visible.map(name => `
-    <a href="products.html?cat=${encodeURIComponent(name)}" class="cat-tile${activeCategory === name ? ' active' : ''}" data-cat="${name}" title="Browse ${name} — full brass hardware, six premium PVD finishes">
-      <div class="cat-tile-icon">${iconForCategory(name)}</div>
-      <div class="cat-tile-name">${name}</div>
-    </a>`).join('');
-  grid.style.maxHeight = catExpanded ? '2000px' : '400px';
+function escHtml(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function plural(n, one, many){ return n + ' ' + (n === 1 ? one : many); }
+
+function renderCollections(){
+  const jump = document.querySelector('#colJump .wrap');
+  const host = document.getElementById('colShelves');
+  if(!jump || !host) return;
+  jump.innerHTML = COLLECTIONS.map(c =>
+    `<a href="#shelf-${c.id}">${escHtml(c.name)} <span>${c.ranges.length}</span></a>`).join('');
+  host.innerHTML = COLLECTIONS.map(c => {
+    const items = c.ranges.reduce((n, r) => n + r.count, 0);
+    const cards = c.ranges.map(r => `
+      <a class="rcard" href="products.html?cat=${encodeURIComponent(r.name)}">
+        <div class="rcard-media"><img src="${r.img}" alt="${escHtml(r.name)} — Korraz ${escHtml(c.name)}" loading="lazy"></div>
+        <div class="rcard-body">
+          <div>
+            <h3>${escHtml(r.name)}</h3>
+            ${r.sub ? `<div class="rcard-sub">${escHtml(r.sub)}</div>` : ''}
+          </div>
+          <div class="rcard-go"><span>${plural(r.count, 'item', 'items')}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>`).join('');
+    return `
+    <section class="shelf" id="shelf-${c.id}">
+      <div class="wrap shelf-grid">
+        <div class="shelf-head">
+          <h2>${escHtml(c.name)}</h2>
+          <div class="shelf-meta">${plural(c.ranges.length, 'range', 'ranges')}, ${plural(items, 'item', 'items')}</div>
+          <p>${escHtml(c.blurb)}</p>
+        </div>
+        <div class="shelf-cards">${cards}</div>
+      </div>
+    </section>`;
+  }).join('');
 }
 
-function selectCategory(name){
-  window.location.href = 'products.html?cat=' + encodeURIComponent(name);
-}
-
-function clearCategory(){
-  activeCategory = null;
-  renderCatGrid();
-  updateCatFilterUI();
-}
-
-function updateCatFilterUI(){
-  const label = document.getElementById('catActiveLabel');
-  const clearBtn = document.getElementById('catClearBtn');
-  const emptyState = document.getElementById('catEmptyState');
-  const emptyTitle = document.getElementById('catEmptyTitle');
-  const emptyText = document.getElementById('catEmptyText');
-  if(activeCategory){
-    label.innerHTML = `Showing: <span>${activeCategory}</span>`;
-    clearBtn.classList.add('show');
-    emptyTitle.textContent = `${activeCategory} — coming soon`;
-    emptyText.textContent = `We're adding ${activeCategory.toLowerCase()} products and finishes to this collection. WhatsApp us for early access.`;
-    emptyState.style.display = 'block';
-  } else {
-    label.textContent = 'Select a collection above to view products';
-    clearBtn.classList.remove('show');
-    emptyTitle.textContent = 'Products coming soon';
-    emptyText.textContent = "We're adding products and finishes to this collection. WhatsApp us for early access to the catalogue.";
-    emptyState.style.display = 'none';
-  }
-}
-
-document.getElementById('catToggleBtn').addEventListener('click', function(){
-  catExpanded = !catExpanded;
-  this.classList.toggle('open', catExpanded);
-  document.getElementById('catToggleLabel').textContent = catExpanded ? 'Show less' : 'View all categories';
-  renderCatGrid();
-});
-document.getElementById('catClearBtn').addEventListener('click', clearCategory);
-
-renderCatGrid();
-updateCatFilterUI();
+renderCollections();
 updateBadges();
 
 /* product data will be loaded here */
@@ -1203,22 +1195,6 @@ document.addEventListener('click', function(e){
     window.location.href = 'product-detail.html?id=' + card.dataset.id;
   }
 });
-
-/* category tab scroll-spy */
-(function(){
-  const links = document.querySelectorAll('.cat-link, .filter-strip a[href^="#"]');
-  const targets = ['collections', 'contact'];
-  const sections = targets.map(id => document.getElementById(id)).filter(Boolean);
-  const spy = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        const id = e.target.id;
-        links.forEach(l=>{ l.classList.toggle('active', l.getAttribute('href') === '#'+id); });
-      }
-    });
-  }, {rootMargin:'-45% 0px -45% 0px'});
-  sections.forEach(s=>spy.observe(s));
-})();
 
 /* subscribe demo submit */
 document.getElementById('subForm').addEventListener('submit', function(e){

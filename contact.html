@@ -201,14 +201,6 @@
   .icon-btn svg{width:16px; height:16px;}
 
   /* filter strip: sticky secondary row of section-jump tabs, à la reference site's "nav filter" */
-  .filter-strip{background:var(--dark-2); border-bottom:1px solid var(--dark-line);}
-  .filter-strip .wrap{display:flex; gap:0; overflow-x:auto;}
-  .filter-strip a{
-    padding:13px 22px; font-family:'Inter',sans-serif; font-size:0.7rem; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--dark-mute); font-weight:700; white-space:nowrap; border-bottom:2px solid transparent; transition:all .25s ease;
-  }
-  .filter-strip a:hover{color:var(--dark-text);}
-  .filter-strip a.active{color:var(--brass); border-bottom-color:var(--brass);}
 
   /* ---------------- hero slider ---------------- */
   .hero{position:relative; height:88vh; min-height:620px; overflow:hidden; background:var(--dark);}
@@ -823,6 +815,15 @@ body.search-lock{ overflow:hidden; }
   .search-ov-body{ padding:20px 20px 24px; max-height:min(70vh, 520px); }
 }
 
+
+  /* header spacing: brand left, links centred in the free space, tools right */
+  @media (min-width:1101px){ .nav-inner{gap:24px;} .nav-cta{gap:20px;} }
+  header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px); padding-right:clamp(16px,3.4vw,48px);}
+  .main-nav{flex:1; min-width:0;}
+  .main-nav ul{justify-content:center; gap:clamp(18px,2.4vw,38px);}
+  .nav-cta{flex-shrink:0;}
+  @media (max-width:360px){ .icon-btn{width:36px; height:36px;} .menu-toggle{width:38px; height:38px;} .hexbox{width:38px; height:38px;} .brandmark{gap:8px;} }
+  .nav-search-desktop{width:clamp(170px,16vw,240px) !important;}
 </style>
 </head>
 
@@ -839,7 +840,7 @@ body.search-lock{ overflow:hidden; }
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
     <div class="brandmark">
       <div class="hexbox">
-        <svg viewBox="0 0 100 100"><polygon points="50,4 91,27 91,73 50,96 9,73 9,27" fill="none" stroke="#c9a24b" stroke-width="3"/><text x="50" y="62" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="38" fill="#efece4" font-weight="700">K</text></svg>
+        <svg viewBox="0 0 100 100"><polygon points="50,4 91,27 91,73 50,96 9,73 9,27" fill="none" stroke="#c9a24b" stroke-width="3"/><text x="50" y="62" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="38" fill="#f5f1e6" font-weight="700">K</text></svg>
       </div>
       <div class="brand-text"><div class="name">KORRAZ</div><div class="tag">Premium Brass Fitting</div></div>
     </div>
@@ -849,7 +850,6 @@ body.search-lock{ overflow:hidden; }
         <li><a href="about.html">About</a></li>
         <li><a href="products.html">Products</a></li>
         <li><a href="collection.html">Collections</a></li>
-        <li><a href="testimonials.html">Testimonials</a></li>
         <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
     </nav>
@@ -858,14 +858,6 @@ body.search-lock{ overflow:hidden; }
       <button class="icon-btn" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
       <a href="wishlist.html" class="icon-btn" id="headerWishBtn" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 8 2 4.5 5.4 3.6 8 2.9 10.4 4.2 12 6.6c1.6-2.4 4-3.7 6.6-3 3.4.9 4.8 4.4 3.4 7.6-2.5 4.7-10 9.3-10 9.3Z"/></svg><span class="icon-badge zero" id="wishBadge">0</span></a>
       <a href="cart.html" class="icon-btn cart-btn" id="headerCartBtn" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17.5" cy="19.5" r="1.4"/></svg><span class="icon-badge zero" id="cartBadge">0</span></a>
-      <a href="contact.html" class="btn">Enquire Now</a>
-    </div>
-  </div>
-  <!-- in-page "filter" nav, echoes the tabbed jump-nav on the reference site -->
-  <div class="filter-strip">
-    <div class="wrap">
-      <a href="#contact" class="filter-link">Get In Touch</a>
-      <a href="#newsletter" class="filter-link">Subscribe</a>
     </div>
   </div>
 </header>
@@ -877,17 +869,7 @@ body.search-lock{ overflow:hidden; }
           <li><a href="about.html">About <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
           <li><a href="products.html">Products <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
           <li><a href="collection.html">Collections <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
-          <li><a href="testimonials.html">Testimonials <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
           <li><a href="contact.html" class="active">Contact <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></a></li>
-          <li class="has-submenu">
-            <button type="button" class="submenu-toggle" aria-expanded="false">Help <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>
-            <ul class="submenu">
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="contact.html">Contact Us</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Shipping &amp; Delivery</a></li>
-            </ul>
-          </li>
     </ul>
     <a href="contact.html" class="btn">Enquire Now</a>
   </div>
