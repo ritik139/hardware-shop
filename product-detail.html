@@ -871,6 +871,24 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
 }
 .nav-search-desktop{width:clamp(170px,16vw,240px) !important;}
 </style>
+<style id="pd-gallery-size">
+/* desktop: keep the square main photo no taller than the visible screen area (header + a little breathing room),
+   so on laptops / zoomed screens it no longer fills the whole viewport. Mobile / tablet layouts are untouched. */
+@media (min-width:901px){
+  .pd-gallery{width:min(100%, max(400px, calc(100vh - 240px))); margin-left:auto; margin-right:auto;}
+}
+@media (max-width:900px){
+  /* phones / tablets: header + breadcrumb + sticky bottom bars use ~360px, so cap the photo to what is left */
+  .pd-gallery{width:min(100%, max(260px, calc(100vh - 360px))); margin-left:auto; margin-right:auto;}
+}
+</style>
+
+<style id="mobile-fixes">
+/* mobile fixes: header tag size, product-detail */
+@media (max-width:400px){
+  .brand-text .tag{font-size:0.56rem; letter-spacing:.06em; max-width:92px; line-height:1.15; margin-top:2px; white-space:normal;}
+}
+</style>
 </head>
 <body>
 
@@ -1085,7 +1103,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
 
 <footer>
   <div class="wrap footer-bottom" style="margin-top:0; border-top:none; padding-top:0;">
-    <p>&copy; 2026 Korraz. All Rights Reserved. — Product Detail Page Demo</p>
+    <p>&copy; 2026 Korraz. All Rights Reserved.</p>
   </div>
 </footer>
 
@@ -1361,7 +1379,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     const table = [
       [/rose\s*gold/, '#b56a4d'], [/gun\s*metal/, '#3a3d42'], [/antique\s*bronze|bronze/, '#8b7c4a'],
       [/antique\s*brass|antique/, '#caa23e'], [/matte\s*black|black/, '#2b2d31'],
-      [/graphite/, '#4a4a4a'], [/^ssf$|brushed\s*silver|silver\s*chrome|chrome|steel|silver/, '#b9bcc0'], [/gold/, '#c9a24b'],
+      [/graphite/, '#4a4a4a'], [/^cp$/, '#e4e8eb'], [/^ssf$|brushed\s*silver|silver\s*chrome|chrome|steel|silver/, '#b9bcc0'], [/gold/, '#c9a24b'],
       [/copper/, '#b56a4d'], [/white/, '#efe8d9'], [/grey|gray/, '#8b8b8b'],
       [/brass/, '#b8863c'], [/wood|walnut|teak/, '#6b4a30']
     ];
@@ -1622,7 +1640,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     });
     const hasExplicitSizeMap = imageSizesTag && sizeByImageIndex.some(Boolean);
     /* same idea but for colour photos — product.colors[i] names the finish shown in catalogImages[i] */
-    const imagePerColor = catalogImages.length > 1 && product.colors && product.colors.length === catalogImages.length;
+    const imagePerColor = catalogImages.length >= 1 && product.colors && product.colors.length === catalogImages.length;
 
     /* work out which thumbnails correspond to which finish, so clicking a
        thumbnail can drive the price the same way clicking a finish pill does.
@@ -2665,7 +2683,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     {name:'Folding Bracket', sub:'Space-saving folding brackets', img:'images/catalog-demo/Folding Bracket/Square folding bracketmain.jpg'},
     {name:'Bracket', sub:'General purpose brackets', img:'images/catalog-demo/Square Bracket/square bracketmain.jpg'},
     {name:'Orange Wheels Castor', sub:'Durable caster wheels', img:'images/catalog-demo/OrangeWheelCastor.jpg'},
-    {name:'Oval Socket', sub:'Smooth oval sockets', img:'images/catalog-demo/oval-socket.jpg'},
+    {name:'Oval Socket', sub:'Smooth oval sockets', img:'images/catalog-demo/overal socket/oval socketssf.jpg'},
     {name:'Glass Hinges', sub:'Sturdy glass hinges', img:'images/catalog-demo/Glass Hingas/Glass Hingasmain.jpg'},
     {name:'Door Eye', sub:'Secure door eye viewers', img:'images/catalog-demo/door eye/dooreyecolor1.jpg'},
     {name:'SS L Bracket', sub:'Stainless steel L brackets', img:'images/catalog-demo/SSL Bracket/Ss L bracket heavy.jpg'},

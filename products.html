@@ -989,6 +989,16 @@ body.search-lock{ overflow:hidden; }
   @media (max-width:360px){ .icon-btn{width:36px; height:36px;} .menu-toggle{width:38px; height:38px;} .hexbox{width:38px; height:38px;} .brandmark{gap:8px;} }
   .nav-search-desktop{width:clamp(170px,16vw,240px) !important;}
 </style>
+
+<style id="mobile-fixes">
+/* mobile fixes: header tag size, products */
+@media (max-width:400px){
+  .brand-text .tag{font-size:0.56rem; letter-spacing:.06em; max-width:92px; line-height:1.15; margin-top:2px; white-space:normal;}
+}
+@media (max-width:400px){
+  .mobile-cat-bar{margin:0 -16px 18px; padding:2px 16px 14px;}
+}
+</style>
 </head>
 <body>
 
@@ -1372,7 +1382,7 @@ const PRODUCTS = [
   {name:'Folding Bracket', sub:'Space-saving folding brackets', count:3, icon:'bracket', parent:'Brackets', img:'images/catalog-demo/Folding Bracket/Square folding bracketmain.jpg'},
   {name:'Bracket', sub:'General purpose brackets', count:2, icon:'bracket', parent:'Brackets', img:'images/catalog-demo/Square Bracket/square bracketmain.jpg'},
   {name:'Orange Wheels Castor', sub:'Durable caster wheels', count:1, icon:'wheel', parent:'Caster Wheels', img:'images/catalog-demo/OrangeWheelCastor.jpg'},
-  {name:'Oval Socket', sub:'Smooth oval sockets', count:1, icon:'socket', parent:'Brackets', img:'images/catalog-demo/oval-socket.jpg'},
+  {name:'Oval Socket', sub:'Smooth oval sockets', count:1, icon:'socket', parent:'Brackets', img:'images/catalog-demo/overal socket/oval socketssf.jpg'},
   {name:'Glass Hinges', sub:'Sturdy glass hinges', count:1, icon:'hinge', parent:'Glass Fittings', img:'images/catalog-demo/Glass Hingas/Glass Hingasmain.jpg'},
   {name:'Door Eye', sub:'Secure door eye viewers', count:1, icon:'eye', parent:'Lock & Security', img:'images/catalog-demo/door eye/dooreyecolor1.jpg'},
   {name:'SS L Bracket', sub:'Stainless steel L brackets', count:2, icon:'bracket', parent:'Brackets', img:'images/catalog-demo/SSL Bracket/Ss L bracket heavy.jpg'},
@@ -1444,8 +1454,8 @@ const CATALOG = {
   ]},
   'Brass Pane Lock': { type:'sizes', img:'images/catalog-demo/brass lock.jpg', sizes:['19mm','25mm','32mm','38mm','50mm'] },
   'Door Stopper': { type:'items', items:[
-    {name:'304 SS Half Door Stopper', sub:'Premium Stainless Steel 304 · Black · Rose Gold · Gold · Antique Bronze · Silver Chrome', img:'images/catalog-demo/Door Stopper/doorstoppercolor1.jpg', images:['images/catalog-demo/Door Stopper/doorstoppercolor1.jpg','images/catalog-demo/Door Stopper/doorstoppercolor2.jpg','images/catalog-demo/Door Stopper/doorstoppercolor4.jpg','images/catalog-demo/Door Stopper/doorstoppercolor5.jpg','images/catalog-demo/Door Stopper/doorstoppercolor3.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], colorLabel:'Finish'},
-    {name:'202 SS Half Door Stopper', sub:'Premium Stainless Steel 202 · Oval Plate Model · Black · Rose Gold · Gold · Antique Bronze · Silver Chrome', img:'images/catalog-demo/Door Stopper/doorstoppercolor1.jpg', images:['images/catalog-demo/Door Stopper/doorstoppercolor1.jpg','images/catalog-demo/Door Stopper/doorstoppercolor2.jpg','images/catalog-demo/Door Stopper/doorstoppercolor4.jpg','images/catalog-demo/Door Stopper/doorstoppercolor5.jpg','images/catalog-demo/Door Stopper/doorstoppercolor3.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], colorLabel:'Finish'}
+    {name:'304 SS Half Door Stopper', sub:'Premium Stainless Steel 304 · Black · Rose Gold · Gold · Antique Bronze · Silver Chrome', img:'images/catalog-demo/Door Stopper/304 door/doorstoppercolor1.jpg', images:['images/catalog-demo/Door Stopper/304 door/doorstoppercolor1.jpg','images/catalog-demo/Door Stopper/304 door/doorstoppercolor2.jpg','images/catalog-demo/Door Stopper/304 door/doorstoppercolor4.jpg','images/catalog-demo/Door Stopper/304 door/doorstoppercolor5.jpg','images/catalog-demo/Door Stopper/304 door/doorstoppercolor3.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], colorLabel:'Finish'},
+    {name:'202 SS Half Door Stopper', sub:'Premium Stainless Steel 202 · Oval Plate Model · Gold · Rose Gold · Black · Silver Chrome', img:'images/catalog-demo/Door Stopper/202/2021.jpg', images:['images/catalog-demo/Door Stopper/202/2021.jpg','images/catalog-demo/Door Stopper/202/2022.jpg','images/catalog-demo/Door Stopper/202/2023.jpg','images/catalog-demo/Door Stopper/202/2024.jpg'], colors:['Gold','Rose Gold','Black','Silver Chrome'], colorLabel:'Finish'}
   ]},
   'L Bat': { type:'items', img:'images/catalog-demo/L batmain.jpg', items:[
     {name:'Single L Bat — Mild', img:'images/catalog-demo/L bat/L bat Single/L batsingle.jpg', images:['images/catalog-demo/L bat/L bat Single/L batsinglecolor2.jpg','images/catalog-demo/L bat/L bat Single/L batsinglecolor5.jpg','images/catalog-demo/L bat/L bat Single/L batsinglecolor1.jpg','images/catalog-demo/L bat/L bat Single/L batsinglecolor3.jpg','images/catalog-demo/L bat/L bat Single/L batsinglecolor4.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], colorLabel:'Finish'},
@@ -1486,14 +1496,14 @@ const CATALOG = {
   'Floor Magnet': { type:'sizes', img:'images/catalog-demo/flaremagnetmain.jpg', images:['images/catalog-demo/flaremagnetmain.jpg','images/catalog-demo/FLare Magnet/flaremagnetcolor2.jpg','images/catalog-demo/FLare Magnet/flaremagnetcolor1.jpg','images/catalog-demo/FLare Magnet/flaremagnetcolor4.jpg','images/catalog-demo/FLare Magnet/flaremagnetcolor3.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], colorLabel:'Finish' },
   'Table Chain': { type:'sizes', note:'CP / SSF', img:'images/catalog-demo/table Chainmain.jpg', sizes:['6"','8"','10"','12"'] },
   'Rope Wire Chain': { type:'sizes', note:'SSF/AB · Black · Gold · Rose Gold', img:'images/catalog-demo/Rope Wire Chian/Rope Wire Chain.jpg', images:['images/catalog-demo/Rope Wire Chian/Rope Wire ChainColor2.jpg','images/catalog-demo/Rope Wire Chian/Rope Wire ChainColor1.jpg','images/catalog-demo/Rope Wire Chian/Rope Wire ChainColor3.jpg','images/catalog-demo/Rope Wire Chian/Rope Wire ChainColor4.jpg','images/catalog-demo/Rope Wire Chian/Rope Wire Chain.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], sizes:['6"','8"','10"','12"'] },
-  'Oval Socket': { type:'sizes', note:'Size: 5/8" (16 MM)', img:'images/catalog-demo/oval-socket.jpg', sizes:['CP'] },
+  'Oval Socket': { type:'sizes', note:'Size: 5/8" (16 MM)', img:'images/catalog-demo/overal socket/oval socketssf.jpg', images:['images/catalog-demo/overal socket/oval socketssf.jpg','images/catalog-demo/overal socket/oval socketzblack.jpg','images/catalog-demo/overal socket/oval socketbrushgold.jpg','images/catalog-demo/overal socket/oval socketantique.jpg','images/catalog-demo/overal socket/oval socket.jpg'], colors:['SSF','Z Black','Brush Gold','Antique','CP'], colorLabel:'Finish', sizes:[] },
   'Pivot': { type:'items', items:[
     {name:'SS Door Pivot', sub:'Smooth Operation · Premium Chrome Finish · Strong & Durable', img:'images/catalog-demo/Pivot/pivot_main.jpg', colors:['Chrome'], colorLabel:'Finish', sizes:['12mm','8mm','2.5x1.5x6mm']},
     {name:'Brass Fancy Pivot Mid', sub:'Premium Brass · Strong & Durable · Smooth Operation · Long Lasting', img:'images/catalog-demo/Pivot/pivotcolor1.jpg', colors:['SSF'], colorLabel:'Finish', sizes:['2×6mm','2×8mm']},
     {name:'Brass Glass Pivot Heavy', sub:'Premium Brass · Strong & Durable · Perfect for Glass Doors', img:'images/catalog-demo/Pivot/pivotcolor2.jpg', colors:['SSF'], colorLabel:'Finish', sizes:['2×6mm']}
   ]},
   'Flare Products': { type:'items', items:[
-    {name:'Flare Brass', note:'Z Black · PVD Gold · PVD Rose Gold', sizes:['3"','4"'], img:'images/catalog-demo/Flare BRass/Flarepvtblack.jpg', images:['images/catalog-demo/Flare BRass/Flarepvtblack.jpg','images/catalog-demo/Flare BRass/Flarepvtrose.jpg','images/catalog-demo/Flare BRass/Flarepvtgold.jpg'], colors:['Black','Rose Gold','Gold'], colorLabel:'Finish'},
+    {name:'Flare Brass', note:'Z Black · PVD Gold · PVD Rose Gold · SSF', sizes:['3"','4"'], img:'images/catalog-demo/Flare BRass/Flarepvtblack.jpg', images:['images/catalog-demo/Flare BRass/Flarepvtblack.jpg','images/catalog-demo/Flare BRass/Flarepvtrose.jpg','images/catalog-demo/Flare BRass/Flarepvtgold.jpg','images/catalog-demo/Flare BRass/Flarepvtssf.jpg'], colors:['Black','Rose Gold','Gold','SSF'], colorLabel:'Finish'},
     {name:'Flare Brass Square', img:'images/catalog-demo/Flare brass Sqare/flaresquare.jpg', images:['images/catalog-demo/Flare brass Sqare/flaresquare.jpg','images/catalog-demo/Flare brass Sqare/flarequare2.jpg']}
   ]},
   'Mirror Holder': { type:'sizes', img:'images/catalog-demo/Mirror Holder/Mirror Holdermain.jpg', images:['images/catalog-demo/Mirror Holder/Mirror Holdercolor3.jpg','images/catalog-demo/Mirror Holder/Mirror Holdercolor4.jpg','images/catalog-demo/Mirror Holder/Mirror Holdercolor2.jpg','images/catalog-demo/Mirror Holder/Mirror Holdercolor1.jpg','images/catalog-demo/Mirror Holder/Mirror Holdermain.jpg'], colors:['Black','Rose Gold','Gold','Antique Bronze','Silver Chrome'], sizes:['6mm'] },
@@ -2208,7 +2218,7 @@ document.getElementById('subForm').addEventListener('submit', function(e){
     {name:'Folding Bracket', sub:'Space-saving folding brackets', img:'images/catalog-demo/Folding Bracket/Square folding bracketmain.jpg'},
     {name:'Bracket', sub:'General purpose brackets', img:'images/catalog-demo/Square Bracket/square bracketmain.jpg'},
     {name:'Orange Wheels Castor', sub:'Durable caster wheels', img:'images/catalog-demo/OrangeWheelCastor.jpg'},
-    {name:'Oval Socket', sub:'Smooth oval sockets', img:'images/catalog-demo/oval-socket.jpg'},
+    {name:'Oval Socket', sub:'Smooth oval sockets', img:'images/catalog-demo/overal socket/oval socketssf.jpg'},
     {name:'Glass Hinges', sub:'Sturdy glass hinges', img:'images/catalog-demo/Glass Hingas/Glass Hingasmain.jpg'},
     {name:'Door Eye', sub:'Secure door eye viewers', img:'images/catalog-demo/door eye/dooreyecolor1.jpg'},
     {name:'SS L Bracket', sub:'Stainless steel L brackets', img:'images/catalog-demo/SSL Bracket/Ss L bracket heavy.jpg'},
