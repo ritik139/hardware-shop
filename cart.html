@@ -285,7 +285,7 @@
 
   /* ---------------- footer (matches index.html) ---------------- */
   footer{background:var(--dark); padding:80px 0 0;}
-  .footer-grid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:40px; padding-bottom:60px; border-bottom:1px solid var(--dark-line);}
+  .footer-grid{display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr; gap:40px; padding-bottom:60px; border-bottom:1px solid var(--dark-line);}
   .footer-brand{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
   .footer-grid p{color:var(--dark-mute); font-size:0.84rem; max-width:280px;}
   .footer-social{display:flex; gap:10px; margin-top:22px;}
@@ -297,7 +297,7 @@
   .footer-grid ul a{color:var(--dark-mute); font-size:0.86rem; transition:color .25s ease;}
   .footer-grid ul a:hover{color:var(--brass);}
   .footer-acc-toggle svg{display:none;}
-  .footer-bottom{display:flex; justify-content:space-between; align-items:center; padding:26px 0; color:var(--dark-mute); font-size:0.78rem;}
+  .footer-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:26px; padding-bottom:26px; color:var(--dark-mute); font-size:0.78rem;}
   .to-top{width:38px; height:38px; border-radius:50%; border:1px solid var(--dark-line-2); display:flex; align-items:center; justify-content:center; color:var(--dark-text); transition:all .25s ease;}
   .to-top:hover{border-color:var(--brass); color:var(--brass);}
   .to-top svg{width:15px; height:15px;}
@@ -887,9 +887,13 @@ body.search-lock{ overflow:hidden; }
         <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 21c1-3 1.5-6 2-9a3.5 3.5 0 1 1 3 1.6c-.3 1.4-.6 3-1 4.4"/></svg></a>
       </div>
     </div>
+    <div class="footer-acc open">
+      <h4 class="footer-acc-toggle">Quick Links <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></h4>
+      <div class="footer-acc-body"><ul><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="collection.html">Collections</a></li></ul></div>
+    </div>
     <div class="footer-acc">
       <h4 class="footer-acc-toggle">Products <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></h4>
-      <div class="footer-acc-body"><ul><li><a href="products.html">Mortise Handles</a></li><li><a href="products.html">Key Hole Covers</a></li></ul></div>
+      <div class="footer-acc-body"><ul><li><a href="products.html">Mortise Handles</a></li><li><a href="products.html?cat=Key%20Hole">Key Hole Covers</a></li><li><a href="products.html?cat=Brass%20Tower%20Bolt">Tower Bolts</a></li></ul></div>
     </div>
     <div class="footer-acc">
       <h4 class="footer-acc-toggle">Help &amp; Support <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></h4>
@@ -897,7 +901,7 @@ body.search-lock{ overflow:hidden; }
     </div>
     <div class="footer-acc">
       <h4 class="footer-acc-toggle">Contact <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></h4>
-      <div class="footer-acc-body"><ul><li><a href="#">Goregaon (W), Mumbai</a></li><li><a href="tel:+919024655202">+91 90246 55202</a></li><li><a href="mailto:korrasenterprises@gmail.com">korrasenterprises@gmail.com</a></li></ul></div>
+      <div class="footer-acc-body"><ul><li><a href="https://www.google.com/maps/search/?api=1&amp;query=Korras+Enterprises+42%2F336+Unnat+Nagar+No.4+M.G.+Road+Goregaon+West+Mumbai+400104" target="_blank" rel="noopener">Goregaon (W), Mumbai</a></li><li><a href="tel:+919024655202">+91 90246 55202</a></li><li><a href="mailto:korrasenterprises@gmail.com">korrasenterprises@gmail.com</a></li></ul></div>
     </div>
   </div>
   <div class="wrap footer-bottom">

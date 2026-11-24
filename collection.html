@@ -387,7 +387,7 @@
 
   /* ---------------- footer (matches index.html) ---------------- */
   footer{background:var(--dark); padding:80px 0 0;}
-  .footer-grid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:40px; padding-bottom:60px; border-bottom:1px solid var(--dark-line);}
+  .footer-grid{display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr; gap:40px; padding-bottom:60px; border-bottom:1px solid var(--dark-line);}
   .footer-brand{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
   .footer-grid p{color:var(--dark-mute); font-size:0.84rem; max-width:280px;}
   .footer-social{display:flex; gap:10px; margin-top:22px;}
@@ -399,7 +399,7 @@
   .footer-grid ul a{color:var(--dark-mute); font-size:0.86rem; transition:color .25s ease;}
   .footer-grid ul a:hover{color:var(--brass);}
   .footer-acc-toggle svg{display:none;}
-  .footer-bottom{display:flex; justify-content:space-between; align-items:center; padding:26px 0; color:var(--dark-mute); font-size:0.78rem;}
+  .footer-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:26px; padding-bottom:26px; color:var(--dark-mute); font-size:0.78rem;}
   .to-top{width:38px; height:38px; border-radius:50%; border:1px solid var(--dark-line-2); display:flex; align-items:center; justify-content:center; color:var(--dark-text); transition:all .25s ease;}
   .to-top:hover{border-color:var(--brass); color:var(--brass);}
   .to-top svg{width:15px; height:15px;}
@@ -911,9 +911,13 @@ body.search-lock{ overflow:hidden; }
         <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 21c1-3 1.5-6 2-9a3.5 3.5 0 1 1 3 1.6c-.3 1.4-.6 3-1 4.4"/></svg></a>
       </div>
     </div>
+    <div class="footer-acc open">
+      <h4 class="footer-acc-toggle">Quick Links <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></h4>
+      <div class="footer-acc-body"><ul><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="collection.html">Collections</a></li></ul></div>
+    </div>
     <div class="footer-acc">
       <h4 class="footer-acc-toggle">Products <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></h4>
-      <div class="footer-acc-body"><ul><li><a href="products.html">Mortise Handles</a></li><li><a href="products.html">Key Hole Covers</a></li></ul></div>
+      <div class="footer-acc-body"><ul><li><a href="products.html">Mortise Handles</a></li><li><a href="products.html?cat=Key%20Hole">Key Hole Covers</a></li><li><a href="products.html?cat=Brass%20Tower%20Bolt">Tower Bolts</a></li></ul></div>
     </div>
     <div class="footer-acc">
       <h4 class="footer-acc-toggle">Help &amp; Support <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></h4>
@@ -921,7 +925,7 @@ body.search-lock{ overflow:hidden; }
     </div>
     <div class="footer-acc">
       <h4 class="footer-acc-toggle">Contact <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></h4>
-      <div class="footer-acc-body"><ul><li><a href="#">Goregaon (W), Mumbai</a></li><li><a href="tel:+919024655202">+91 90246 55202</a></li><li><a href="mailto:korrasenterprises@gmail.com">korrasenterprises@gmail.com</a></li></ul></div>
+      <div class="footer-acc-body"><ul><li><a href="https://www.google.com/maps/search/?api=1&amp;query=Korras+Enterprises+42%2F336+Unnat+Nagar+No.4+M.G.+Road+Goregaon+West+Mumbai+400104" target="_blank" rel="noopener">Goregaon (W), Mumbai</a></li><li><a href="tel:+919024655202">+91 90246 55202</a></li><li><a href="mailto:korrasenterprises@gmail.com">korrasenterprises@gmail.com</a></li></ul></div>
     </div>
   </div>
   <div class="wrap footer-bottom">
@@ -995,7 +999,7 @@ function artTile(iconKey, tag){
 /* ---------------- Collections (edit this list to change the page) ---------------- */
 const COLLECTIONS = [
   {id:'bolts-latches', name:'Bolts & Latches', blurb:'Tower bolts, T-bolts, cam bolts and latches in brass and aluminium.', ranges:[
-    {name:'Brass Tower Bolt', sub:'Premium brass tower bolts', count:9, img:'images/catalog-demo/brass T Bolt/brass marble/brass marblecolor3.jpg'},
+    {name:'Brass Tower Bolt', sub:'Premium brass tower bolts', count:10, img:'images/catalog-demo/brass T Bolt/brass marble/brass marblecolor3.jpg'},
     {name:'Alu T-Bolt', sub:'High quality aluminium T-bolts', count:5, img:'images/catalog-demo/ALU T bolt/10mm/10mmmain.jpg'},
     {name:'Rod Latch', sub:'Heavy duty rod latches', count:1, img:'images/catalog-demo/ROd Latch/rodlatchcolor1.jpg'},
     {name:'Cam Bolt', sub:'Precision cam bolts', count:5, img:'images/catalog-demo/Cam bolt/Cam bolt.jpg'},
@@ -1013,7 +1017,7 @@ const COLLECTIONS = [
     {name:'SS Hinges', sub:'Stainless steel hinges', count:1, img:'images/catalog-demo/ss-hinges.jpg'}
   ]},
   {id:'knobs-handles', name:'Knobs & Handles', blurb:'Flare knobs and chest handles.', ranges:[
-    {name:'Flare Knob', sub:'Elegant flare knobs', count:7, img:'images/catalog-demo/flare knob/flareberlicolor1.jpg'},
+    {name:'Flare Knob', sub:'Elegant flare knobs', count:8, img:'images/catalog-demo/flare knob/flareberlicolor1.jpg'},
     {name:'Chest Handle', sub:'Chest handles', count:1, img:'images/catalog-demo/cheshhandlemain-hero.jpg'}
   ]},
   {id:'flare-products', name:'Flare Products', blurb:'The Flare hardware collection.', ranges:[
@@ -1021,7 +1025,7 @@ const COLLECTIONS = [
   ]},
   {id:'brackets', name:'Brackets', blurb:'Sockets and brackets: fixed, folding and L-shaped.', ranges:[
     {name:'SS Socket', sub:'Stainless steel sockets', count:3, img:'images/catalog-demo/ss socket/1 full size/1 full size.jpg'},
-    {name:'Oval Socket', sub:'Smooth oval sockets', count:1, img:'images/catalog-demo/oval-socket.jpg'},
+    {name:'Oval Socket', sub:'Smooth oval sockets', count:1, img:'images/catalog-demo/overal socket/oval socketssf.jpg'},
     {name:'SS New Consil Socket', sub:'Heavy duty stainless steel consil socket', count:1, img:'images/catalog-demo/ss rod consil/1ssrodconsilmain.jpg'},
     {name:'Folding Bracket', sub:'Space-saving folding brackets', count:3, img:'images/catalog-demo/Folding Bracket/Square folding bracketmain.jpg'},
     {name:'Bracket', sub:'General purpose brackets', count:2, img:'images/catalog-demo/Square Bracket/square bracketmain.jpg'},
@@ -1046,7 +1050,7 @@ const COLLECTIONS = [
     {name:'Mirror Cap', sub:'Polished mirror caps', count:1, img:'images/catalog-demo/Mirror Cap/mirror capmain.jpg'},
     {name:'Mirror Holder', sub:'Durable mirror holders', count:1, img:'images/catalog-demo/Mirror Holder/Mirror Holdermain.jpg'},
     {name:'Floor Magnet', sub:'Strong floor door magnets', count:1, img:'images/catalog-demo/flaremagnetmain.jpg'},
-    {name:'Big Vaccum', sub:'', count:1, img:'images/catalog-demo/big vaccum/big vaccummain.jpg'}
+    {name:'Big Vaccum', sub:'Heavy duty vacuum fitting', count:1, img:'images/catalog-demo/big vaccum/big vaccummain.jpg'}
   ]}
 ];
 
@@ -1281,9 +1285,9 @@ document.getElementById('subForm').addEventListener('submit', function(e){
     {name:'Folding Bracket', sub:'Space-saving folding brackets', img:'images/catalog-demo/Folding Bracket/Square folding bracketmain.jpg'},
     {name:'Bracket', sub:'General purpose brackets', img:'images/catalog-demo/Square Bracket/square bracketmain.jpg'},
     {name:'Orange Wheels Castor', sub:'Durable caster wheels', img:'images/catalog-demo/OrangeWheelCastor.jpg'},
-    {name:'Oval Socket', sub:'Smooth oval sockets', img:'images/catalog-demo/oval-socket.jpg'},
+    {name:'Oval Socket', sub:'Smooth oval sockets', img:'images/catalog-demo/overal socket/oval socketssf.jpg'},
     {name:'Glass Hinges', sub:'Sturdy glass hinges', img:'images/catalog-demo/Glass Hingas/Glass Hingasmain.jpg'},
-    {name:'Door Eye', sub:'Secure door eye viewers', img:'images/catalog-demo/door eye/door-eye.jpg'},
+    {name:'Door Eye', sub:'Secure door eye viewers', img:'images/catalog-demo/door eye/dooreyecolor1.jpg'},
     {name:'SS L Bracket', sub:'Stainless steel L brackets', img:'images/catalog-demo/SSL Bracket/Ss L bracket heavy.jpg'},
     {name:'Mirror Cap', sub:'Polished mirror caps', img:'images/catalog-demo/Mirror Cap/mirror capmain.jpg'},
     {name:'Mirror Holder', sub:'Durable mirror holders', img:'images/catalog-demo/Mirror Holder/Mirror Holdermain.jpg'},
@@ -1293,7 +1297,8 @@ document.getElementById('subForm').addEventListener('submit', function(e){
     {name:'Flare Products', sub:'Flare hardware collection', img:'images/catalog-demo/Flare BRass/Flarepvtblack.jpg'},
     {name:'Chest Handle', sub:'Solid brass chest handle', img:'images/catalog-demo/cheshhandlemain-hero.jpg'},
     {name:'Big Vaccum', sub:'Heavy duty vacuum fitting', img:'images/catalog-demo/big vaccum/big vaccummain.jpg'},
-    {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'}
+    {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'},
+    {name:'SS New Consil Socket', sub:'Heavy duty stainless steel consil socket', img:'images/catalog-demo/ss rod consil/1ssrodconsilmain.jpg'}
   ];
   var SEARCH_INDEX = (typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX;
   var CHIP_NAMES = ['Brass Tower Bolt','Alu T-Bolt','SS Hinges','Key Hole','Door Stopper','Flare Knob'];
