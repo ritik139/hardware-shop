@@ -6,9 +6,12 @@
 <title>Product | Korraz — Premium Brass Door Hardware</title>
 <meta name="description" content="Full brass mortise handles, key hole covers and door hardware from Korraz — six premium PVD finishes. Mumbai-based manufacturer, pan-India delivery.">
 <meta name="keywords" content="brass mortise handle, door handle Mumbai, PVD finish hardware, key hole cover brass, Korras Enterprises, Korraz, architectural hardware India">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Korras Enterprises">
 <link rel="canonical" href="https://www.korraz.in/product-detail.html">
+<meta name="theme-color" content="#0e0c09">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon-180.png">
 
 <!-- Open Graph -->
 <meta property="og:type" content="product">
@@ -27,6 +30,7 @@
 <meta name="twitter:title" content="Product | Korraz — Premium Brass Door Hardware">
 <meta name="twitter:description" content="Full brass mortise handles, key hole covers and door hardware from Korraz — six premium PVD finishes.">
 <meta name="twitter:image" content="https://www.korraz.in/images/catalog-demo/cheshhandlemain-hero.jpg">
+<meta name="twitter:image:alt" content="Korraz premium brass fittings">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -124,6 +128,7 @@
   .pd-gallery-main .pcard-wish:active{transform:scale(.9);}
   .pd-gallery-main .pcard-wish.active svg{fill:var(--brass); stroke:var(--brass);}
   .pd-gallery-counter{display:none;}
+  @media (max-width:640px){ .pd-gallery-main img.real-photo ~ .tag{display:none;} }
   .pd-gallery-arrow{display:none;}
   .pd-gallery-zoom{display:none;}
   .pd-lightbox{display:none; position:fixed; inset:0; z-index:400; background:rgba(10,9,7,0.92); align-items:center; justify-content:center; padding:40px;}
@@ -180,19 +185,6 @@
   .pd-size-pill.pd-size-hidden{display:none;}
   .pd-size-more{min-width:70px; height:46px; padding:0 16px; border-radius:var(--r-sm); border:1px solid var(--hairline-2); background:transparent; color:var(--brass); font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:.03em; cursor:pointer; transition:all .2s ease; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; flex-shrink:0;}
   .pd-size-more:hover{border-color:var(--brass);}
-
-  /* ---- mobile-only (<=400px) "+N more" collapse for color circles &
-     thumbnails on select catalog items (currently: Brass Tower Bolt only,
-     as a trial before rolling out further) — desktop/tablet always show
-     every circle/thumbnail, untouched. ---- */
-  .pd-mobile-more{display:none;}
-  #pdColorBlock .pd-color-pill .pd-color-dot.pd-color-more-dot{display:flex; align-items:center; justify-content:center; background:transparent; border:1.5px dashed var(--hairline-2); color:var(--brass); font-family:'Inter',sans-serif; font-weight:700; font-size:0.62rem;}
-  .pd-thumb-more-inner{display:none; width:100%; height:100%; align-items:center; justify-content:center; background:rgba(0,0,0,.35); color:var(--brass); font-family:'Inter',sans-serif; font-weight:700; font-size:0.7rem;}
-  @media (max-width:400px){
-    .pd-color-pill.pd-mobile-hide, .pd-thumb.pd-mobile-hide{display:none;}
-    .pd-mobile-more{display:inline-flex;}
-    .pd-thumb-more-inner{display:flex;}
-  }
 
   .pd-qty-label{display:none;}
   .pd-qty-row{display:flex; align-items:center; gap:20px; margin-top:30px;}
@@ -382,20 +374,20 @@
        swatches on desktop too (mirrors the mobile treatment above), so
        finish selectors like Step Xylo's match the reference's round
        colour circles instead of rectangular text buttons */
-    #pdColorBlock .pd-sizes{gap:16px; row-gap:16px; align-items:flex-start;}
-    #pdColorBlock .pd-color-pill{
+    #pdColorBlock .pd-sizes, #pdFinishPriceBlock .pd-sizes{gap:16px; row-gap:16px; align-items:flex-start;}
+    #pdColorBlock .pd-color-pill, #pdFinishPriceBlock .pd-color-pill{
       flex-direction:column; justify-content:flex-start; width:auto; height:auto; min-width:0; padding:0;
       border:none; background:transparent; gap:0; white-space:normal;
     }
-    #pdColorBlock .pd-color-pill:hover{ border:none; background:transparent; color:inherit; }
-    #pdColorBlock .pd-color-dot{
+    #pdColorBlock .pd-color-pill:hover, #pdFinishPriceBlock .pd-color-pill:hover{ border:none; background:transparent; color:inherit; }
+    #pdColorBlock .pd-color-dot, #pdFinishPriceBlock .pd-color-dot{
       display:block; width:46px; height:46px; border-radius:50%; flex-shrink:0;
       border:2px solid transparent; outline:1px solid var(--hairline-2); outline-offset:3px;
       transition:outline-color .2s ease;
     }
     #pdColorBlock .pd-color-pill.active{background:transparent; border-color:transparent; color:inherit;}
     #pdColorBlock .pd-color-pill.active .pd-color-dot{outline-color:var(--brass); outline-width:2px;}
-    #pdColorBlock .pd-color-label{
+    #pdColorBlock .pd-color-label, #pdFinishPriceBlock .pd-color-label{
       display:block; margin-top:9px; font-family:'Inter',sans-serif; font-size:0.7rem; font-weight:600;
       color:var(--mute); text-align:center; max-width:76px; line-height:1.25; overflow-wrap:break-word;
     }
@@ -414,14 +406,14 @@
     }.pd-add-cart svg{width:16px; height:16px; flex-shrink:0;}.pd-add-cart:hover{background:transparent; color:#181510;}.pd-add-cart::after{display:none;}.pd-add-cart.added{background:transparent; color:#181510; border-color:#181510;}.pd-qty-actions-row .pd-qty button{width:34px; height:42px;}.pd-qty-actions-row .pd-qty input{width:34px; height:42px; font-size:0.82rem;}.pd-wa-row{display:none;}#pdQtyNote{display:none;}.pd-qty-label{display:block; font-family:'Inter',sans-serif; font-size:0.72rem; letter-spacing:.1em; text-transform:uppercase; font-weight:700; color:var(--bone); margin-bottom:10px;}.pd-qty-actions-row{display:flex; align-items:center; gap:12px; margin-top:14px;}.pd-qty-actions-row .pd-qty-row{margin-top:0; flex:0 0 auto;}.pd-qty-actions-row .pd-qty-row #pdQtyNote{display:none;}.pd-qty-actions-row .pd-actions{margin-top:0; flex:1; min-width:0;}.pd-swatches{gap:16px; row-gap:14px;}.pd-swatch-name{
       display:block; font-family:'Inter',sans-serif; font-size:0.62rem; font-weight:600; color:var(--mute);
       margin-top:8px; max-width:52px; text-align:center; line-height:1.25; overflow-wrap:break-word;
-    }.pd-swatch-item.active .pd-swatch-name{color:var(--bone); font-weight:700;}#pdColorBlock .pd-sizes{gap:16px; row-gap:14px; align-items:flex-start;}#pdColorBlock .pd-color-pill{
+    }.pd-swatch-item.active .pd-swatch-name{color:var(--bone); font-weight:700;}#pdColorBlock .pd-sizes, #pdFinishPriceBlock .pd-sizes{gap:16px; row-gap:14px; align-items:flex-start;}#pdColorBlock .pd-color-pill, #pdFinishPriceBlock .pd-color-pill{
       flex-direction:column; justify-content:flex-start; width:auto; height:auto; min-width:0; padding:0;
       border:none; background:transparent; gap:0; white-space:normal;
-    }#pdColorBlock .pd-color-pill:hover{ border:none; background:transparent; color:inherit; }#pdColorBlock .pd-color-dot{
+    }#pdColorBlock .pd-color-pill:hover, #pdFinishPriceBlock .pd-color-pill:hover{ border:none; background:transparent; color:inherit; }#pdColorBlock .pd-color-dot, #pdFinishPriceBlock .pd-color-dot{
       display:block; width:38px; height:38px; border-radius:50%; flex-shrink:0;
       border:2px solid transparent; outline:1px solid var(--hairline-2); outline-offset:3px;
       transition:outline-color .2s ease;
-    }#pdColorBlock .pd-color-pill.active{background:transparent; border-color:transparent; color:inherit;}#pdColorBlock .pd-color-pill.active .pd-color-dot{outline-color:var(--brass); outline-width:2px;}#pdColorBlock .pd-color-label{
+    }#pdColorBlock .pd-color-pill.active{background:transparent; border-color:transparent; color:inherit;}#pdColorBlock .pd-color-pill.active .pd-color-dot{outline-color:var(--brass); outline-width:2px;}#pdColorBlock .pd-color-label, #pdFinishPriceBlock .pd-color-label{
       display:block; margin-top:8px; font-family:'Inter',sans-serif; font-size:0.62rem; font-weight:600;
       color:var(--mute); text-align:center; max-width:58px; line-height:1.25; overflow-wrap:break-word;
     }#pdColorBlock .pd-color-pill.active .pd-color-label{color:var(--bone); font-weight:700;}.pd-trust{
@@ -444,7 +436,7 @@
       background:rgba(20,17,13,0.97); backdrop-filter:blur(14px); border-top:1px solid var(--dark-line);
       padding:8px 4px calc(8px + env(safe-area-inset-bottom));
     }.tab-item{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:6px 2px; color:var(--dark-mute);}.tab-item svg{width:20px; height:20px;}.tab-item span{font-size:0.62rem; letter-spacing:.02em; font-weight:600; font-family:'Inter',sans-serif;}.tab-item.active{color:var(--brass);}}
-  @media (max-width:400px){.wrap{padding:0 16px;}.pd-swatch{width:34px; height:34px;}.pd-swatch-name{font-size:0.6rem; max-width:46px;}#pdColorBlock .pd-color-dot{width:34px; height:34px;}#pdColorBlock .pd-color-label{font-size:0.6rem; max-width:46px;}.pd-size-pill{height:42px; min-width:48px; padding:0 14px; font-size:0.76rem;}.pd-size-more{height:42px; min-width:60px; padding:0 14px; font-size:0.76rem;}.pd-gallery{margin:0 -16px;}.pd-thumbs-row{padding:0 16px;}.pd-thumb{width:52px; height:52px;}}
+  @media (max-width:400px){.wrap{padding:0 16px;}.pd-swatch{width:34px; height:34px;}.pd-swatch-name{font-size:0.6rem; max-width:46px;}#pdColorBlock .pd-color-dot, #pdFinishPriceBlock .pd-color-dot{width:34px; height:34px;}#pdColorBlock .pd-color-label, #pdFinishPriceBlock .pd-color-label{font-size:0.6rem; max-width:46px;}.pd-size-pill{height:42px; min-width:48px; padding:0 14px; font-size:0.76rem;}.pd-size-more{height:42px; min-width:60px; padding:0 14px; font-size:0.76rem;}.pd-gallery{margin:0 -16px;}.pd-thumbs-row{padding:0 16px;}.pd-thumb{width:52px; height:52px;}}
 
   /* ============================================================
      MOBILE-ONLY ENHANCEMENTS (320px–640px)
@@ -531,6 +523,11 @@
       transform:translateY(120%); transition:transform .35s var(--ease);
     }
     .pd-sticky-bar.show{ transform:translateY(0); }
+    /* Kai AI chat button / teaser / panel sit at bottom:76px by default (just above the tabbar),
+       which is right behind this sticky bar — lift them above it while the bar is showing */
+    body.pd-sticky-on .kai-btn{ bottom:142px !important; transition:bottom .35s ease, transform .2s ease, box-shadow .2s ease !important; }
+    body.pd-sticky-on .kai-teaser{ bottom:148px !important; }
+    body.pd-sticky-on .kai-panel{ bottom:196px !important; height:min(66vh, calc(100vh - 270px)) !important; }
     .pd-sticky-wa{
       flex:1; min-width:0; display:flex; align-items:center; justify-content:center; gap:6px;
       height:44px; padding:0 6px; border-radius:var(--r-sm); border:1px solid var(--brass); color:#fff;
@@ -924,6 +921,94 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
   .brand-text .tag{font-size:0.56rem; letter-spacing:.06em; max-width:92px; line-height:1.15; margin-top:2px; white-space:normal;}
 }
 </style>
+<style id="pd-collapse">
+/* ============================================================
+   "+N more" collapse — any list with more than 5 thumbnails,
+   colour circles or finish circles shows only 5 + a More tile.
+   Works on every screen size. Expanding re-flows into a tidy grid
+   (no horizontal scroll, no stray gaps); collapsing frees the space.
+   ============================================================ */
+:root{ --pd-dot:38px; }
+@media (min-width:641px){ :root{ --pd-dot:46px; } }
+@media (max-width:400px){ :root{ --pd-dot:34px; } }
+
+.pd-extra{display:none !important;}
+.pd-reveal{animation:pdRevealIn .38s var(--ease) both; animation-delay:calc(var(--i,0) * 40ms);}
+@keyframes pdRevealIn{from{opacity:0; transform:translateY(8px) scale(.85);} to{opacity:1; transform:none;}}
+@media (prefers-reduced-motion:reduce){.pd-reveal{animation:none;}}
+
+.pd-more-toggle{cursor:pointer; transition:transform .2s var(--ease), background .2s ease, border-color .2s ease, color .2s ease;}
+.pd-more-toggle:active{transform:scale(.94);}
+.pd-more-toggle:focus-visible{outline:2px solid var(--brass); outline-offset:3px; border-radius:8px;}
+
+/* ---- colour / finish circles: 6-column grid so 5 circles + More sit on ONE row ---- */
+.pd-swatches.pd-collapsible,
+#pdColors.pd-collapsible, #pdFinishPricePills.pd-collapsible{
+  display:grid; grid-template-columns:repeat(6,minmax(0,72px)); gap:16px 10px;
+  justify-content:start; align-items:start;
+}
+#pdColors.pd-collapsible .pd-color-pill, #pdFinishPricePills.pd-collapsible .pd-color-pill{width:100%; min-width:0;}
+#pdColors.pd-collapsible .pd-color-label, #pdFinishPricePills.pd-collapsible .pd-color-label,
+.pd-swatches.pd-collapsible .pd-swatch-name{max-width:100%;}
+.pd-swatches.pd-collapsible .pd-swatch-item{width:100%; min-width:0;}
+.pd-more-color{
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+  width:100%; min-width:0; padding:0; background:transparent; border:none; color:var(--brass);
+  font-family:'Inter',sans-serif;
+}
+.pd-more-color .pd-more-dot{
+  display:flex; align-items:center; justify-content:center; width:var(--pd-dot); height:var(--pd-dot);
+  border-radius:50%; border:1.5px dashed var(--brass); outline:1px solid var(--hairline-2); outline-offset:3px;
+  background:rgba(184,134,60,.08); font-weight:800; font-size:.78rem; letter-spacing:.01em;
+  transition:background .2s ease, transform .2s var(--ease), color .2s ease;
+}
+.pd-more-color:hover .pd-more-dot{background:rgba(184,134,60,.2); transform:scale(1.07);}
+.pd-more-color[aria-expanded="true"] .pd-more-dot{background:var(--brass); color:var(--btn-ink); border-style:solid;}
+.pd-more-color .pd-more-label{margin-top:9px; font-size:.7rem; font-weight:700; color:var(--brass); line-height:1.25;}
+@media (max-width:640px){
+  .pd-swatches.pd-collapsible, #pdColors.pd-collapsible, #pdFinishPricePills.pd-collapsible{grid-template-columns:repeat(6,minmax(0,1fr)); gap:14px 6px;}
+  .pd-more-color .pd-more-label{margin-top:8px; font-size:.62rem;}
+  .pd-more-color .pd-more-dot{font-size:.72rem;}
+}
+
+/* ---- gallery thumbnails ---- */
+.pd-thumbs.pd-collapsible{
+  display:grid; grid-template-columns:repeat(6,minmax(0,76px)); gap:10px; justify-content:start;
+  overflow:visible; scroll-snap-type:none; padding-bottom:0;
+}
+.pd-thumbs.pd-collapsible .pd-thumb,
+.pd-thumbs.pd-collapsible .pd-more-thumb{width:100%; height:auto; min-width:0; aspect-ratio:1/1; position:relative;}
+.pd-thumbs.pd-collapsible .pd-thumb img.real-photo,
+.pd-thumbs.pd-collapsible .pd-thumb .art{position:absolute; inset:0; width:100%; height:100%;}
+.pd-more-thumb{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; padding:0;
+  border-radius:var(--r-sm); overflow:hidden; border:1.5px solid var(--hairline-2);
+  background:var(--dark-2); color:#fff; font-family:'Inter',sans-serif;
+}
+.pd-more-thumb:hover{border-color:var(--brass);}
+.pd-more-thumb .pd-more-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:blur(1.5px) brightness(.42); transform:scale(1.08);}
+.pd-more-thumb .pd-more-count,
+.pd-more-thumb .pd-more-text{position:relative; z-index:1;}
+.pd-more-thumb .pd-more-count{font-size:1rem; font-weight:800; line-height:1;}
+.pd-more-thumb .pd-more-text{font-size:.54rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#e9c98a;}
+.pd-more-thumb[aria-expanded="true"]{background:var(--brass); border-color:var(--brass); color:var(--btn-ink);}
+.pd-more-thumb[aria-expanded="true"] .pd-more-text{color:var(--btn-ink);}
+@media (max-width:640px){
+  .pd-thumbs.pd-collapsible{gap:6px;}
+  .pd-more-thumb .pd-more-count{font-size:.86rem;}
+  .pd-more-thumb .pd-more-text{font-size:.5rem; letter-spacing:.06em;}
+}
+
+/* spacing: "Quantity" label no longer sits glued to the colour / size block above it (mobile) */
+@media (max-width:640px){ .pd-qty-label{margin-top:22px;} }
+
+/* thin inner edge so pale finishes (Chrome, Steel) never vanish on a white page */
+#pdColorBlock .pd-color-dot, #pdFinishPriceBlock .pd-color-dot, .pd-swatch, .pd-sib-swatch{box-shadow:inset 0 0 0 1px rgba(0,0,0,.10);}
+
+/* ---- "More In This Category" cards: colour dots capped at 5 + "+N" ---- */
+.pd-sib-swatches{align-items:center;}
+.pd-sib-more{font-family:'Inter',sans-serif; font-size:.66rem; font-weight:800; color:var(--brass); line-height:1; margin-left:2px;}
+</style>
 </head>
 <body>
 
@@ -975,11 +1060,12 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
 </div>
 <div class="mobile-nav-scrim" id="mobileNavScrim"></div>
 
-<div class="breadcrumb">
+<main id="main-content">
+<nav class="breadcrumb" aria-label="Breadcrumb">
   <div class="wrap">
-    <a href="index.html">Home</a><span class="sep">/</span><a href="products.html">Products</a><span class="sep">/</span><a href="products.html" id="pdBreadcrumbCat">Category</a><span class="sep">/</span><span class="current" id="pdBreadcrumbCurrent">Product Name</span>
+    <a href="index.html">Home</a><span class="sep">/</span><a href="products.html">Products</a><span class="sep">/</span><a href="products.html" id="pdBreadcrumbCat">Category</a><span class="sep">/</span><span class="current" id="pdBreadcrumbCurrent" aria-current="page">Product Name</span>
   </div>
-</div>
+</nav>
 
 <!-- ================= PRODUCT DETAIL ================= -->
 <section class="pd-section">
@@ -1136,6 +1222,8 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
   </div>
 </section>
 
+</main>
+
 <footer id="contact-anchor">
   <div class="wrap footer-grid">
     <div>
@@ -1150,7 +1238,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
         <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 21c1-3 1.5-6 2-9a3.5 3.5 0 1 1 3 1.6c-.3 1.4-.6 3-1 4.4"/></svg></a>
       </div>
     </div>
-    <div class="footer-acc open">
+    <div class="footer-acc">
       <h4 class="footer-acc-toggle">Quick Links <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></h4>
       <div class="footer-acc-body"><ul><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="collection.html">Collections</a></li></ul></div>
     </div>
@@ -1290,20 +1378,67 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
      Updates the static head tags (set as generic fallbacks above) with the real
      product's details once it loads, so the tab title, social share previews and
      search-engine snippet all reflect the actual product being viewed. */
+  const SITE_ORIGIN = 'https://www.korraz.in/';
+  const DEFAULT_OG_IMAGE = SITE_ORIGIN + 'images/catalog-demo/cheshhandlemain-hero.jpg';
+  /* social crawlers & Google need absolute, URL-encoded image links (folder names here contain spaces) */
+  function absUrl(p){ if(!p) return ''; try{ return new URL(p, SITE_ORIGIN).href; }catch(e){ return p; } }
+  function trimAtWord(str, max){
+    str = (str || '').replace(/\s+/g, ' ').trim();
+    if(str.length <= max) return str;
+    return str.slice(0, max - 1).replace(/\s+\S*$/, '').replace(/[\s,;:·—–-]+$/, '') + '…';
+  }
   function setMetaTag(attr, key, val){
     if(!val) return;
     let el = document.querySelector('meta[' + attr + '="' + key + '"]');
     if(!el){ el = document.createElement('meta'); el.setAttribute(attr, key); document.head.appendChild(el); }
     el.setAttribute('content', val);
   }
+  function removeMetaTag(attr, key){ document.querySelectorAll('meta[' + attr + '="' + key + '"]').forEach(n => n.remove()); }
+  function setRobots(content){ setMetaTag('name', 'robots', content); }
+  function setLdJson(id, obj){
+    let ld = document.getElementById(id);
+    if(!ld){ ld = document.createElement('script'); ld.type = 'application/ld+json'; ld.id = id; document.head.appendChild(ld); }
+    ld.textContent = JSON.stringify(obj);
+  }
+  /* "Berli" + category "Flare Knob" -> "Berli – Flare Knob | Korraz"; skipped when the title already says it */
+  function seoTitle(product){
+    const t = (product.title || 'Product').trim();
+    const cat = (product.category || '').trim();
+    const low = t.toLowerCase();
+    const covered = !cat || cat.toLowerCase().split(/\s+/).every(w => low.includes(w));
+    const full = covered ? t + ' | Korraz' : t + ' – ' + cat + ' | Korraz';
+    return full.length <= 68 ? full : t + ' | Korraz';
+  }
+  /* catalog items all share one boilerplate description — build a unique one per product instead */
+  function seoDescription(product){
+    const sub = (product.sub || '').trim();
+    const subUseful = sub && !/^Premium solid brass hardware$/i.test(sub);
+    const isTemplate = /from Korraz — premium hardware\. Enquire/.test(product.desc || '');
+    let lead = isTemplate ? (subUseful ? product.title + ' — ' + sub : product.title)
+                          : ((product.desc || '').trim() || (subUseful ? product.title + ' — ' + sub : product.title));
+    lead = trimAtWord(lead.replace(/\s*·\s*/g, ', ').replace(/[.\s]+$/, ''), 96); /* keep room for the finish/size facts + delivery line */
+    lead = lead.replace(/[.…\s]+$/, '');
+    const facts = [];
+    const nFin = (product.colors && product.colors.length) || (product.swatches && product.swatches.length) || 0;
+    if(nFin) facts.push(nFin + (nFin === 1 ? ' finish option' : ' finish options'));
+    if(product.sizes && product.sizes.length) facts.push(product.sizes.length + (product.sizes.length === 1 ? ' size' : ' sizes'));
+    const factText = facts.length ? ' ' + facts.join(' and ') + ' available.' : '';
+    const tails = [' By Korraz, Mumbai — pan-India delivery. Enquire for bulk pricing.', ' By Korraz — pan-India delivery. Enquire for pricing.', ' Pan-India delivery from Mumbai.'];
+    const body = lead + '.' + factText;
+    const tail = tails.find(t => (body + t).length <= 158);
+    return tail ? body + tail : trimAtWord(body, 158);
+  }
   function updateProductSEO(product, imageUrl, canonicalUrl){
-    const title = product.title + ' | Korraz';
-    const desc = (product.desc || product.sub || '').toString().trim().slice(0, 155) || 'Premium solid brass hardware from Korraz.';
-    const img = imageUrl || 'https://www.korraz.in/images/catalog-demo/cheshhandlemain-hero.jpg';
-    const url = canonicalUrl || window.location.href;
+    const title = seoTitle(product);
+    const desc = seoDescription(product);
+    const url = absUrl(canonicalUrl || window.location.href);
+    const imgs = Array.from(new Set([imageUrl].concat(product.images || [], product.gallery || [], [product.image, product.img])
+      .filter(Boolean).filter(u => !/^data:/i.test(u)).map(absUrl))).slice(0, 8);
+    const img = imgs[0] || DEFAULT_OG_IMAGE;
+    const catalogMode = (typeof IS_CATALOG_MODE !== 'undefined') && IS_CATALOG_MODE;
 
+    document.title = title;
     setMetaTag('name', 'description', desc);
-
     let canon = document.querySelector('link[rel="canonical"]');
     if(!canon){ canon = document.createElement('link'); canon.setAttribute('rel', 'canonical'); document.head.appendChild(canon); }
     canon.setAttribute('href', url);
@@ -1312,28 +1447,57 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     setMetaTag('property', 'og:description', desc);
     setMetaTag('property', 'og:url', url);
     setMetaTag('property', 'og:image', img);
+    setMetaTag('property', 'og:image:alt', product.title);
+    /* the static 1200x630 size belongs to the default hero image, not to this product photo */
+    removeMetaTag('property', 'og:image:width'); removeMetaTag('property', 'og:image:height');
     setMetaTag('name', 'twitter:title', title);
     setMetaTag('name', 'twitter:description', desc);
     setMetaTag('name', 'twitter:image', img);
+    setMetaTag('name', 'twitter:image:alt', product.title);
 
-    let ld = document.getElementById('productLdJson');
-    if(!ld){ ld = document.createElement('script'); ld.type = 'application/ld+json'; ld.id = 'productLdJson'; document.head.appendChild(ld); }
     const priceNum = (product.price || '').toString().replace(/[^\d.]/g, '');
-    ld.textContent = JSON.stringify({
+    const hasPrice = parseFloat(priceNum) > 0;
+    if(hasPrice){ setMetaTag('property', 'product:price:amount', priceNum); setMetaTag('property', 'product:price:currency', 'INR'); }
+    else { removeMetaTag('property', 'product:price:amount'); removeMetaTag('property', 'product:price:currency'); }
+
+    /* facts shown in the Specifications tab, minus internal/price/date rows */
+    const specRows = (product.specs || []).filter(r => r && r[0] && r[1] && r[1] !== '—' && !/pric|packed|hsn|manufactured/i.test(r[0]) && String(r[1]).length <= 120);
+    const codeRow = specRows.find(r => /product code|^code$/i.test(r[0]));
+    const ld = {
       "@context": "https://schema.org",
       "@type": "Product",
+      "@id": url + "#product",
+      "url": url,
       "name": product.title,
       "description": desc,
-      "image": [img],
+      "image": imgs.length ? imgs : [DEFAULT_OG_IMAGE],
       "brand": { "@type": "Brand", "name": "Korraz" },
       "category": product.category || undefined,
-      "offers": priceNum ? {
+      "sku": codeRow ? String(codeRow[1]) : undefined,
+      "additionalProperty": specRows.slice(0, 8).map(r => ({ "@type": "PropertyValue", "name": String(r[0]), "value": String(r[1]) }))
+    };
+    if(!ld.additionalProperty.length) delete ld.additionalProperty;
+    if(hasPrice){
+      ld.offers = {
         "@type": "Offer",
         "priceCurrency": "INR",
         "price": priceNum,
         "availability": "https://schema.org/InStock",
-        "url": url
-      } : undefined
+        "itemCondition": "https://schema.org/NewCondition",
+        "priceValidUntil": new Date(Date.now() + 365 * 864e5).toISOString().slice(0, 10),
+        "url": url,
+        "seller": { "@type": "Organization", "name": "Korraz" }
+      };
+    }
+    setLdJson('productLdJson', ld);
+
+    const crumbs = [['Home', SITE_ORIGIN], ['Products', SITE_ORIGIN + 'products.html']];
+    if(catalogMode && product.category && product.category.toLowerCase() !== (product.title || '').toLowerCase()) crumbs.push([product.category, SITE_ORIGIN + 'products.html?cat=' + encodeURIComponent(product.category)]);
+    crumbs.push([product.title, url]);
+    setLdJson('breadcrumbLdJson', {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": crumbs.map((c, i) => ({ "@type": "ListItem", "position": i + 1, "name": c[0], "item": c[1] }))
     });
   }
 
@@ -1375,11 +1539,15 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
   }
   function renderSwatches(p){
     const wrap = document.getElementById('pdSwatches');
+    const rawNames = p.swatches.map((c,i) => p.finishNames[i] || ('Finish ' + (i+1)));
+    const shownNames = makeDisplayNames(rawNames);
     wrap.innerHTML = p.swatches.map((c,i) => {
-      const name = p.finishNames[i] || ('Finish ' + (i+1));
-      return `<span class="pd-swatch-item${i===0?' active':''}"><button class="pd-swatch${i===0?' active':''}" style="background:${c}" data-name="${name}" aria-label="${name}"></button><span class="pd-swatch-name">${name}</span></span>`;
+      const name = escAttr(shownNames[i]);
+      const hex = getColorHex(rawNames[i]) || c;
+      return `<span class="pd-swatch-item${i===0?' active':''}"><button class="pd-swatch${i===0?' active':''}" style="background:${hex}" data-name="${name}" aria-label="${name}"></button><span class="pd-swatch-name">${shownNames[i]}</span></span>`;
     }).join('');
-    document.getElementById('pdFinishName').textContent = '— ' + (p.finishNames[0] || '');
+    document.getElementById('pdFinishName').textContent = '— ' + (shownNames[0] || '');
+    collapseList(wrap, Array.from(wrap.querySelectorAll('.pd-swatch-item')), 'swatch');
     wrap.querySelectorAll('.pd-swatch').forEach(s => {
       s.addEventListener('click', () => {
         wrap.querySelectorAll('.pd-swatch').forEach(x => x.classList.remove('active'));
@@ -1446,22 +1614,202 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
      (like the numbered-product finish swatches) instead of plain text pills.
      Unmatched names fall back to a neutral grey dot; the text label is always
      shown too, so nothing is ever ambiguous. */
-  /* trial: collapse color circles + thumbnails to 5 + "more" on mobile
-     (<=400px) for these categories only, before rolling out further */
-  const MOBILE_COLLAPSE_CATEGORIES = ['Brass Tower Bolt', 'Alu T-Bolt', 'Key Hole'];
-  const MOBILE_COLLAPSE_LIMIT = 5;
+  /* ---------------- "+N more" collapse helper ----------------
+     Any list (gallery thumbnails, colour circles, finish circles, finish
+     pills) with more than COLLAPSE_LIMIT items shows only the first 5 plus
+     a "More" tile. Tapping it reveals the rest (animated, re-flowed into a
+     tidy grid); tapping again collapses and gives the space back. */
+  const COLLAPSE_LIMIT = 5;
+  function moreToggleHtml(kind, expanded, count, previewSrc){
+    if(kind === 'thumb'){
+      return expanded
+        ? '<span class="pd-more-count">\u2212</span><span class="pd-more-text">Less</span>'
+        : (previewSrc ? '<img class="pd-more-bg" src="' + escAttr(previewSrc) + '" alt="">' : '') +
+          '<span class="pd-more-count">+' + count + '</span><span class="pd-more-text">More</span>';
+    }
+    if(kind === 'pill') return expanded ? 'Show less' : '+' + count + ' more';
+    return '<span class="pd-more-dot">' + (expanded ? '\u2212' : '+' + count) + '</span><span class="pd-more-label">' + (expanded ? 'Less' : 'More') + '</span>';
+  }
+  function collapseList(container, items, kind){
+    if(!container) return;
+    container.classList.remove('pd-collapsible','pd-expanded');
+    container.querySelectorAll(':scope > .pd-more-toggle').forEach(n => n.remove());
+    container._pdExpand = null;
+    items.forEach(el => el.classList.remove('pd-extra','pd-reveal'));
+    if(items.length <= COLLAPSE_LIMIT) return;
+    const extra = items.slice(COLLAPSE_LIMIT);
+    const count = extra.length;
+    const previewImg = kind === 'thumb' ? extra[0].querySelector('img') : null;
+    const previewSrc = previewImg ? previewImg.getAttribute('src') : '';
+    container.classList.add('pd-collapsible');
+    extra.forEach(el => el.classList.add('pd-extra'));
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = kind === 'thumb' ? 'pd-more-toggle pd-more-thumb'
+                  : kind === 'pill'  ? 'pd-size-more pd-more-toggle pd-more-pill'
+                  : 'pd-more-toggle pd-more-color';
+    const paint = (expanded) => {
+      btn.innerHTML = moreToggleHtml(kind, expanded, count, previewSrc);
+      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      btn.setAttribute('aria-label', expanded ? 'Show fewer' : 'Show ' + count + ' more');
+    };
+    const setExpanded = (expanded) => {
+      container.classList.toggle('pd-expanded', expanded);
+      extra.forEach((el, i) => {
+        el.classList.toggle('pd-extra', !expanded);
+        el.classList.remove('pd-reveal');
+        if(expanded){ el.style.setProperty('--i', i); void el.offsetWidth; el.classList.add('pd-reveal'); }
+      });
+      paint(expanded);
+    };
+    btn.addEventListener('click', () => setExpanded(!container.classList.contains('pd-expanded')));
+    container._pdExpand = () => { if(!container.classList.contains('pd-expanded')) setExpanded(true); };
+    container.appendChild(btn);
+    paint(false);
+  }
+  /* if the selected item (e.g. picked via the gallery arrows or a matching
+     thumbnail) lives in the hidden part of a list, open the list so the
+     highlighted one is actually visible */
+  function revealActive(container, activeSelector){
+    if(!container || !container._pdExpand) return;
+    const act = container.querySelector(activeSelector);
+    if(act && act.classList.contains('pd-extra')) container._pdExpand();
+  }
+  /* the wishlist heart on the big photo is re-created every time the photo
+     is swapped — re-apply its filled/unfilled state each time */
+  function syncMainWishState(){
+    const b = document.getElementById('pdWishMain');
+    if(b) b.classList.toggle('active', getWishlist().includes(CURRENT_PRODUCT_ID));
+  }
 
-  function getColorHex(name){
-    const n = String(name || '').toLowerCase();
-    const table = [
-      [/rose\s*gold/, '#b56a4d'], [/gun\s*metal/, '#3a3d42'], [/antique\s*bronze|bronze/, '#8b7c4a'],
-      [/antique\s*brass|antique/, '#caa23e'], [/matte\s*black|black/, '#2b2d31'],
-      [/graphite/, '#4a4a4a'], [/^cp$/, '#e4e8eb'], [/^ssf$|brushed\s*silver|silver\s*chrome|chrome|steel|silver/, '#b9bcc0'], [/gold/, '#c9a24b'],
-      [/copper/, '#b56a4d'], [/white/, '#efe8d9'], [/grey|gray/, '#8b8b8b'],
-      [/brass/, '#b8863c'], [/wood|walnut|teak/, '#6b4a30']
-    ];
-    for(const [re, hex] of table){ if(re.test(n)) return hex; }
+  /* ---------------- MASTER COLOUR TABLE ----------------
+     Every exact finish name has ONE fixed shade and ONE standard name, used
+     everywhere on this page (colour circles, finish swatches, category-card
+     dots). Gold, PVD Gold, Matt Gold, Brush Gold are four different shades
+     (PVD = brighter, Brush = softer, Matt = duller/darker) — so when they
+     appear together on one product they are still easy to tell apart, and the
+     same name never changes colour from one product to another.
+     `keys` are accepted spellings (matched ignoring case / spaces / dashes). */
+  const COLOR_VARIANTS = [
+    { name:'Gold',               hex:'#D4AF37', keys:['gold'] },
+    { name:'PVD Gold',           hex:'#E5BE3C', keys:['pvdgold'] },
+    { name:'Brush Gold',         hex:'#CDB56A', keys:['brushgold'] },
+    { name:'Matt Gold',          hex:'#B9973A', keys:['mattgold'] },
+    { name:'PVD Matt Gold',      hex:'#C1A23B', keys:['pvdmattgold'] },
+    { name:'Rose Gold',          hex:'#B97A6A', keys:['rosegold','copper'] },
+    { name:'PVD Rose Gold',      hex:'#C98A78', keys:['pvdrosegold'] },
+    { name:'Matt Rose Gold',     hex:'#A66B5C', keys:['mattrosegold'] },
+    { name:'PVD Matt Rose Gold', hex:'#B3705F', keys:['pvdmattrosegold'] },
+    { name:'Antique',            hex:'#A8812F', keys:['antique','antiquebrass'] },
+    { name:'Antique Bronze',     hex:'#7A5C2E', keys:['antiquebronze','bronze'] },
+    { name:'Black',              hex:'#1C1C1E', keys:['black'] },
+    { name:'Matt Black',         hex:'#303034', keys:['mattblack'] },
+    { name:'Z Black',            hex:'#0E0E10', keys:['zblack'] },
+    { name:'Graphite',           hex:'#4A4D52', keys:['graphite'] },
+    { name:'PVD Graphite',       hex:'#35383C', keys:['pvdgraphite'] },
+    { name:'Greyfide',           hex:'#6A6E73', keys:['greyfide'] },
+    { name:'Gun Metal',          hex:'#3A3D42', keys:['gunmetal'] },
+    { name:'Chrome',             hex:'#DDE1E5', keys:['chrome','silverchrome','cp'] },
+    { name:'SS',                 hex:'#B4B8BD', keys:['ss','steel'] },
+    { name:'SSF',                hex:'#9EA3A9', keys:['ssf','brushsilver'] }
+  ];
+  /* a name not listed above (e.g. a brand-new finish) still gets the right
+     colour FAMILY, and keeps its own label */
+  const COLOR_FAMILIES = [
+    { hex:'#B97A6A', re:/rose\s*gold|copper/ },
+    { hex:'#7A5C2E', re:/bronze/ },
+    { hex:'#A8812F', re:/antique/ },
+    { hex:'#D4AF37', re:/gold/ },
+    { hex:'#1C1C1E', re:/black/ },
+    { hex:'#4A4D52', re:/graphite|greyfide|gun\s*metal/ },
+    { hex:'#DDE1E5', re:/chrome|^cp$/ },
+    { hex:'#A7ACB2', re:/^ssf?$|steel|silver/ }
+  ];
+  const COLOR_LEGACY = [
+    [/white/, '#EFE8D9'], [/grey|gray/, '#8B8B8B'], [/brass/, '#B8863C'], [/wood|walnut|teak/, '#6B4A30']
+  ];
+  const COLOR_VARIANT_MAP = {};
+  COLOR_VARIANTS.forEach(v => v.keys.forEach(k => { COLOR_VARIANT_MAP[k] = v; }));
+  function colorKey(name){
+    return String(name || '').toLowerCase().replace(/\bmatte\b/g, 'matt').replace(/\bbrushed\b/g, 'brush').replace(/[^a-z0-9]/g, '');
+  }
+  /* -> { name, hex } or null.  Exact variant: standard name + its own shade.
+     Otherwise: family shade + the original label. */
+  function getColorInfo(name){
+    const v = COLOR_VARIANT_MAP[colorKey(name)];
+    if(v) return { name: v.name, hex: v.hex };
+    const n = String(name || '').trim().toLowerCase();
+    const fam = COLOR_FAMILIES.find(f => f.re.test(n));
+    if(fam) return { name: String(name), hex: fam.hex };
+    for(const [re, hex] of COLOR_LEGACY){ if(re.test(n)) return { name: String(name), hex }; }
     return null;
+  }
+  function getColorFamily(name){ return getColorInfo(name); }
+  function getColorHex(name){ const i = getColorInfo(name); return i ? i.hex : null; }
+  /* standard label for a list of names. If two names on the SAME product would
+     collapse to one standard label (e.g. "Silver Chrome" and "CP"), their
+     original names are kept so they stay distinguishable. */
+  /* ---------------- ONE colour series for every detail page ----------------
+     Black -> Rose Gold -> Gold -> Antique -> Silver (SSF / Chrome), then anything else.
+     Inside a family the plain shade comes first, then PVD, Matt, Brush. The same
+     order is used for the colour/finish circles, the gallery thumbnails that belong
+     to them and the little dots on the "More In This Category" cards, so every
+     product shows its finishes in the same sequence. To change the series, just
+     reorder the list below. */
+  const COLOR_SERIES = [
+    /black|graphite|greyfide|gun\s*metal/,
+    /rose|copper/,
+    /antique|a\/b|bronze/,
+    /gold/,
+    /ssf|silver|chrome|steel|^cp$|nickel/
+  ];
+  /* Rose Gold sits before Gold, Antique is checked before Gold so "Antique Gold"-style names land in Antique */
+  const COLOR_SERIES_ORDER = [0, 1, 3, 2, 4]; /* index in COLOR_SERIES -> position in the series */
+  function colorSeriesRank(name){
+    const n = String(name || '').toLowerCase();
+    let fam = 99;
+    for(let i = 0; i < COLOR_SERIES.length; i++){ if(COLOR_SERIES[i].test(n)){ fam = COLOR_SERIES_ORDER[i]; break; } }
+    const kind = /pvd/.test(n) ? 1 : /matt/.test(n) ? 2 : /brush/.test(n) ? 3 : 0;
+    const dark = /graphite|greyfide|gun\s*metal/.test(n) ? 10 : 0;
+    return fam * 100 + dark + kind;
+  }
+  /* stable sort of any list of finish names (keeps the original order for ties) */
+  function sortByColorSeries(list, nameOf){
+    const get = nameOf || (x => x);
+    return list.map((v, i) => ({ v, i, r: colorSeriesRank(get(v)) }))
+               .sort((a, b) => (a.r - b.r) || (a.i - b.i)).map(o => o.v);
+  }
+  /* re-order a catalog product's colours into the series, moving each colour's
+     photo (and its imageFinishes / imageSizes tag) together with it */
+  function applyColorSeries(product){
+    const imgs = product.images || [];
+    const n = imgs.length;
+    if(product.colors && product.colors.length > 1){
+      const order = product.colors.map((c, i) => ({ i, r: colorSeriesRank(c) })).sort((a, b) => (a.r - b.r) || (a.i - b.i)).map(o => o.i);
+      const pick = arr => order.map(i => arr[i]);
+      const tied = n === product.colors.length;
+      product.colors = pick(product.colors);
+      if(tied){
+        product.images = pick(imgs);
+        if(product.imageFinishes && product.imageFinishes.length === n) product.imageFinishes = pick(product.imageFinishes);
+        if(product.imageSizes && product.imageSizes.length === n) product.imageSizes = pick(product.imageSizes);
+      }
+    } else if(product.imageFinishes && product.imageFinishes.length > 1 && product.imageFinishes.length === n){
+      /* finish-priced items: photos follow the finish series too */
+      const order = product.imageFinishes.map((f, i) => ({ i, r: colorSeriesRank(f) })).sort((a, b) => (a.r - b.r) || (a.i - b.i)).map(o => o.i);
+      const pick = arr => order.map(i => arr[i]);
+      product.images = pick(imgs);
+      product.imageFinishes = pick(product.imageFinishes);
+      if(product.imageSizes && product.imageSizes.length === n) product.imageSizes = pick(product.imageSizes);
+    }
+    return product;
+  }
+
+  function makeDisplayNames(names){
+    const infos = names.map(getColorInfo);
+    const counts = {};
+    infos.forEach(f => { if(f) counts[f.name] = (counts[f.name] || 0) + 1; });
+    return names.map((n, i) => (infos[i] && counts[infos[i].name] === 1) ? infos[i].name : n);
   }
 
   /* single source of truth for a catalog item's id, derived the same way
@@ -1660,7 +2008,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     document.title = product.title + ' | Korraz';
     updateProductSEO(product, (product.images && product.images[0]) || product.img, 'https://www.korraz.in/' + product.url);
     document.getElementById('pdBreadcrumbCat').textContent = product.category;
-    document.getElementById('pdBreadcrumbCat').href = 'products.html';
+    document.getElementById('pdBreadcrumbCat').href = 'products.html?cat=' + encodeURIComponent(product.category);
     document.getElementById('pdBreadcrumbCurrent').textContent = product.title;
     document.getElementById('pdEyebrow').textContent = product.eyebrow;
     document.getElementById('pdTitle').textContent = product.title;
@@ -1694,12 +2042,15 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     let selectedSize = null;
     let selectedFinish = null;
     let selectedColor = null;
+    /* declared here (not inside the colour block) so the thumbnail-click handler below can use it too */
+    let shownColor = (c) => c;
 
     document.getElementById('pdSpecs').innerHTML = product.specs.map(row => `<div class="pd-spec-row"><span>${row[0]}</span><span>${row[1]}</span></div>`).join('');
 
     const mainArt = document.getElementById('pdMainArt');
     const thumbsWrap = document.getElementById('pdThumbs');
     const wishBtnHtml = `<button class="pcard-wish" id="pdWishMain" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 8 2 4.5 5.4 3.6 8 2.9 10.4 4.2 12 6.6c1.6-2.4 4-3.7 6.6-3 3.4.9 4.8 4.4 3.4 7.6-2.5 4.7-10 9.3-10 9.3Z"/></svg></button>`;
+    applyColorSeries(product);
     const catalogImages = (product.images && product.images.length) ? product.images : (product.img ? [product.img] : []);
     /* only treat images as "one per size" when the counts line up 1:1 */
     const imagePerSize = catalogImages.length > 1 && catalogImages.length === product.sizes.length;
@@ -1747,7 +2098,8 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     const finishImages = imagePerFinish ? catalogImages.slice(finishOffset) : [];
 
     const setCatalogMain = (src) => {
-      mainArt.innerHTML = `<img class="real-photo" src="${src}" alt="${product.title}" style="object-fit:cover;background:#fff;"><div class="tag" id="pdMainTag">${product.category}</div>${wishBtnHtml}`;
+      mainArt.innerHTML = `<img class="real-photo" src="${src}" fetchpriority="high" decoding="async" alt="${escAttr(product.title)}" style="object-fit:cover;background:#fff;"><div class="tag" id="pdMainTag">${product.category}</div>${wishBtnHtml}`;
+      syncMainWishState();
     };
     const setActiveThumbBySrc = (src) => {
       if(!thumbsWrap) return;
@@ -1761,6 +2113,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
       document.getElementById('pdPrice').textContent = finish.price;
       document.querySelector('.pd-price-unit').textContent = '/ Pcs';
       finishPricePills.querySelectorAll('.pd-size-pill').forEach(b => b.classList.toggle('active', b.dataset.name === finish.name));
+      revealActive(finishPricePills, '.pd-color-pill.active');
       waLinkEl.href = catalogWaLink(product, selectedSize, selectedFinish, selectedColor);
       if(!fromThumb && hasExplicitFinishMap){
         const imgIdx = finishByImageIndex.findIndex(o => o === finish);
@@ -1779,15 +2132,19 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
            a button with no matching thumbnail is a dead end for the buyer,
            so it's dropped rather than shown. Products without an explicit
            imageFinishes map keep every priced finish as before. */
-        const availableOptions = hasExplicitFinishMap
+        const availableOptions = sortByColorSeries(hasExplicitFinishMap
           ? priceInfo.options.filter(o => imageFinishes.includes(o.name))
-          : priceInfo.options;
-        finishPricePills.innerHTML = availableOptions.map((o,i) =>
-          `<button type="button" class="pd-size-pill${i===0?' active':''}" data-price="${escAttr(o.price)}" data-name="${escAttr(o.name)}">${o.name}</button>`
-        ).join('');
+          : priceInfo.options, o => o.name);
+        /* round colour circles + name, identical to the Select Color / Finish circles elsewhere */
+        const finishShown = makeDisplayNames(availableOptions.map(o => o.name));
+        finishPricePills.innerHTML = availableOptions.map((o,i) => {
+          const hex = getColorHex(o.name);
+          return `<button type="button" class="pd-size-pill pd-color-pill${i===0?' active':''}" data-price="${escAttr(o.price)}" data-name="${escAttr(o.name)}"><span class="pd-color-dot" style="background:${hex || 'var(--hairline-2)'}"></span><span class="pd-color-label">${finishShown[i]}</span></button>`;
+        }).join('');
         finishPricePills.querySelectorAll('.pd-size-pill').forEach((btn,i) => {
           btn.addEventListener('click', () => applyFinish(availableOptions[i], false));
         });
+        collapseList(finishPricePills, Array.from(finishPricePills.querySelectorAll('.pd-color-pill')), 'color');
         selectedFinish = availableOptions[0];
         finishPriceNameEl.textContent = '— ' + selectedFinish.name;
         document.getElementById('pdPrice').textContent = selectedFinish.price;
@@ -1863,19 +2220,20 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
         colorBlock.style.display = '';
         if(colorLabelWordEl) colorLabelWordEl.textContent = product.colorLabel || 'Color';
         selectedColor = product.colors[0];
-        colorNameEl.textContent = '— ' + selectedColor;
-        const collapseColors = MOBILE_COLLAPSE_CATEGORIES.includes(product.category);
+        /* standard display names (cart / WhatsApp keep the original product-data name) */
+        const colorShown = makeDisplayNames(product.colors);
+        shownColor = (c) => colorShown[product.colors.indexOf(c)] || c;
+        colorNameEl.textContent = '— ' + shownColor(selectedColor);
         colorsWrap.innerHTML = product.colors.map((c,i) => {
           const hex = getColorHex(c);
-          const hideCls = (collapseColors && i >= MOBILE_COLLAPSE_LIMIT) ? ' pd-mobile-hide' : '';
-          return `<button type="button" class="pd-size-pill pd-color-pill${i===0?' active':''}${hideCls}" data-color="${escAttr(c)}" data-index="${i}"><span class="pd-color-dot" style="background:${hex || 'var(--hairline-2)'}"></span><span class="pd-color-label">${c}</span></button>`;
+          return `<button type="button" class="pd-size-pill pd-color-pill${i===0?' active':''}" data-color="${escAttr(c)}" data-index="${i}"><span class="pd-color-dot" style="background:${hex || 'var(--hairline-2)'}"></span><span class="pd-color-label">${colorShown[i]}</span></button>`;
         }).join('');
         colorsWrap.querySelectorAll('.pd-size-pill').forEach(btn => {
           btn.addEventListener('click', () => {
             colorsWrap.querySelectorAll('.pd-size-pill').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             selectedColor = btn.dataset.color;
-            colorNameEl.textContent = '— ' + selectedColor;
+            colorNameEl.textContent = '— ' + shownColor(selectedColor);
             waLinkEl.href = catalogWaLink(product, selectedSize, selectedFinish, selectedColor);
             syncButtonStates();
             const idx = Number(btn.dataset.index);
@@ -1883,27 +2241,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
             setActiveThumbBySrc(catalogImages[idx]);
           });
         });
-        if(collapseColors && product.colors.length > MOBILE_COLLAPSE_LIMIT){
-          const extraCount = product.colors.length - MOBILE_COLLAPSE_LIMIT;
-          const colorMoreBtn = document.createElement('button');
-          colorMoreBtn.type = 'button';
-          colorMoreBtn.className = 'pd-size-pill pd-color-pill pd-mobile-more';
-          colorMoreBtn.innerHTML = `<span class="pd-color-dot pd-color-more-dot">+${extraCount}</span><span class="pd-color-label">more</span>`;
-          colorMoreBtn.addEventListener('click', () => {
-            const hidden = colorsWrap.querySelectorAll('.pd-color-pill.pd-mobile-hide');
-            const isExpanded = hidden.length === 0;
-            if(isExpanded){
-              colorsWrap.querySelectorAll('.pd-color-pill[data-index]').forEach((b,i) => {
-                if(Number(b.dataset.index) >= MOBILE_COLLAPSE_LIMIT) b.classList.add('pd-mobile-hide');
-              });
-              colorMoreBtn.innerHTML = `<span class="pd-color-dot pd-color-more-dot">+${extraCount}</span><span class="pd-color-label">more</span>`;
-            } else {
-              hidden.forEach(b => b.classList.remove('pd-mobile-hide'));
-              colorMoreBtn.innerHTML = `<span class="pd-color-dot pd-color-more-dot">–</span><span class="pd-color-label">less</span>`;
-            }
-          });
-          colorsWrap.appendChild(colorMoreBtn);
-        }
+        collapseList(colorsWrap, Array.from(colorsWrap.querySelectorAll('.pd-color-pill')), 'color');
       } else {
         colorBlock.style.display = 'none';
       }
@@ -1921,10 +2259,9 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     }
 
     /* thumbs: one per image we have (e.g. one per colour/finish); clicking a thumb swaps the large photo */
-    const collapseThumbs = MOBILE_COLLAPSE_CATEGORIES.includes(product.category);
     if(thumbsWrap){
       thumbsWrap.innerHTML = catalogImages.length
-        ? catalogImages.map((src,i) => `<div class="pd-thumb${i===defaultImageIdx?' active':''}${(collapseThumbs && i >= MOBILE_COLLAPSE_LIMIT) ? ' pd-mobile-hide' : ''}" data-src="${src}"><img class="real-photo" src="${src}" alt="${product.title} view ${i+1}" style="object-fit:cover;background:#fff;" loading="lazy"></div>`).join('')
+        ? catalogImages.map((src,i) => `<div class="pd-thumb${i===defaultImageIdx?' active':''}" data-src="${escAttr(src)}"><img class="real-photo" src="${escAttr(src)}" alt="${escAttr(product.title)} view ${i+1}" style="object-fit:cover;background:#fff;" loading="lazy"></div>`).join('')
         : Array.from({length:4}).map((_,i) => `<div class="pd-thumb${i===0?' active':''}"><div class="art"><div class="icon">${ICONS.mortise}</div></div></div>`).join('');
       thumbsWrap.querySelectorAll('.pd-thumb').forEach((t,i) => {
         t.addEventListener('click', () => {
@@ -1959,8 +2296,9 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
           /* keep the colour pill in sync when thumbs and colors map 1:1 */
           if(imagePerColor){
             colorsWrap.querySelectorAll('.pd-size-pill').forEach(b => b.classList.toggle('active', Number(b.dataset.index) === i));
+            revealActive(colorsWrap, '.pd-color-pill.active');
             selectedColor = product.colors[i];
-            colorNameEl.textContent = '— ' + selectedColor;
+            colorNameEl.textContent = '— ' + shownColor(selectedColor);
             waLinkEl.href = catalogWaLink(product, selectedSize, selectedFinish, selectedColor);
             syncButtonStates();
           }
@@ -1975,26 +2313,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
           }
         });
       });
-      if(collapseThumbs && catalogImages.length > MOBILE_COLLAPSE_LIMIT){
-        const extraThumbCount = catalogImages.length - MOBILE_COLLAPSE_LIMIT;
-        const thumbMoreBtn = document.createElement('div');
-        thumbMoreBtn.className = 'pd-thumb pd-mobile-more';
-        thumbMoreBtn.innerHTML = `<div class="pd-thumb-more-inner">+${extraThumbCount}</div>`;
-        thumbMoreBtn.addEventListener('click', () => {
-          const hidden = thumbsWrap.querySelectorAll('.pd-thumb.pd-mobile-hide');
-          const isExpanded = hidden.length === 0;
-          if(isExpanded){
-            thumbsWrap.querySelectorAll('.pd-thumb[data-src]').forEach((t,i) => {
-              if(i >= MOBILE_COLLAPSE_LIMIT) t.classList.add('pd-mobile-hide');
-            });
-            thumbMoreBtn.querySelector('.pd-thumb-more-inner').textContent = `+${extraThumbCount}`;
-          } else {
-            hidden.forEach(t => t.classList.remove('pd-mobile-hide'));
-            thumbMoreBtn.querySelector('.pd-thumb-more-inner').textContent = '−';
-          }
-        });
-        thumbsWrap.appendChild(thumbMoreBtn);
-      }
+      collapseList(thumbsWrap, Array.from(thumbsWrap.querySelectorAll('.pd-thumb')), 'thumb');
     }
 
     document.getElementById('pdWaLinkText').textContent = 'Enquire on WhatsApp for Pricing';
@@ -2022,19 +2341,6 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     }
     renderCategorySiblings(product);
   }
-
-  /* finish/color names used across the CATALOG (products.html) mapped to a
-     display hex so sibling cards can show a quick swatch-dot preview
-     without the person having to click through to see what's available */
-  const COLOR_HEX = {
-    'Black': '#1a1a1a', 'Rose Gold': '#caa08a', 'Gold': '#cfa03c',
-    'Antique Bronze': '#8a6a29', 'Silver Chrome': '#c8c8c8',
-    'SS': '#b0b3b8', 'SSF': '#a8a8a8', 'CP': '#cfd3d6',
-    'Antique': '#caa23e', 'Z Black': '#1a1a1a', 'Graphite': '#4a4a4a',
-    'PVD Graphite': '#3a3a3a', 'PVD Gold': '#c9a24b', 'PVD Rose Gold': '#b56a4d',
-    'Brush Gold': '#c9a24b', 'Matt Gold': '#c9a24b', 'Matt Rose Gold': '#b56a4d',
-    'PVD Matt Gold': '#c9a24b', 'PVD Matt Rose Gold': '#b56a4d', 'Greyfide': '#4a4a4a'
-  };
 
   /* "More In This Category" — for a catalog item (e.g. one of the 5 Key Hole
      styles), show the other styles from the same category so the person can
@@ -2086,15 +2392,16 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
       if(it.specs && it.specs.length) params.set('specs', it.specs.map(row => row.join(':::')).join('|||'));
       const url = 'product-detail.html?' + params.toString();
       const id = makeCatalogId(product.category, it.name);
-      const swatchesHtml = (it.colors && it.colors.length)
-        ? `<div class="pd-sib-swatches">${it.colors.map(c => `<span class="pd-sib-swatch" style="background:${COLOR_HEX[c] || 'var(--brass)'}" title="${c}"></span>`).join('')}</div>`
+      const sibColors = (it.colors && it.colors.length) ? sortByColorSeries(it.colors) : [];
+      const swatchesHtml = sibColors.length
+        ? `<div class="pd-sib-swatches">${sibColors.slice(0, COLLAPSE_LIMIT).map(c => `<span class="pd-sib-swatch" style="background:${getColorHex(c) || 'var(--brass)'}" title="${escAttr(getColorFamily(c) ? getColorFamily(c).name : c)}"></span>`).join('')}${sibColors.length > COLLAPSE_LIMIT ? `<span class="pd-sib-more" title="${escAttr(sibColors.slice(COLLAPSE_LIMIT).map(c => getColorFamily(c) ? getColorFamily(c).name : c).join(', '))}">+${sibColors.length - COLLAPSE_LIMIT}</span>` : ''}</div>`
         : '';
       const safeUrl = url.replace(/&/g, '&amp;');
       const safeSizes = escAttr((it.sizes || []).join('|'));
       return `
       <a class="pcard" href="${url}" style="display:block;">
         <div class="pcard-media art">
-          ${it.img ? `<img class="real-photo" src="${it.img}" alt="${it.name}" loading="lazy">` : ''}
+          ${it.img ? `<img class="real-photo" src="${it.img}" alt="${escAttr(it.name)}" loading="lazy">` : ''}
           <div class="pcard-actions">
             <button class="pcard-icon-btn pcard-wish" data-id="${id}" data-name="${escAttr(it.name)}" data-sub="${escAttr(it.sub || '')}" data-cat="${escAttr(product.category)}" data-url="${safeUrl}" data-sizes="${safeSizes}" data-img="${escAttr(it.img || '')}" aria-label="Add to wishlist" data-tip="Wishlist">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 8 2 4.5 5.4 3.6 8 2.9 10.4 4.2 12 6.6c1.6-2.4 4-3.7 6.6-3 3.4.9 4.8 4.4 3.4 7.6-2.5 4.7-10 9.3-10 9.3Z"/></svg>
@@ -2118,6 +2425,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
   function loadProduct(){
     const params = new URLSearchParams(window.location.search);
     if(params.get('src') === 'catalog'){
+      if(!params.get('name')) setRobots('noindex, follow'); /* ?src=catalog with no product name = empty page, keep it out of search */
       renderCatalogProduct(buildCatalogProductFromParams(params));
       return;
     }
@@ -2127,7 +2435,8 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
       if(fromIndex){ renderCatalogProduct(fromIndex); return; }
     }
     const product = CATALOG[id] || Object.values(CATALOG)[0];
-    if(!product){ return; }
+    if(!product){ setRobots('noindex, follow'); document.title = 'Product not found | Korraz'; return; }
+    if(!CATALOG[id]) setRobots('noindex, follow'); /* missing/unknown ?id= shows the first product as a fallback — never index that under a wrong URL */
     IS_CATALOG_MODE = false;
     CURRENT_PRODUCT_ID = product.id;
     showShopChrome(true);
@@ -2166,7 +2475,8 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     if(product.gallery && product.gallery.length){
       const images = product.gallery;
       const setMain = (src) => {
-        mainArt.innerHTML = `<img class="real-photo" src="${src}" alt="${product.title}"><div class="tag" id="pdMainTag">${product.category} — ${product.finishNames[0] || ''}</div>${wishBtnHtml}`;
+        mainArt.innerHTML = `<img class="real-photo" src="${src}" fetchpriority="high" decoding="async" alt="${escAttr(product.title)}"><div class="tag" id="pdMainTag">${product.category} — ${product.finishNames[0] || ''}</div>${wishBtnHtml}`;
+        syncMainWishState();
       };
       setMain(images[0]);
       thumbsWrap.innerHTML = images.map((src,i) => `<div class="pd-thumb${i===0?' active':''}" data-src="${src}"><img class="real-photo" src="${src}" alt="${product.title} view ${i+1}" loading="lazy"></div>`).join('');
@@ -2177,6 +2487,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
           setMain(t.dataset.src);
         });
       });
+      collapseList(thumbsWrap, Array.from(thumbsWrap.querySelectorAll('.pd-thumb')), 'thumb');
     } else {
       mainArt.innerHTML = `<div class="ring" style="width:70%;height:70%;top:15%;left:15%;"></div><div class="icon" id="pdMainIcon">${ICONS[product.icon || 'mortise']}</div><div class="tag" id="pdMainTag">${product.category || ''} — ${product.finishNames[0] || ''}</div>${wishBtnHtml}`;
       thumbsWrap.innerHTML = Array.from({length:4}).map((_,i) => `<div class="pd-thumb${i===0?' active':''}"><div class="art"><div class="icon">${ICONS[product.icon || 'mortise']}</div></div></div>`).join('');
@@ -2474,7 +2785,11 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
       syncButtonStates();
       updateHeaderBadges();
     }
-    pdWishMain.addEventListener('click', toggleWish);
+    /* delegated: the heart button is re-created on every photo swap, so a listener bound
+       to the original element stopped working after the first colour/size/thumbnail click */
+    document.getElementById('pdMainArt').addEventListener('click', function(e){
+      if(e.target.closest('#pdWishMain')) toggleWish();
+    });
     if(pdWishSide) pdWishSide.addEventListener('click', toggleWish);
     if(pdStickyWish) pdStickyWish.addEventListener('click', toggleWish);
     if(pdWishInline) pdWishInline.addEventListener('click', toggleWish);
@@ -2564,15 +2879,17 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     const galleryCounter = document.getElementById('pdGalleryCounter');
     const thumbNavBtn = document.getElementById('pdThumbNav');
 
+    const getThumbs = () => thumbsWrap ? Array.from(thumbsWrap.querySelectorAll('.pd-thumb')) : [];
+    let lastActiveIdx = -1;
     function updateCounter(){
       if(!galleryCounter || !thumbsWrap) return;
-      const thumbs = Array.from(thumbsWrap.children);
+      const thumbs = getThumbs();
       const activeIdx = thumbs.findIndex(t => t.classList.contains('active'));
       galleryCounter.textContent = (activeIdx === -1 ? 1 : activeIdx + 1) + '/' + thumbs.length;
     }
     function renderDots(){
       if(!dotsWrap || !thumbsWrap) return;
-      const thumbs = Array.from(thumbsWrap.children);
+      const thumbs = getThumbs();
       dotsWrap.innerHTML = thumbs.map((t,i) => `<span class="dot${t.classList.contains('active') ? ' active' : ''}" data-i="${i}"></span>`).join('');
       dotsWrap.querySelectorAll('.dot').forEach(dot => {
         dot.addEventListener('click', () => {
@@ -2584,15 +2901,29 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     }
     function syncDots(){
       if(!dotsWrap || !thumbsWrap) return;
-      const thumbs = Array.from(thumbsWrap.children);
+      const thumbs = getThumbs();
       dotsWrap.querySelectorAll('.dot').forEach((dot,i) => dot.classList.toggle('active', thumbs[i] && thumbs[i].classList.contains('active')));
       updateCounter();
-      const activeThumb = thumbs.find(t => t.classList.contains('active'));
-      if(activeThumb && isMobile()) activeThumb.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+      const activeIdx = thumbs.findIndex(t => t.classList.contains('active'));
+      const activeThumb = thumbs[activeIdx];
+      /* a newly selected photo that sits in the hidden part of the strip opens it
+         (only when the selection CHANGED, so "Less" still works afterwards) */
+      if(activeIdx !== lastActiveIdx){
+        lastActiveIdx = activeIdx;
+        if(activeThumb && activeThumb.classList.contains('pd-extra') && thumbsWrap._pdExpand) thumbsWrap._pdExpand();
+      }
+      /* scroll only the strip itself (never the page) and only when it really scrolls sideways */
+      if(activeThumb && isMobile() && thumbsWrap.scrollWidth > thumbsWrap.clientWidth + 2){
+        const left = activeThumb.offsetLeft - thumbsWrap.offsetLeft - (thumbsWrap.clientWidth - activeThumb.offsetWidth) / 2;
+        thumbsWrap.scrollTo({left: Math.max(0, left), behavior:'smooth'});
+      }
     }
     if(thumbsWrap){
       /* thumbsWrap.innerHTML is fully rebuilt by loadProduct(), so watch for that */
       new MutationObserver(renderDots).observe(thumbsWrap, {childList:true});
+      /* thumbnails can also become active from a colour / size / finish pick (those only toggle
+         the class) — keep the counter + dots in step with that too */
+      new MutationObserver(syncDots).observe(thumbsWrap, {attributes:true, attributeFilter:['class'], subtree:true});
       /* clicks on individual thumbs (existing handlers just toggle 'active') just need a re-sync */
       thumbsWrap.addEventListener('click', () => setTimeout(syncDots, 0));
       renderDots();
@@ -2627,7 +2958,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
         const dx = e.changedTouches[0].clientX - touchStartX;
         touchStartX = null;
         if(Math.abs(dx) < 40 || !thumbsWrap) return;
-        const thumbs = Array.from(thumbsWrap.children);
+        const thumbs = getThumbs();
         const activeIdx = thumbs.findIndex(t => t.classList.contains('active'));
         if(activeIdx === -1) return;
         const nextIdx = dx < 0
@@ -2650,7 +2981,9 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     if(stickyBar && priceRow && realAddBtn){
       if('IntersectionObserver' in window){
         new IntersectionObserver((entries) => {
-          stickyBar.classList.toggle('show', isMobile() && !entries[0].isIntersecting);
+          const stickyOn = isMobile() && !entries[0].isIntersecting;
+          stickyBar.classList.toggle('show', stickyOn);
+          document.body.classList.toggle('pd-sticky-on', stickyOn);
         }, {rootMargin:'-70px 0px 0px 0px'}).observe(priceRow);
       }
       if(stickyWa && realWaLink){
@@ -2678,7 +3011,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     const galleryNext = document.getElementById('pdGalleryNext');
     function stepGallery(dir){
       if(!thumbsWrap) return;
-      const thumbs = Array.from(thumbsWrap.children);
+      const thumbs = getThumbs();
       if(!thumbs.length) return;
       const activeIdx = thumbs.findIndex(t => t.classList.contains('active'));
       const cur = activeIdx === -1 ? 0 : activeIdx;

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin-panel/
 
-Sitemap: https://www.koraaz.in/sitemap.xml
+Sitemap: https://www.korraz.in/sitemap.xml

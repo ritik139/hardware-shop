@@ -264,10 +264,10 @@
   .kai-cta:hover{transform:translateY(-2px);}\
   .kai-cta svg{width:14px; height:14px;}\
   .kai-input-row{display:flex; align-items:center; gap:8px; padding:12px; border-top:1px solid rgba(255,255,255,.08); background:var(--panel,#191c22); flex-shrink:0;}\
-  .kai-input{flex:1; background:var(--ink,#101216); border:1px solid rgba(255,255,255,.1); border-radius:22px; padding:10px 16px; color:var(--bone,#EEEBE3);\
+  .kai-input{flex:1; min-width:0; background:var(--ink,#101216); border:1px solid rgba(255,255,255,.1); border-radius:22px; padding:10px 16px; color:var(--bone,#EEEBE3);\
     font-family:Inter,sans-serif; font-size:0.84rem; outline:none; transition:border-color .2s ease;}\
   .kai-input:focus{border-color:var(--brass,#C9A24B);}\
-  .kai-send{width:38px; height:38px; border-radius:50%; border:none; background:var(--brass,#C9A24B); color:#18140b; display:flex; align-items:center; justify-content:center;\
+  .kai-send{flex-shrink:0; width:38px; height:38px; border-radius:50%; border:none; background:var(--brass,#C9A24B); color:#18140b; display:flex; align-items:center; justify-content:center;\
     cursor:pointer; flex-shrink:0; transition:transform .2s ease, background .2s ease;}\
   .kai-send:hover{background:var(--brass-2,#a8843a); transform:scale(1.06);}\
   .kai-send:active{transform:scale(.9);}\

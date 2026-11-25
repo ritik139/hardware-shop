@@ -371,7 +371,7 @@
   .cinfo{display:flex; gap:16px; padding:18px 0; border-bottom:1px solid var(--hairline);}
   .cinfo:first-child{padding-top:0;}
   .cinfo-icon{width:38px; height:38px; border-radius:50%; border:1px solid var(--hairline-2); display:flex; align-items:center; justify-content:center; color:var(--brass); flex-shrink:0; font-size:1rem;}
-  .cinfo .l{font-size:0.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--mute-2); font-weight:700;}
+  .cinfo .l{font-size:0.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--mute); font-weight:700;}
   .cinfo .v{font-size:0.95rem; color:var(--bone); margin-top:4px;}
   .cinfo .v a{transition:color .25s ease;}
   .cinfo .v a:hover{color:var(--brass);}
@@ -554,7 +554,7 @@
     .work-grid{grid-template-columns:1fr !important;}
     .folio-card{flex:0 0 210px;}
     .range-card{flex:0 0 230px;}
-    .cinfo{flex-wrap:wrap;}
+    .cinfo > div:last-child{flex:1; min-width:0;}
     .contact-grid{gap:34px;}
     .btn{padding:14px 24px; font-size:0.74rem;}
     .gfilter-tabs{gap:8px;}
@@ -562,7 +562,7 @@
     .stats-band{padding-top:44px !important; padding-bottom:44px !important;}
     .whatsapp-float{bottom:76px; left:16px; width:38px; height:38px;}
     .whatsapp-float svg{width:19px; height:19px;}
-    body{padding-bottom:64px;}
+    footer{padding-bottom:calc(64px + env(safe-area-inset-bottom));}
     .mobile-tabbar{
       display:flex; position:fixed; left:0; right:0; bottom:0; z-index:150;
       background:rgba(20,17,13,0.97); backdrop-filter:blur(14px); border-top:1px solid var(--dark-line);
@@ -1006,7 +1006,7 @@ const COLLECTIONS = [
     {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', count:1, img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'}
   ]},
   {id:'lock-security', name:'Lock & Security', blurb:'Key hole covers, pane locks, keys and door eyes.', ranges:[
-    {name:'Key Hole', sub:'Durable brass key holes', count:9, img:'images/catalog-demo/key-hole.jpg'},
+    {name:'Key Hole', sub:'Durable brass key holes', count:8, img:'images/catalog-demo/key-hole.jpg'},
     {name:'SS Pane Lock', sub:'Secure stainless steel locks', count:1, img:'images/catalog-demo/ss panle lock.jpg'},
     {name:'Key', sub:'High quality brass keys', count:3, img:'images/catalog-demo/key/key small/flarekeysmallmain.jpg'},
     {name:'Brass Pane Lock', sub:'Durable brass pane locks', count:1, img:'images/catalog-demo/brass lock.jpg'},
@@ -1034,7 +1034,7 @@ const COLLECTIONS = [
   {id:'door-fittings', name:'Door Fittings', blurb:'Door stoppers, L bats and pivots.', ranges:[
     {name:'Door Stopper', sub:'Reliable door stoppers', count:2, img:'images/catalog-demo/doorstoppermain.jpg'},
     {name:'L Bat', sub:'Sturdy L bats for doors', count:5, img:'images/catalog-demo/L batmain.jpg'},
-    {name:'Pivot', sub:'Smooth door pivots', count:3, img:'images/catalog-demo/PIvot/pivot_main.jpg'}
+    {name:'Pivot', sub:'Smooth door pivots', count:3, img:'images/catalog-demo/Pivot/pivot_main.jpg'}
   ]},
   {id:'glass-fittings', name:'Glass Fittings', blurb:'Hinges for glass doors.', ranges:[
     {name:'Glass Hinges', sub:'Sturdy glass hinges', count:1, img:'images/catalog-demo/Glass Hingas/Glass Hingasmain.jpg'}
