@@ -907,6 +907,7 @@ document.querySelectorAll('.footer-acc-toggle').forEach(function(t){t.addEventLi
   </div>
 </div>
 
+<script src="js/search-data.js"></script>
 <script>
 (function(){
   var FALLBACK_SEARCH_INDEX = [
@@ -942,7 +943,7 @@ document.querySelectorAll('.footer-acc-toggle').forEach(function(t){t.addEventLi
     {name:'Big Vaccum', sub:'Heavy duty vacuum fitting', img:'images/catalog-demo/big vaccum/big vaccummain.jpg'},
     {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'}
   ];
-  var SEARCH_INDEX = (typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX;
+  var SEARCH_INDEX = (window.KORRAZ_SEARCH && window.KORRAZ_SEARCH.length) ? window.KORRAZ_SEARCH : ((typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX);
   var CHIP_NAMES = ['Brass Tower Bolt','Alu T-Bolt','SS Hinges','Key Hole','Door Stopper','Flare Knob'];
 
   var overlay = document.getElementById('searchOverlay');
@@ -976,7 +977,7 @@ document.querySelectorAll('.footer-acc-toggle').forEach(function(t){t.addEventLi
   }
 
   function itemUrl(item){
-    return 'products.html?cat=' + encodeURIComponent(item.name);
+    return item.url || ('products.html?cat=' + encodeURIComponent(item.name));
   }
 
   function renderResults(list, term){
@@ -991,6 +992,37 @@ document.querySelectorAll('.footer-acc-toggle').forEach(function(t){t.addEventLi
     }).join('');
   }
 
+  /* case-insensitive, punctuation/space-insensitive, any word order — "KEY HOLE", "key hole", "t bolt", "T-Bolt", "tbolt" all work.
+     Searches every category AND every item inside a category (js/search-data.js); best name matches come first. */
+  function normSearch(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+  function searchMatches(term){
+    var q = normSearch(term);
+    if(!q) return [];
+    var qc = q.replace(/ /g,'');
+    var tokens = q.split(' ').map(function(t){ return (t.length > 3 && t.charAt(t.length-1) === 's') ? t.slice(0,-1) : t; });
+    var longer = tokens.filter(function(t){ return t.length > 1; });
+    if(longer.length) tokens = longer; /* a lone letter like the "t" in "t bolt" is too vague on its own */
+    var short = q.length <= 3;
+    /* short words (ss, br, l) must start a word — otherwise "ss" would match inside "bra-ss" */
+    function has(text, t){ return t.length <= 3 ? (' ' + text).indexOf(' ' + t) !== -1 : text.indexOf(t) !== -1; }
+    var scored = [];
+    SEARCH_INDEX.forEach(function(item, i){
+      var name = normSearch(item.name), nameC = name.replace(/ /g,'');
+      var hay = name + ' ' + normSearch(item.sub) + ' ' + normSearch(item.parent);
+      var hayC = hay.replace(/ /g,'');
+      var score = 0;
+      if(name === q) score = 100;
+      else if(name.indexOf(q) === 0) score = 80;
+      else if(has(name, q) || (!short && nameC.indexOf(qc) !== -1)) score = 60;
+      else if(tokens.every(function(t){ return has(name, t); })) score = 50;
+      else if(has(hay, q) || (!short && hayC.indexOf(qc) !== -1)) score = 30;
+      else if(tokens.every(function(t){ return has(hay, t); })) score = 20;
+      if(score) scored.push({ item:item, score:score, i:i });
+    });
+    scored.sort(function(a,b){ return b.score - a.score || a.i - b.i; });
+    return scored.slice(0,20).map(function(x){ return x.item; });
+  }
+
   function runSearch(term){
     term = (term || '').trim().toLowerCase();
     var list;
@@ -999,11 +1031,7 @@ document.querySelectorAll('.footer-acc-toggle').forEach(function(t){t.addEventLi
       sectionLabel.textContent = 'Popular Products';
       suggestEl.style.display = '';
     } else {
-      list = SEARCH_INDEX.filter(function(item){
-        return item.name.toLowerCase().indexOf(term) !== -1 ||
-               (item.sub && item.sub.toLowerCase().indexOf(term) !== -1) ||
-               (item.parent && item.parent.toLowerCase().indexOf(term) !== -1);
-      }).slice(0,8);
+      list = searchMatches(term);
       sectionLabel.textContent = 'Products';
       suggestEl.style.display = 'none';
     }

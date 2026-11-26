@@ -9,6 +9,8 @@
 <meta name="robots" content="index, follow">
 <meta name="author" content="Korras Enterprises">
 <link rel="canonical" href="https://www.korraz.in/contact.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon-180.png">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -17,37 +19,65 @@
 <meta property="og:url" content="https://www.korraz.in/contact.html">
 <meta property="og:site_name" content="Korraz">
 <meta property="og:locale" content="en_IN">
-<meta property="og:image" content="https://www.korraz.in/images/catalog-demo/cheshhandlemain-hero.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image" content="https://www.korraz.in/images/catalog-demo/contactmain.jpg">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="420">
 <meta property="og:image:alt" content="Korraz brass hardware showroom">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact Korraz | Korras Enterprises">
 <meta name="twitter:description" content="Reach Korraz directly for catalogue, pricing, or bulk project quotes on brass door hardware.">
-<meta name="twitter:image" content="https://www.korraz.in/images/catalog-demo/cheshhandlemain-hero.jpg">
+<meta name="twitter:image" content="https://www.korraz.in/images/catalog-demo/contactmain.jpg">
 
 <!-- Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Korraz",
-  "alternateName": "Korras Enterprises",
-  "url": "https://www.korraz.in/",
-  "description": "Manufacturer and supplier of premium full-brass mortise handles, key hole covers and architectural door hardware.",
-  "email": "korrasenterprises@gmail.com",
-  "telephone": "+91-90246-55202",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "42/336, Ground Floor, Unnat Nagar No.4, M. G. Road, Goregaon (W)",
-    "addressLocality": "Mumbai",
-    "addressRegion": "Maharashtra",
-    "postalCode": "400104",
-    "addressCountry": "IN"
-  },
-  "sameAs": []
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.korraz.in/#organization",
+      "name": "Korraz",
+      "alternateName": "Korras Enterprises",
+      "url": "https://www.korraz.in/",
+      "logo": "https://www.korraz.in/favicon-180.png",
+      "description": "Manufacturer and supplier of premium full-brass mortise handles, key hole covers and architectural door hardware.",
+      "email": "korrasenterprises@gmail.com",
+      "telephone": "+91-90246-55202",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "42/336, Ground Floor, Unnat Nagar No.4, M. G. Road, Goregaon (W)",
+        "addressLocality": "Mumbai",
+        "addressRegion": "Maharashtra",
+        "postalCode": "400104",
+        "addressCountry": "IN"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "telephone": "+91-90246-55202",
+        "email": "korrasenterprises@gmail.com",
+        "areaServed": "IN",
+        "availableLanguage": ["English", "Hindi"]
+      }
+    },
+    {
+      "@type": "ContactPage",
+      "@id": "https://www.korraz.in/contact.html#webpage",
+      "url": "https://www.korraz.in/contact.html",
+      "name": "Contact Korraz | Korras Enterprises",
+      "isPartOf": { "@id": "https://www.korraz.in/#organization" },
+      "about": { "@id": "https://www.korraz.in/#organization" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.korraz.in/" },
+        { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://www.korraz.in/contact.html" }
+      ]
+    }
+  ]
 }
 </script>
 
@@ -551,7 +581,7 @@
     .gallery-grid{grid-template-columns:repeat(2,1fr);}
     .work-grid{grid-template-columns:repeat(2,1fr) !important;}
     .treviews-grid{grid-template-columns:1fr;}
-    .contact-grid{grid-template-columns:1fr; gap:40px;}
+    .contact-grid{grid-template-columns:1fr; gap:0;}
     .news-grid{flex-direction:column; align-items:flex-start; gap:26px;}
     .news-grid > .reveal{width:100%;}
     .news-form{min-width:100%; width:100%;}
@@ -587,11 +617,11 @@
     .hero-arrows svg{width:14px; height:14px;}
     .hero-dots{left:20px; bottom:20px;}
     .hero-dots button{width:22px;}
-    .page-hero{display:block; height:auto; min-height:0; overflow:visible; padding:0 0 40px;}
-    .page-hero .art{position:static; width:100%; background:var(--dark);}
-    .page-hero .art-photo{position:static; width:100%; height:auto; object-fit:contain;}
-    .page-hero-scrim{display:none;}
-    .page-hero-content{position:relative; padding:30px 20px 0; margin:0; max-width:100%;}
+    .page-hero{display:flex; align-items:center; height:auto; min-height:380px; overflow:hidden; padding:56px 0;}
+    .page-hero .art{position:absolute; inset:0; width:100%; background:var(--dark);}
+    .page-hero .art-photo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+    .page-hero-scrim{display:block; background:linear-gradient(180deg, rgba(15,12,9,.62) 0%, rgba(15,12,9,.82) 100%);}
+    .page-hero-content{position:relative; padding:0 20px; margin:0; max-width:100%;}
     .page-hero .hero-brand{margin-bottom:8px;}
     .page-hero .hero-brand .ch{font-size:1.5rem;}
     .page-hero-content h1{font-size:1.8rem;}
@@ -628,7 +658,7 @@
     .folio-card{flex:0 0 210px;}
     .range-card{flex:0 0 230px;}
     .cinfo{flex-wrap:wrap;}
-    .contact-grid{gap:34px;}
+    .contact-grid{gap:0;}
     .btn{padding:14px 24px; font-size:0.74rem;}
     .gfilter-tabs{gap:8px;}
     .craft-content h2, .cta-actions{text-align:center;}
@@ -827,6 +857,16 @@ body.search-lock{ overflow:hidden; }
 </style>
 
 <style id="mobile-fixes">
+/* mobile: tap targets, hero spacing, clearance above floating buttons / tab bar */
+@media (max-width:640px){
+  .cinfo .v a{display:inline-block; padding:6px 0;}
+  .footer-acc-body ul li{margin-bottom:0;}
+  .footer-acc-body ul a{display:inline-block; padding:10px 0;}
+  footer .footer-bottom{padding-bottom:84px;}
+}
+@media (max-width:400px){
+  .wrap.page-hero-content{padding:0 16px;}
+}
 /* mobile fixes: header tag size, contact */
 @media (max-width:400px){
   .brand-text .tag{font-size:0.56rem; letter-spacing:.06em; max-width:92px; line-height:1.15; margin-top:2px; white-space:normal;}
@@ -886,7 +926,7 @@ body.search-lock{ overflow:hidden; }
 <!-- ================= PAGE HERO ================= -->
 <section class="page-hero" id="top">
   <div class="art">
-    <img class="art-photo" src="images/catalog-demo/contactmain.jpg" alt="Korraz brass hardware showroom display" loading="eager" fetchpriority="high">
+    <img class="art-photo" src="images/catalog-demo/contactmain.jpg" alt="Korraz brass hardware showroom display" width="1024" height="420" loading="eager" fetchpriority="high">
   </div>
   <div class="page-hero-scrim"></div>
   <div class="wrap page-hero-content">
@@ -913,13 +953,19 @@ body.search-lock{ overflow:hidden; }
 
         <form class="enquiry-form" id="enquiryForm">
           <div class="row2">
-            <input type="text" name="name" placeholder="Your name" required>
-            <input type="tel" name="phone" placeholder="Phone number" required>
+            <input type="text" name="name" placeholder="Your name" aria-label="Your name" autocomplete="name" required>
+            <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number" autocomplete="tel" inputmode="tel" required>
           </div>
-          <select name="interest">
-            <option value="Something else" selected>Something else</option>
+          <select name="interest" aria-label="What are you looking for">
+            <option value="Something else" selected>I'm looking for…</option>
+            <option value="Catalogue / Pricing">Catalogue / Pricing</option>
+            <option value="Bulk Project Quote">Bulk Project Quote</option>
+            <option value="Mortise Handles">Mortise Handles</option>
+            <option value="Key Hole Covers">Key Hole Covers</option>
+            <option value="Tower Bolts">Tower Bolts</option>
+            <option value="Something else">Something else</option>
           </select>
-          <textarea name="message" placeholder="Tell us what you're looking for..."></textarea>
+          <textarea name="message" placeholder="Tell us what you're looking for..." aria-label="Your message"></textarea>
           <button type="submit">Send Enquiry</button>
           <div class="form-msg" id="enquiryMsg"></div>
         </form>
@@ -947,7 +993,7 @@ body.search-lock{ overflow:hidden; }
           <div class="cinfo-icon">✉</div>
           <div>
             <div class="l">Email</div>
-            <div class="v"><a href="mailto:korrasenterprises@gmail.com">korrasenterprises@gmail.com</a></div>
+            <div class="v"><a href="mailto:korrasenterprises@gmail.com">korrasenterprises@<wbr>gmail.com</a></div>
           </div>
         </div>
         <div class="cinfo">
@@ -1211,6 +1257,7 @@ document.getElementById('newsForm').addEventListener('submit', function(e){
   </div>
 </div>
 
+<script src="js/search-data.js"></script>
 <script>
 (function(){
   var FALLBACK_SEARCH_INDEX = [
@@ -1232,9 +1279,9 @@ document.getElementById('newsForm').addEventListener('submit', function(e){
     {name:'Folding Bracket', sub:'Space-saving folding brackets', img:'images/catalog-demo/Folding Bracket/Square folding bracketmain.jpg'},
     {name:'Bracket', sub:'General purpose brackets', img:'images/catalog-demo/Square Bracket/square bracketmain.jpg'},
     {name:'Orange Wheels Castor', sub:'Durable caster wheels', img:'images/catalog-demo/OrangeWheelCastor.jpg'},
-    {name:'Oval Socket', sub:'Smooth oval sockets', img:'images/catalog-demo/oval-socket.jpg'},
+    {name:'Oval Socket', sub:'Smooth oval sockets', img:'images/catalog-demo/overal socket/oval socketssf.jpg'},
     {name:'Glass Hinges', sub:'Sturdy glass hinges', img:'images/catalog-demo/Glass Hingas/Glass Hingasmain.jpg'},
-    {name:'Door Eye', sub:'Secure door eye viewers', img:'images/catalog-demo/door eye/door-eye.jpg'},
+    {name:'Door Eye', sub:'Secure door eye viewers', img:'images/catalog-demo/door eye/dooreyecolor1.jpg'},
     {name:'SS L Bracket', sub:'Stainless steel L brackets', img:'images/catalog-demo/SSL Bracket/Ss L bracket heavy.jpg'},
     {name:'Mirror Cap', sub:'Polished mirror caps', img:'images/catalog-demo/Mirror Cap/mirror capmain.jpg'},
     {name:'Mirror Holder', sub:'Durable mirror holders', img:'images/catalog-demo/Mirror Holder/Mirror Holdermain.jpg'},
@@ -1244,9 +1291,10 @@ document.getElementById('newsForm').addEventListener('submit', function(e){
     {name:'Flare Products', sub:'Flare hardware collection', img:'images/catalog-demo/Flare BRass/Flarepvtblack.jpg'},
     {name:'Chest Handle', sub:'Solid brass chest handle', img:'images/catalog-demo/cheshhandlemain-hero.jpg'},
     {name:'Big Vaccum', sub:'Heavy duty vacuum fitting', img:'images/catalog-demo/big vaccum/big vaccummain.jpg'},
-    {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'}
+    {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'},
+    {name:'SS New Consil Socket', sub:'Heavy duty stainless steel consil socket', img:'images/catalog-demo/ss rod consil/1ssrodconsilmain.jpg'}
   ];
-  var SEARCH_INDEX = (typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX;
+  var SEARCH_INDEX = (window.KORRAZ_SEARCH && window.KORRAZ_SEARCH.length) ? window.KORRAZ_SEARCH : ((typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX);
   var CHIP_NAMES = ['Brass Tower Bolt','Alu T-Bolt','SS Hinges','Key Hole','Door Stopper','Flare Knob'];
 
   var overlay = document.getElementById('searchOverlay');
@@ -1280,7 +1328,7 @@ document.getElementById('newsForm').addEventListener('submit', function(e){
   }
 
   function itemUrl(item){
-    return 'products.html?cat=' + encodeURIComponent(item.name);
+    return item.url || ('products.html?cat=' + encodeURIComponent(item.name));
   }
 
   function renderResults(list, term){
@@ -1295,6 +1343,37 @@ document.getElementById('newsForm').addEventListener('submit', function(e){
     }).join('');
   }
 
+  /* case-insensitive, punctuation/space-insensitive, any word order — "KEY HOLE", "key hole", "t bolt", "T-Bolt", "tbolt" all work.
+     Searches every category AND every item inside a category (js/search-data.js); best name matches come first. */
+  function normSearch(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+  function searchMatches(term){
+    var q = normSearch(term);
+    if(!q) return [];
+    var qc = q.replace(/ /g,'');
+    var tokens = q.split(' ').map(function(t){ return (t.length > 3 && t.charAt(t.length-1) === 's') ? t.slice(0,-1) : t; });
+    var longer = tokens.filter(function(t){ return t.length > 1; });
+    if(longer.length) tokens = longer; /* a lone letter like the "t" in "t bolt" is too vague on its own */
+    var short = q.length <= 3;
+    /* short words (ss, br, l) must start a word — otherwise "ss" would match inside "bra-ss" */
+    function has(text, t){ return t.length <= 3 ? (' ' + text).indexOf(' ' + t) !== -1 : text.indexOf(t) !== -1; }
+    var scored = [];
+    SEARCH_INDEX.forEach(function(item, i){
+      var name = normSearch(item.name), nameC = name.replace(/ /g,'');
+      var hay = name + ' ' + normSearch(item.sub) + ' ' + normSearch(item.parent);
+      var hayC = hay.replace(/ /g,'');
+      var score = 0;
+      if(name === q) score = 100;
+      else if(name.indexOf(q) === 0) score = 80;
+      else if(has(name, q) || (!short && nameC.indexOf(qc) !== -1)) score = 60;
+      else if(tokens.every(function(t){ return has(name, t); })) score = 50;
+      else if(has(hay, q) || (!short && hayC.indexOf(qc) !== -1)) score = 30;
+      else if(tokens.every(function(t){ return has(hay, t); })) score = 20;
+      if(score) scored.push({ item:item, score:score, i:i });
+    });
+    scored.sort(function(a,b){ return b.score - a.score || a.i - b.i; });
+    return scored.slice(0,20).map(function(x){ return x.item; });
+  }
+
   function runSearch(term){
     term = (term || '').trim().toLowerCase();
     var list;
@@ -1303,11 +1382,7 @@ document.getElementById('newsForm').addEventListener('submit', function(e){
       sectionLabel.textContent = 'Popular Products';
       suggestEl.style.display = '';
     } else {
-      list = SEARCH_INDEX.filter(function(item){
-        return item.name.toLowerCase().indexOf(term) !== -1 ||
-               (item.sub && item.sub.toLowerCase().indexOf(term) !== -1) ||
-               (item.parent && item.parent.toLowerCase().indexOf(term) !== -1);
-      }).slice(0,8);
+      list = searchMatches(term);
       sectionLabel.textContent = 'Products';
       suggestEl.style.display = 'none';
     }

@@ -21,8 +21,8 @@
 <meta property="og:site_name" content="Korraz">
 <meta property="og:locale" content="en_IN">
 <meta property="og:image" content="https://www.korraz.in/images/catalog-demo/cheshhandlemain-hero.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="434">
 <meta property="og:image:alt" content="Korraz premium brass fittings">
 
 <!-- Twitter -->
@@ -523,6 +523,10 @@
       transform:translateY(120%); transition:transform .35s var(--ease);
     }
     .pd-sticky-bar.show{ transform:translateY(0); }
+    /* tabbar (64px) + sticky bar (~72px) are both fixed: give the page enough room so the footer's last row isn't hidden */
+    body.pd-sticky-on{ padding-bottom:calc(140px + env(safe-area-inset-bottom)); }
+    .breadcrumb a{ display:inline-block; padding:10px 4px; }
+    footer .footer-acc-body a{ display:inline-block; padding:8px 0; }
     /* Kai AI chat button / teaser / panel sit at bottom:76px by default (just above the tabbar),
        which is right behind this sticky bar — lift them above it while the bar is showing */
     body.pd-sticky-on .kai-btn{ bottom:142px !important; transition:bottom .35s ease, transform .2s ease, box-shadow .2s ease !important; }
@@ -1278,7 +1282,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
 <!-- desktop-only image lightbox (opened via the zoom button on the gallery) -->
 <div class="pd-lightbox" id="pdLightbox">
   <button class="pd-lightbox-close" id="pdLightboxClose" aria-label="Close">&times;</button>
-  <img id="pdLightboxImg" src="" alt="">
+  <img id="pdLightboxImg" alt="">
 </div>
 
 <nav class="mobile-tabbar" id="mobileTabbar">
@@ -2406,7 +2410,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
             <button class="pcard-icon-btn pcard-wish" data-id="${id}" data-name="${escAttr(it.name)}" data-sub="${escAttr(it.sub || '')}" data-cat="${escAttr(product.category)}" data-url="${safeUrl}" data-sizes="${safeSizes}" data-img="${escAttr(it.img || '')}" aria-label="Add to wishlist" data-tip="Wishlist">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 8 2 4.5 5.4 3.6 8 2.9 10.4 4.2 12 6.6c1.6-2.4 4-3.7 6.6-3 3.4.9 4.8 4.4 3.4 7.6-2.5 4.7-10 9.3-10 9.3Z"/></svg>
             </button>
-            <button class="pcard-icon-btn pcard-quickcart" data-id="${id}" data-name="${escAttr(it.name)}" data-sub="${escAttr(it.sub || '')}" data-cat="${escAttr(product.category)}" data-url="${safeUrl}" data-img="${escAttr(it.img || '')}" aria-label="Add to cart" data-tip="Add to Cart">
+            <button class="pcard-icon-btn pcard-quickcart" data-id="${id}" data-name="${escAttr(it.name)}" data-sub="${escAttr(it.sub || '')}" data-cat="${escAttr(product.category)}" data-url="${safeUrl}" data-img="${escAttr(it.img || '')}" aria-label="Add to cart" data-tip="${((it.sizes||[]).length>1||(it.colors||[]).length>1) ? 'Select Size/Color' : 'Add to Cart'}"${((it.sizes||[]).length>1||(it.colors||[]).length>1) ? ' data-choose="1"' : ''}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17.5" cy="19.5" r="1.4"/></svg>
             </button>
           </div>
@@ -2634,6 +2638,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
       btn.classList.toggle('active', wishlist.includes(btn.dataset.id));
     });
     grid.querySelectorAll('.pcard-quickcart').forEach(btn => {
+      if(btn.dataset.choose) return; /* opens the item page to pick size/color */
       const inCart = cart.includes(btn.dataset.id);
       btn.classList.toggle('added', inCart);
       btn.dataset.tip = inCart ? 'Added ✓' : 'Add to Cart';
@@ -2650,6 +2655,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     const quickCartBtn = e.target.closest('.pcard-quickcart');
     if(quickCartBtn){
       e.preventDefault();
+      if(quickCartBtn.dataset.choose && quickCartBtn.dataset.url){ window.location.href = quickCartBtn.dataset.url; return; }
       const id = quickCartBtn.dataset.id;
       /* only catalog-sourced sibling cards carry data-name (see saveCatalogMeta
          pattern in products.html) — a numbered CATALOG product needs no
@@ -2741,7 +2747,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
            reading it here means the cart thumbnail always matches what the
            person actually saw and picked, instead of always showing e.g.
            the black photo even when Rose Gold was added. */
-        const shownImg = document.querySelector('#pdMainArt img.real-photo')?.src || CURRENT_CATALOG_PRODUCT.img || '';
+        const shownImg = document.querySelector('#pdMainArt img.real-photo')?.getAttribute('src') || CURRENT_CATALOG_PRODUCT.img || '';
         /* field names here must match what products.html's own saveCatalogMeta()
            writes (name/sub/icon/img/url) — CURRENT_CATALOG_PRODUCT uses .title
            instead of .name, so map it explicitly rather than spreading the
@@ -3072,6 +3078,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
   </div>
 </div>
 
+<script src="js/search-data.js"></script>
 <script>
 (function(){
   var FALLBACK_SEARCH_INDEX = [
@@ -3107,7 +3114,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     {name:'Big Vaccum', sub:'Heavy duty vacuum fitting', img:'images/catalog-demo/big vaccum/big vaccummain.jpg'},
     {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'}
   ];
-  var SEARCH_INDEX = (typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX;
+  var SEARCH_INDEX = (window.KORRAZ_SEARCH && window.KORRAZ_SEARCH.length) ? window.KORRAZ_SEARCH : ((typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX);
   var CHIP_NAMES = ['Brass Tower Bolt','Alu T-Bolt','SS Hinges','Key Hole','Door Stopper','Flare Knob'];
 
   var overlay = document.getElementById('searchOverlay');
@@ -3141,7 +3148,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
   }
 
   function itemUrl(item){
-    return 'products.html?cat=' + encodeURIComponent(item.name);
+    return item.url || ('products.html?cat=' + encodeURIComponent(item.name));
   }
 
   function renderResults(list, term){
@@ -3156,6 +3163,37 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
     }).join('');
   }
 
+  /* case-insensitive, punctuation/space-insensitive, any word order — "KEY HOLE", "key hole", "t bolt", "T-Bolt", "tbolt" all work.
+     Searches every category AND every item inside a category (js/search-data.js); best name matches come first. */
+  function normSearch(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+  function searchMatches(term){
+    var q = normSearch(term);
+    if(!q) return [];
+    var qc = q.replace(/ /g,'');
+    var tokens = q.split(' ').map(function(t){ return (t.length > 3 && t.charAt(t.length-1) === 's') ? t.slice(0,-1) : t; });
+    var longer = tokens.filter(function(t){ return t.length > 1; });
+    if(longer.length) tokens = longer; /* a lone letter like the "t" in "t bolt" is too vague on its own */
+    var short = q.length <= 3;
+    /* short words (ss, br, l) must start a word — otherwise "ss" would match inside "bra-ss" */
+    function has(text, t){ return t.length <= 3 ? (' ' + text).indexOf(' ' + t) !== -1 : text.indexOf(t) !== -1; }
+    var scored = [];
+    SEARCH_INDEX.forEach(function(item, i){
+      var name = normSearch(item.name), nameC = name.replace(/ /g,'');
+      var hay = name + ' ' + normSearch(item.sub) + ' ' + normSearch(item.parent);
+      var hayC = hay.replace(/ /g,'');
+      var score = 0;
+      if(name === q) score = 100;
+      else if(name.indexOf(q) === 0) score = 80;
+      else if(has(name, q) || (!short && nameC.indexOf(qc) !== -1)) score = 60;
+      else if(tokens.every(function(t){ return has(name, t); })) score = 50;
+      else if(has(hay, q) || (!short && hayC.indexOf(qc) !== -1)) score = 30;
+      else if(tokens.every(function(t){ return has(hay, t); })) score = 20;
+      if(score) scored.push({ item:item, score:score, i:i });
+    });
+    scored.sort(function(a,b){ return b.score - a.score || a.i - b.i; });
+    return scored.slice(0,20).map(function(x){ return x.item; });
+  }
+
   function runSearch(term){
     term = (term || '').trim().toLowerCase();
     var list;
@@ -3164,11 +3202,7 @@ header .nav-inner, header.shrink .nav-inner{padding-left:clamp(16px,3.4vw,48px);
       sectionLabel.textContent = 'Popular Products';
       suggestEl.style.display = '';
     } else {
-      list = SEARCH_INDEX.filter(function(item){
-        return item.name.toLowerCase().indexOf(term) !== -1 ||
-               (item.sub && item.sub.toLowerCase().indexOf(term) !== -1) ||
-               (item.parent && item.parent.toLowerCase().indexOf(term) !== -1);
-      }).slice(0,8);
+      list = searchMatches(term);
       sectionLabel.textContent = 'Products';
       suggestEl.style.display = 'none';
     }

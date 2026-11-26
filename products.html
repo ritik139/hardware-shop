@@ -21,8 +21,8 @@
 <meta property="og:site_name" content="Korraz">
 <meta property="og:locale" content="en_IN">
 <meta property="og:image" content="https://www.korraz.in/images/catalog-demo/cheshhandlemain-hero.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="434">
 <meta property="og:image:alt" content="Korraz premium brass door hardware catalogue">
 
 <!-- Twitter -->
@@ -394,6 +394,10 @@
   .prod-card-body{padding:26px 20px 20px;}
   .prod-card-title{font-family:'Cormorant Garamond',serif; font-size:1.28rem; font-weight:700;}
   .prod-card-link{color:inherit; text-decoration:none;}
+  @media(max-width:760px){
+    .breadcrumb a{display:inline-block; padding:10px 4px;}
+    footer .footer-acc-body a{display:inline-block; padding:8px 0;}
+  }
   .prod-card-link:hover{color:var(--brass-2);}
   .prod-card-link:focus-visible{outline:2px solid var(--brass); outline-offset:3px; border-radius:2px;}
   .noscript-cats{display:flex; flex-wrap:wrap; gap:10px 22px; padding:8px 0 30px;}
@@ -1065,7 +1069,7 @@ body.search-lock{ overflow:hidden; }
   <div class="prod-hero-bg"></div>
   <div class="wrap prod-hero-inner reveal">
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Products</span></nav>
-    <h1>Our Products</h1>
+    <h1 id="catH1">Our Products</h1>
     <p>Explore our carefully curated range of premium brass fittings and hardware across <span id="heroLines">32</span> different product lines.</p>
   </div>
 </section>
@@ -1468,6 +1472,27 @@ function updateCatalogSEO(){
     if(cat.img) img = absUrl(cat.img);
   }
   document.title = title;
+  /* category view: H1 + schema follow the category so each ?cat= URL has its own heading */
+  try{
+    const h1 = document.getElementById('catH1');
+    if(h1) h1.textContent = cat ? cat.name : 'Our Products';
+    const ldEl = document.getElementById('catalogLdJson');
+    if(ldEl){
+      const g = JSON.parse(ldEl.textContent);
+      (g['@graph'] || []).forEach(n => {
+        if(n['@type'] === 'CollectionPage'){
+          n.url = url; n.name = cat ? cat.name + ' — Korraz' : 'Korraz Product Catalogue';
+          n['@id'] = url + '#page';
+          if(cat) n.description = desc;
+        }
+        if(n['@type'] === 'BreadcrumbList'){
+          n.itemListElement = n.itemListElement.slice(0, 2);
+          if(cat) n.itemListElement.push({ '@type':'ListItem', 'position':3, 'name':cat.name, 'item':url });
+        }
+      });
+      ldEl.textContent = JSON.stringify(g);
+    }
+  }catch(e){}
   setMeta('name', 'description', desc);
   let canon = document.querySelector('link[rel="canonical"]');
   if(!canon){ canon = document.createElement('link'); canon.rel = 'canonical'; document.head.appendChild(canon); }
@@ -1845,6 +1870,8 @@ function renderProductGrid(){
              (see getQuickAddTarget) so the action is never ambiguous and
              always has a working detail-page link. */
           const cardCat = activeCategory || p.name;
+          /* a category card that holds several items has no single product to add — its icons used to silently add/wishlist the first item inside. Show icons only on real items (or single-item categories). */
+          if(!activeCategory && isAmbiguousCategory(p.name)) return '';
           const target = getQuickAddTarget(p);
           const id = itemId(cardCat, target.name);
           const url = catalogItemUrl(cardCat, target).replace(/&/g, '&amp;');
@@ -1853,12 +1880,14 @@ function renderProductGrid(){
           const safeSizes = (target.sizes || []).join('|').replace(/"/g,'&quot;');
           const safeName = (target.name || '').replace(/"/g,'&quot;');
           const safeImg = (target.img || '').replace(/"/g,'&quot;');
+          /* several sizes/colors → the cart icon opens the item page so size/color is picked (and written in the cart) instead of silently adding a default */
+          const needsChoice = (target.sizes && target.sizes.length > 1) || (target.colors && target.colors.length > 1);
           return `
         <div class="pcard-actions">
           <button class="pcard-icon-btn pcard-wish" data-id="${id}" data-name="${safeName}" data-sub="${safeSub}" data-cat="${safeCat}" data-icon="${p.icon}" data-sizes="${safeSizes}" data-url="${url}" data-img="${safeImg}" aria-label="Add to wishlist" data-tip="Wishlist">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-10-9.3C.6 8 2 4.5 5.4 3.6 8 2.9 10.4 4.2 12 6.6c1.6-2.4 4-3.7 6.6-3 3.4.9 4.8 4.4 3.4 7.6-2.5 4.7-10 9.3-10 9.3Z"/></svg>
           </button>
-          <button class="pcard-icon-btn pcard-quickcart" data-id="${id}" data-name="${safeName}" data-sub="${safeSub}" data-cat="${safeCat}" data-icon="${p.icon}" data-url="${url}" data-img="${safeImg}" aria-label="Add to cart" data-tip="Add to Cart">
+          <button class="pcard-icon-btn pcard-quickcart" data-id="${id}" data-name="${safeName}" data-sub="${safeSub}" data-cat="${safeCat}" data-icon="${p.icon}" data-url="${url}" data-img="${safeImg}" aria-label="${needsChoice ? 'Select size or color' : 'Add to cart'}" data-tip="${needsChoice ? 'Select Size/Color' : 'Add to Cart'}"${needsChoice ? ' data-choose="1"' : ''}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17.5" cy="19.5" r="1.4"/></svg>
           </button>
         </div>`;
@@ -2133,6 +2162,7 @@ function syncCardStates(){
     btn.classList.toggle('active', wishlist.includes(id));
   });
   document.querySelectorAll('.pcard-quickcart').forEach(btn => {
+    if(btn.dataset.choose) return; /* opens the item page — no single added state */
     const id = btn.dataset.id;
     const inCart = cart.includes(id);
     btn.classList.toggle('added', inCart);
@@ -2193,6 +2223,7 @@ document.addEventListener('click', function(e){
   }
   const quickCartBtn = e.target.closest('.pcard-quickcart');
   if(quickCartBtn){
+    if(quickCartBtn.dataset.choose && quickCartBtn.dataset.url){ window.location.href = quickCartBtn.dataset.url; return; }
     const id = quickCartBtn.dataset.id;
     saveCatalogMeta(quickCartBtn);
     let cart = getCart();
@@ -2293,6 +2324,7 @@ document.getElementById('subForm').addEventListener('submit', function(e){
   </div>
 </div>
 
+<script src="js/search-data.js"></script>
 <script>
 (function(){
   var FALLBACK_SEARCH_INDEX = [
@@ -2329,7 +2361,7 @@ document.getElementById('subForm').addEventListener('submit', function(e){
     {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'},
     {name:'SS New Consil Socket', sub:'Heavy duty stainless steel consil socket', img:'images/catalog-demo/ss rod consil/1ssrodconsilmain.jpg'}
   ];
-  var SEARCH_INDEX = (typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX;
+  var SEARCH_INDEX = (window.KORRAZ_SEARCH && window.KORRAZ_SEARCH.length) ? window.KORRAZ_SEARCH : ((typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX);
   var CHIP_NAMES = ['Brass Tower Bolt','Alu T-Bolt','SS Hinges','Key Hole','Door Stopper','Flare Knob'];
 
   var overlay = document.getElementById('searchOverlay');
@@ -2363,7 +2395,7 @@ document.getElementById('subForm').addEventListener('submit', function(e){
   }
 
   function itemUrl(item){
-    return 'products.html?cat=' + encodeURIComponent(item.name);
+    return item.url || ('products.html?cat=' + encodeURIComponent(item.name));
   }
 
   function renderResults(list, term){
@@ -2378,6 +2410,37 @@ document.getElementById('subForm').addEventListener('submit', function(e){
     }).join('');
   }
 
+  /* case-insensitive, punctuation/space-insensitive, any word order — "KEY HOLE", "key hole", "t bolt", "T-Bolt", "tbolt" all work.
+     Searches every category AND every item inside a category (js/search-data.js); best name matches come first. */
+  function normSearch(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+  function searchMatches(term){
+    var q = normSearch(term);
+    if(!q) return [];
+    var qc = q.replace(/ /g,'');
+    var tokens = q.split(' ').map(function(t){ return (t.length > 3 && t.charAt(t.length-1) === 's') ? t.slice(0,-1) : t; });
+    var longer = tokens.filter(function(t){ return t.length > 1; });
+    if(longer.length) tokens = longer; /* a lone letter like the "t" in "t bolt" is too vague on its own */
+    var short = q.length <= 3;
+    /* short words (ss, br, l) must start a word — otherwise "ss" would match inside "bra-ss" */
+    function has(text, t){ return t.length <= 3 ? (' ' + text).indexOf(' ' + t) !== -1 : text.indexOf(t) !== -1; }
+    var scored = [];
+    SEARCH_INDEX.forEach(function(item, i){
+      var name = normSearch(item.name), nameC = name.replace(/ /g,'');
+      var hay = name + ' ' + normSearch(item.sub) + ' ' + normSearch(item.parent);
+      var hayC = hay.replace(/ /g,'');
+      var score = 0;
+      if(name === q) score = 100;
+      else if(name.indexOf(q) === 0) score = 80;
+      else if(has(name, q) || (!short && nameC.indexOf(qc) !== -1)) score = 60;
+      else if(tokens.every(function(t){ return has(name, t); })) score = 50;
+      else if(has(hay, q) || (!short && hayC.indexOf(qc) !== -1)) score = 30;
+      else if(tokens.every(function(t){ return has(hay, t); })) score = 20;
+      if(score) scored.push({ item:item, score:score, i:i });
+    });
+    scored.sort(function(a,b){ return b.score - a.score || a.i - b.i; });
+    return scored.slice(0,20).map(function(x){ return x.item; });
+  }
+
   function runSearch(term){
     term = (term || '').trim().toLowerCase();
     var list;
@@ -2386,11 +2449,7 @@ document.getElementById('subForm').addEventListener('submit', function(e){
       sectionLabel.textContent = 'Popular Products';
       suggestEl.style.display = '';
     } else {
-      list = SEARCH_INDEX.filter(function(item){
-        return item.name.toLowerCase().indexOf(term) !== -1 ||
-               (item.sub && item.sub.toLowerCase().indexOf(term) !== -1) ||
-               (item.parent && item.parent.toLowerCase().indexOf(term) !== -1);
-      }).slice(0,8);
+      list = searchMatches(term);
       sectionLabel.textContent = 'Products';
       suggestEl.style.display = 'none';
     }

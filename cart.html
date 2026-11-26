@@ -1014,6 +1014,9 @@ function setCart(arr){ localStorage.setItem('koraaz_cart', JSON.stringify(arr));
 function getQtyMap(){ try{ return JSON.parse(localStorage.getItem('koraaz_cart_qty') || '{}'); } catch(e){ return {}; } }
 function setQtyMap(map){ localStorage.setItem('koraaz_cart_qty', JSON.stringify(map)); }
 function priceToNumber(p){ return parseInt(String(p).replace(/[^0-9]/g, ''), 10) || 0; }
+/* escape for HTML attributes/text — cart keys carry sizes like 6" and names can too,
+   a raw quote was cutting data-key short so Remove / qty +- silently did nothing */
+function esc(v){ return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 /* koraaz_cart now stores CART KEYS, not bare product ids — a product with a
    selected color/size is keyed as "id::c:Color::s:Size" so the same product
@@ -1079,7 +1082,7 @@ function buildWhatsAppLink(keys, qtyMap){
     const bits = [meta.category, meta.selectedColor, meta.selectedSize].filter(Boolean).join(' · ');
     return `• ${meta.name}${bits ? ' (' + bits + ')' : ''} x${qty}`;
   }).filter(Boolean);
-  const msg = 'Hi Korraz, I would like a quote for:%0A' + lines.join('%0A') + '%0A%0APlease share pricing and availability.';
+  const msg = encodeURIComponent('Hi Korraz, I would like a quote for:\n' + lines.join('\n') + '\n\nPlease share pricing and availability.');
   const waBtn = document.getElementById('waCheckout');
   if(waBtn) waBtn.href = 'https://wa.me/919024655202?text=' + msg;
 }
@@ -1127,25 +1130,25 @@ function renderCart(){
       const variantLine = variantBits.length ? `
         <div class="sub" style="display:flex; align-items:center; gap:6px; margin-top:4px;">
           ${meta.selectedColor ? `<span style="width:10px;height:10px;border-radius:50%;flex-shrink:0;display:inline-block;border:1px solid var(--hairline-2); background:${COLOR_HEX[meta.selectedColor] || 'var(--brass)'};"></span>` : ''}
-          <span>${variantBits.join(' · ')}</span>
+          <span>${esc([meta.selectedColor && ('Color: ' + meta.selectedColor), meta.selectedSize && ('Size: ' + meta.selectedSize)].filter(Boolean).join(' · '))}</span>
         </div>` : '';
       return `
-      <div class="cart-row reveal" data-key="${key}">
-        <div class="art">${meta.img ? `<img class="real-photo" src="${meta.img}" alt="${meta.name}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" loading="lazy">` : artTile(meta.icon, '')}</div>
+      <div class="cart-row reveal" data-key="${esc(key)}">
+        <div class="art">${meta.img ? `<img class="real-photo" src="${esc(meta.img)}" alt="${esc(meta.name)}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" loading="lazy">` : artTile(meta.icon, '')}</div>
         <div class="cart-info">
           <div class="pcard-eyebrow">Catalogue Item</div>
-          <div class="name">${meta.name}</div>
-          <div class="sub">${meta.sub}</div>
+          <div class="name">${esc(meta.name)}</div>
+          <div class="sub">${esc(meta.sub)}</div>
           ${variantLine}
         </div>
         <div class="cart-side">
           <div class="cart-price">Enquire for price</div>
           <div class="qty-box">
-            <button class="qty-dec" data-key="${key}" aria-label="Decrease quantity">−</button>
-            <input type="text" inputmode="numeric" class="qty-input" data-key="${key}" value="${qty}" readonly>
-            <button class="qty-inc" data-key="${key}" aria-label="Increase quantity">+</button>
+            <button class="qty-dec" data-key="${esc(key)}" aria-label="Decrease quantity">−</button>
+            <input type="text" inputmode="numeric" class="qty-input" data-key="${esc(key)}" value="${qty}" readonly>
+            <button class="qty-inc" data-key="${esc(key)}" aria-label="Increase quantity">+</button>
           </div>
-          <button class="cart-remove" data-key="${key}">
+          <button class="cart-remove" data-key="${esc(key)}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M9 7V4h6v3m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg>
             Remove
           </button>
@@ -1156,22 +1159,22 @@ function renderCart(){
     const line = priceToNumber(p.price) * qty;
     subtotal += line;
     return `
-    <div class="cart-row reveal" data-key="${key}">
+    <div class="cart-row reveal" data-key="${esc(key)}">
       <div class="art">${p.image ? `<img class="real-photo" src="${p.image}" alt="${(p.title||'').replace(/"/g,'&quot;')}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" loading="lazy">` : artTile(p.icon, '')}</div>
       <div class="cart-info">
         <div class="pcard-eyebrow">${p.eyebrow}</div>
-        <div class="name">${p.title}</div>
+        <div class="name">${esc(p.title)}</div>
         <div class="sub">${p.sub}</div>
         <div class="swatches">${p.swatches.map(c=>`<div class="swatch" style="background:${c}"></div>`).join('')}</div>
       </div>
       <div class="cart-side">
         <div class="cart-price">₹${line.toLocaleString('en-IN')}</div>
         <div class="qty-box">
-          <button class="qty-dec" data-key="${key}" aria-label="Decrease quantity">−</button>
-          <input type="text" inputmode="numeric" class="qty-input" data-key="${key}" value="${qty}" readonly>
-          <button class="qty-inc" data-key="${key}" aria-label="Increase quantity">+</button>
+          <button class="qty-dec" data-key="${esc(key)}" aria-label="Decrease quantity">−</button>
+          <input type="text" inputmode="numeric" class="qty-input" data-key="${esc(key)}" value="${qty}" readonly>
+          <button class="qty-inc" data-key="${esc(key)}" aria-label="Increase quantity">+</button>
         </div>
-        <button class="cart-remove" data-key="${key}">
+        <button class="cart-remove" data-key="${esc(key)}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M9 7V4h6v3m-8 0 1 13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1l1-13"/></svg>
           Remove
         </button>
@@ -1206,6 +1209,8 @@ document.addEventListener('click', function(e){
     const qtyMap = getQtyMap();
     delete qtyMap[key];
     setQtyMap(qtyMap);
+    /* drop that line's saved photo/name snapshot too, otherwise it lingers in localStorage forever */
+    try{ const cm = JSON.parse(localStorage.getItem('koraaz_catalog_meta') || '{}'); if(cm[key]){ delete cm[key]; localStorage.setItem('koraaz_catalog_meta', JSON.stringify(cm)); } }catch(err){}
     renderCart();
     return;
   }
@@ -1295,6 +1300,7 @@ document.getElementById('subForm').addEventListener('submit', function(e){
   </div>
 </div>
 
+<script src="js/search-data.js"></script>
 <script>
 (function(){
   var FALLBACK_SEARCH_INDEX = [
@@ -1330,7 +1336,7 @@ document.getElementById('subForm').addEventListener('submit', function(e){
     {name:'Big Vaccum', sub:'Heavy duty vacuum fitting', img:'images/catalog-demo/big vaccum/big vaccummain.jpg'},
     {name:'BR Concealed Flat Lat', sub:'Brass concealed flat latch', img:'images/catalog-demo/brass conceld flat lat/brass conceled flattype1.jpg'}
   ];
-  var SEARCH_INDEX = (typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX;
+  var SEARCH_INDEX = (window.KORRAZ_SEARCH && window.KORRAZ_SEARCH.length) ? window.KORRAZ_SEARCH : ((typeof PRODUCTS !== 'undefined' && PRODUCTS.length) ? PRODUCTS : FALLBACK_SEARCH_INDEX);
   var CHIP_NAMES = ['Brass Tower Bolt','Alu T-Bolt','SS Hinges','Key Hole','Door Stopper','Flare Knob'];
 
   var overlay = document.getElementById('searchOverlay');
@@ -1364,7 +1370,7 @@ document.getElementById('subForm').addEventListener('submit', function(e){
   }
 
   function itemUrl(item){
-    return 'products.html?cat=' + encodeURIComponent(item.name);
+    return item.url || ('products.html?cat=' + encodeURIComponent(item.name));
   }
 
   function renderResults(list, term){
@@ -1379,6 +1385,37 @@ document.getElementById('subForm').addEventListener('submit', function(e){
     }).join('');
   }
 
+  /* case-insensitive, punctuation/space-insensitive, any word order — "KEY HOLE", "key hole", "t bolt", "T-Bolt", "tbolt" all work.
+     Searches every category AND every item inside a category (js/search-data.js); best name matches come first. */
+  function normSearch(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+  function searchMatches(term){
+    var q = normSearch(term);
+    if(!q) return [];
+    var qc = q.replace(/ /g,'');
+    var tokens = q.split(' ').map(function(t){ return (t.length > 3 && t.charAt(t.length-1) === 's') ? t.slice(0,-1) : t; });
+    var longer = tokens.filter(function(t){ return t.length > 1; });
+    if(longer.length) tokens = longer; /* a lone letter like the "t" in "t bolt" is too vague on its own */
+    var short = q.length <= 3;
+    /* short words (ss, br, l) must start a word — otherwise "ss" would match inside "bra-ss" */
+    function has(text, t){ return t.length <= 3 ? (' ' + text).indexOf(' ' + t) !== -1 : text.indexOf(t) !== -1; }
+    var scored = [];
+    SEARCH_INDEX.forEach(function(item, i){
+      var name = normSearch(item.name), nameC = name.replace(/ /g,'');
+      var hay = name + ' ' + normSearch(item.sub) + ' ' + normSearch(item.parent);
+      var hayC = hay.replace(/ /g,'');
+      var score = 0;
+      if(name === q) score = 100;
+      else if(name.indexOf(q) === 0) score = 80;
+      else if(has(name, q) || (!short && nameC.indexOf(qc) !== -1)) score = 60;
+      else if(tokens.every(function(t){ return has(name, t); })) score = 50;
+      else if(has(hay, q) || (!short && hayC.indexOf(qc) !== -1)) score = 30;
+      else if(tokens.every(function(t){ return has(hay, t); })) score = 20;
+      if(score) scored.push({ item:item, score:score, i:i });
+    });
+    scored.sort(function(a,b){ return b.score - a.score || a.i - b.i; });
+    return scored.slice(0,20).map(function(x){ return x.item; });
+  }
+
   function runSearch(term){
     term = (term || '').trim().toLowerCase();
     var list;
@@ -1387,11 +1424,7 @@ document.getElementById('subForm').addEventListener('submit', function(e){
       sectionLabel.textContent = 'Popular Products';
       suggestEl.style.display = '';
     } else {
-      list = SEARCH_INDEX.filter(function(item){
-        return item.name.toLowerCase().indexOf(term) !== -1 ||
-               (item.sub && item.sub.toLowerCase().indexOf(term) !== -1) ||
-               (item.parent && item.parent.toLowerCase().indexOf(term) !== -1);
-      }).slice(0,8);
+      list = searchMatches(term);
       sectionLabel.textContent = 'Products';
       suggestEl.style.display = 'none';
     }
