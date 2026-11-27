@@ -112,8 +112,12 @@ footer h4{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:va
 footer li{font-size:.76rem;color:var(--mu);margin-bottom:6px}footer li a:hover{color:var(--gold)}
 footer .p{margin-top:12px;font-size:.78rem}
 .cp{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);font-size:.68rem;color:var(--mu)}
-.wa{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;width:50px;height:50px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.4)}
-.wa svg{width:26px;height:26px;fill:#fff}
+.wa{position:fixed;left:32px;bottom:calc(32px + env(safe-area-inset-bottom,0px));z-index:65;width:52px;height:52px;border-radius:50%;background:linear-gradient(145deg,var(--brass,#b8863c),var(--brass-2,#8a6529));color:#17140d;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;box-shadow:0 8px 20px rgba(184,134,60,.35);transition:transform .25s ease,box-shadow .25s ease}
+.wa::before,.wa::after{content:'';position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--brass,#b8863c);animation:wa-pulse 2.2s ease-out infinite;pointer-events:none}
+.wa::after{animation-delay:1.1s}
+@keyframes wa-pulse{0%{transform:scale(1);opacity:.65}100%{transform:scale(1.7);opacity:0}}
+.wa:hover{transform:scale(1.08);box-shadow:0 10px 26px rgba(184,134,60,.5)}
+.wa svg{width:25px;height:25px;fill:currentColor;position:relative;z-index:1}
 @media(max-width:960px){
 .cols{grid-template-columns:repeat(2,1fr)}.fin{grid-template-columns:repeat(3,1fr);row-gap:24px}.fg{grid-template-columns:1fr 1fr}
 .trust .w{grid-template-columns:1fr 1fr}}
@@ -212,7 +216,7 @@ footer .p{margin-top:12px;font-size:.78rem}
 .hero .ht .eb{font-size:.5rem;letter-spacing:.14em;margin-bottom:8px;line-height:1.5}
 .hero h1{font-size:clamp(1.3rem,6.4vw,1.7rem);line-height:1.08}
 .hero .btns{margin-top:16px;gap:8px;flex-direction:column;flex-wrap:nowrap}
-.hero .btn{flex:none;width:100%;padding:11px 6px;font-size:.54rem;letter-spacing:.1em;line-height:1.35}
+.hero .btn{flex:none;width:100%;padding:12px 8px;font-size:.7rem;letter-spacing:.08em;line-height:1.35}
 .fd{bottom:7px;gap:5px}.fd button{width:5px;height:5px}.fd button.on{width:14px}
 }
 /* hero slider */
@@ -360,6 +364,7 @@ header .nav-inner{padding:16px 0; align-items:center;}
   font-family:'Manrope',sans-serif; font-size:0.86rem; color:var(--bone);
   padding:0 8px; height:100%;}
 .search-ov-input::placeholder{color:var(--mute-2);}
+@media (max-width:900px){ .search-ov-input{ font-size:16px; } } /* 16px+ stops iPhone Safari zooming the page when the box is focused */
 .search-ov-clear{width:22px; height:22px; border-radius:50%; flex-shrink:0; display:none;
   align-items:center; justify-content:center; border:none; background:var(--panel-2); color:var(--mute);}
 .search-ov-clear.show{display:flex;}
@@ -508,7 +513,7 @@ body{padding-bottom:64px}
 .tab-item.active{color:#b8863c}
 .tab-item.active svg{transform:translateY(-2px)}
 .tab-item:active svg{transform:scale(.88)}
-.wa{bottom:calc(76px + env(safe-area-inset-bottom,0px));width:42px;height:42px}
+.wa{left:16px;bottom:calc(76px + env(safe-area-inset-bottom,0px));width:42px;height:42px}
 .wa svg{width:22px;height:22px}
 }
 </style>
@@ -541,6 +546,7 @@ details p{padding-bottom:15px}
 footer#contact-anchor .footer-acc-body a{display:inline-block;padding:4px 0}
 }
 </style>
+<style id="mobile-input-zoom-fix">@media(max-width:860px){input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=hidden]),select,textarea{font-size:16px!important}}</style>
 </head>
 <body>
 <div id="pb"></div>
@@ -554,10 +560,10 @@ footer#contact-anchor .footer-acc-body a{display:inline-block;padding:4px 0}
   <div class="wrap nav-inner">
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
     <div class="brandmark">
-      <div class="hexbox">
+      <a href="index.html" class="brand-link" aria-label="Korraz - Home" style="display:flex;align-items:center;gap:inherit;color:inherit;text-decoration:none;"><div class="hexbox">
         <svg viewBox="0 0 100 100"><polygon points="50,4 91,27 91,73 50,96 9,73 9,27" fill="none" stroke="#c9a24b" stroke-width="3"/><text x="50" y="62" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="38" fill="#f5f1e6" font-weight="700">K</text></svg>
       </div>
-      <div class="brand-text"><div class="name">KORRAZ</div><div class="tag">Premium Brass Fitting</div></div>
+      <div class="brand-text"><div class="name">KORRAZ</div><div class="tag">Premium Brass Fitting</div></div></a>
     </div>
     <nav class="main-nav">
       <ul>
@@ -812,7 +818,7 @@ box.addEventListener('dragstart',function(e){e.preventDefault();});
         <a href="https://wa.me/919024655202?text=Hi%2C%20I%27m%20interested%20in%20Korraz%20brass%20hardware." target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 21c1-3 1.5-6 2-9a3.5 3.5 0 1 1 3 1.6c-.3 1.4-.6 3-1 4.4"/></svg></a>
       </div>
     </div>
-    <div class="footer-acc">
+    <div class="footer-acc open">
       <h4 class="footer-acc-toggle">Quick Links <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></h4>
       <div class="footer-acc-body"><ul><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="collection.html">Collections</a></li></ul></div>
     </div>
@@ -886,7 +892,7 @@ document.querySelectorAll('.footer-acc-toggle').forEach(function(t){t.addEventLi
     <button class="search-ov-back" id="searchOvBack" aria-label="Close search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m15 18-6-6 6-6"/></svg></button>
     <div class="search-ov-input-wrap">
       <svg class="ico-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-      <input type="text" class="search-ov-input" id="searchOvInput" placeholder="Search tower bolts, hinges, key hole…" autocomplete="off">
+      <input type="text" class="search-ov-input" id="searchOvInput" enterkeyhint="go" placeholder="Search tower bolts, hinges, key hole…" autocomplete="off">
       <button class="search-ov-clear" id="searchOvClear" aria-label="Clear search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
     </div>
   </div>
@@ -897,7 +903,7 @@ document.querySelectorAll('.footer-acc-toggle').forEach(function(t){t.addEventLi
     </div>
     <div class="search-ov-section-head">
       <p class="search-ov-label" id="searchSectionLabel">Products</p>
-      <a href="products.html" class="search-view-all">View all results <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 6 6 6-6 6"/></svg></a>
+      <a href="products.html" class="search-view-all" id="searchViewAll">View all products <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 6 6 6-6 6"/></svg></a>
     </div>
     <div class="search-results" id="searchResults"></div>
     <div class="search-ov-empty" id="searchOvEmpty" style="display:none;">
@@ -907,7 +913,7 @@ document.querySelectorAll('.footer-acc-toggle').forEach(function(t){t.addEventLi
   </div>
 </div>
 
-<script src="js/search-data.js"></script>
+<script src="js/search-data.js?v=2"></script>
 <script>
 (function(){
   var FALLBACK_SEARCH_INDEX = [
@@ -993,34 +999,70 @@ document.querySelectorAll('.footer-acc-toggle').forEach(function(t){t.addEventLi
   }
 
   /* case-insensitive, punctuation/space-insensitive, any word order — "KEY HOLE", "key hole", "t bolt", "T-Bolt", "tbolt" all work.
-     Searches every category AND every item inside a category (js/search-data.js); best name matches come first. */
+     Also finds by colour ("rose gold", "color black") and by size ("6", "6 inch", 6", 25mm, 4x12, 1/2"). Searches every category AND every
+     item inside a category (js/search-data.js); best name matches come first. */
   function normSearch(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
-  function searchMatches(term){
-    var q = normSearch(term);
-    if(!q) return [];
+  function canonSize(s){
+    return String(s||'').toLowerCase().replace(/\u00d7/g,'x').replace(/\s+/g,'').replace(/(\d)(?:inches|inch|in|"|'')/g,'$1in');
+  }
+  /* a size with a unit, or an a x b dimension */
+  var SIZE_IN_QUERY = /\d+(?:\.\d+)?(?:\/\d+)?\s*(?:"|''|inches|inch|in\b|mm)|\d+(?:\.\d+)?\s*[x\u00d7]\s*\d+(?:\.\d+)?(?:\s*[x\u00d7]\s*\d+(?:\.\d+)?)?\s*(?:mm|in\b|inch)?/i;
+  function hasSize(item, sq){
+    return (item.sizes || []).some(function(z){
+      var c = canonSize(z);
+      return c.indexOf(sq) === 0 && !/[0-9.\/]/.test(c.charAt(sq.length) || ' ');
+    });
+  }
+  function scoreSearch(text, sq){
+    var q = normSearch(text);
+    if(!q && !sq) return [];
     var qc = q.replace(/ /g,'');
-    var tokens = q.split(' ').map(function(t){ return (t.length > 3 && t.charAt(t.length-1) === 's') ? t.slice(0,-1) : t; });
+    var tokens = q ? q.split(' ').map(function(t){ return (t.length > 3 && t.charAt(t.length-1) === 's') ? t.slice(0,-1) : t; }) : [];
     var longer = tokens.filter(function(t){ return t.length > 1; });
     if(longer.length) tokens = longer; /* a lone letter like the "t" in "t bolt" is too vague on its own */
     var short = q.length <= 3;
     /* short words (ss, br, l) must start a word — otherwise "ss" would match inside "bra-ss" */
-    function has(text, t){ return t.length <= 3 ? (' ' + text).indexOf(' ' + t) !== -1 : text.indexOf(t) !== -1; }
+    function has(t2, t){ return t.length <= 3 ? (' ' + t2).indexOf(' ' + t) !== -1 : t2.indexOf(t) !== -1; }
     var scored = [];
     SEARCH_INDEX.forEach(function(item, i){
-      var name = normSearch(item.name), nameC = name.replace(/ /g,'');
-      var hay = name + ' ' + normSearch(item.sub) + ' ' + normSearch(item.parent);
-      var hayC = hay.replace(/ /g,'');
+      if(sq && !hasSize(item, sq)) return;
       var score = 0;
-      if(name === q) score = 100;
-      else if(name.indexOf(q) === 0) score = 80;
-      else if(has(name, q) || (!short && nameC.indexOf(qc) !== -1)) score = 60;
-      else if(tokens.every(function(t){ return has(name, t); })) score = 50;
-      else if(has(hay, q) || (!short && hayC.indexOf(qc) !== -1)) score = 30;
-      else if(tokens.every(function(t){ return has(hay, t); })) score = 20;
+      if(!q){ score = 40; }
+      else {
+        var name = normSearch(item.name), nameC = name.replace(/ /g,'');
+        var hay = name + ' ' + normSearch(item.sub) + ' ' + normSearch(item.parent) + ' ' + normSearch((item.colors || []).join(' '));
+        var hayC = hay.replace(/ /g,'');
+        if(name === q) score = 100;
+        else if(name.indexOf(q) === 0) score = 80;
+        else if(has(name, q) || (!short && nameC.indexOf(qc) !== -1)) score = 60;
+        else if(tokens.every(function(t){ return has(name, t); })) score = 50;
+        else if(has(hay, q) || (!short && hayC.indexOf(qc) !== -1)) score = 30;
+        else if(tokens.every(function(t){ return has(hay, t); })) score = 20;
+      }
       if(score) scored.push({ item:item, score:score, i:i });
     });
     scored.sort(function(a,b){ return b.score - a.score || a.i - b.i; });
     return scored.slice(0,20).map(function(x){ return x.item; });
+  }
+  function searchMatches(term){
+    var raw = String(term || '');
+    /* "color black", "size 6", "finish gold" — drop the label word and search the value */
+    var stripped = raw.replace(/\b(?:colou?rs?|sizes?|finish(?:es)?)\b/ig, ' ').replace(/\s+/g, ' ').trim();
+    if(stripped) raw = stripped;
+    var sm = raw.match(SIZE_IN_QUERY);
+    if(sm){
+      var out = scoreSearch(raw.replace(sm[0], ' '), canonSize(sm[0]));
+      /* nothing had that size (e.g. a name like "2 in 1") — fall back to plain words */
+      return out.length ? out : scoreSearch(raw, null);
+    }
+    /* a bare number ("6", "12", "2.5", "3/4"): items that come in that size (any unit), plus names that contain it */
+    var bn = raw.trim().match(/^\d+(?:\.\d+)?(?:\/\d+)?$/);
+    if(bn){
+      var byName = scoreSearch(raw, null), bySize = scoreSearch('', bn[0]), seen = [], merged = [];
+      byName.concat(bySize).forEach(function(it){ if(seen.indexOf(it) === -1){ seen.push(it); merged.push(it); } });
+      return merged.slice(0, 20);
+    }
+    return scoreSearch(raw, null);
   }
 
   function runSearch(term){
@@ -1036,6 +1078,8 @@ document.querySelectorAll('.footer-acc-toggle').forEach(function(t){t.addEventLi
       suggestEl.style.display = 'none';
     }
     clearBtn.classList.toggle('show', !!term);
+    var viewAllEl = document.getElementById('searchViewAll'); /* only meaningful before typing — it opens the full product list */
+    if(viewAllEl) viewAllEl.style.display = term ? 'none' : '';
     if(list.length === 0){
       resultsEl.style.display = 'none';
       emptyEl.style.display = '';
@@ -1120,6 +1164,16 @@ document.querySelectorAll('.footer-acc-toggle').forEach(function(t){t.addEventLi
     if(overlay.classList.contains('active')) positionDesktopOverlay();
   });
 
+  /* Enter (or the phone keyboard's Go key) opens the top result */
+  function openTopResult(e){
+    if(e.key !== 'Enter') return;
+    if(!(e.target.value || '').trim()) return;
+    var first = resultsEl.style.display !== 'none' && resultsEl.querySelector('a.search-result-item');
+    if(first){ e.preventDefault(); window.location.href = first.getAttribute('href'); }
+  }
+  input.addEventListener('keydown', openTopResult);
+  if(navInput) navInput.addEventListener('keydown', openTopResult);
+
   renderChips();
 })();
 </script>
@@ -1137,7 +1191,8 @@ document.querySelectorAll('.footer-acc-toggle').forEach(function(t){t.addEventLi
     toggle.addEventListener('click',function(){ isOpen?closeNav():openNav(); });
     if(scrim) scrim.addEventListener('click',closeNav);
     panel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',closeNav); });
-    window.addEventListener('resize',function(){ if(isOpen) pos(); });
+    window.addEventListener('resize',function(){ if(!isOpen) return; if(getComputedStyle(toggle).display==='none') closeNav(); else pos(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&isOpen) closeNav(); });
   }
   function cnt(k){ try{ return JSON.parse(localStorage.getItem(k)||'[]').length; }catch(e){ return 0; } }
   var cb=document.getElementById('cartBadge'),wb=document.getElementById('wishBadge'),c=cnt('koraaz_cart'),w=cnt('koraaz_wishlist');

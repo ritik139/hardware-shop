@@ -1,0 +1,12 @@
+# secrets — never commit
+.env
+.env.*
+!.env.example
+
+# dependencies (run `npm install` inside backend/ instead)
+node_modules/
+
+# logs / OS files
+*.log
+.DS_Store
+Thumbs.db

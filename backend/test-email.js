@@ -9,10 +9,14 @@ console.log("EMAIL_PASS length:", process.env.EMAIL_PASS ? process.env.EMAIL_PAS
 console.log("NOTIFY_EMAIL:", process.env.NOTIFY_EMAIL);
 console.log("--------------------------------------------");
 
+const port = Number(process.env.EMAIL_PORT) || 587;
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
-  port: Number(process.env.EMAIL_PORT) || 587,
-  secure: false,
+  port,
+  secure: port === 465, // same rule as the real server (465 = SSL, 587 = STARTTLS)
+  connectionTimeout: 10000,
+  greetTimeout: 10000,
+  socketTimeout: 20000,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,

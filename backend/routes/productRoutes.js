@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   getAllProducts,
+  getProductImage,
   getProductBySlug,
   getAllProductsAdmin,
   createProduct,
@@ -17,7 +18,8 @@ router.put("/admin/:id", requireAdmin, updateProduct);         // PUT /api/produ
 router.delete("/admin/:id", requireAdmin, deleteProduct);      // DELETE /api/products/admin/:id
 
 // ===== Public routes (used by the website) =====
-router.get("/", getAllProducts);              // GET /api/products
-router.get("/:slug", getProductBySlug);        // GET /api/products/m5001 — kept LAST so it doesn't swallow /admin/* routes
+router.get("/", getAllProducts);                // GET /api/products
+router.get("/image/:id", getProductImage);      // GET /api/products/image/<id> — an uploaded product photo as a cacheable image
+router.get("/:slug", getProductBySlug);         // GET /api/products/m5001 — kept LAST so it doesn't swallow /admin/* routes
 
 module.exports = router;

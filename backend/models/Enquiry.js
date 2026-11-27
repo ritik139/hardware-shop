@@ -16,4 +16,8 @@ const enquirySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// admin list: newest first, optionally filtered by status
+enquirySchema.index({ createdAt: -1 });
+enquirySchema.index({ status: 1, createdAt: -1 });
+
 module.exports = mongoose.model("Enquiry", enquirySchema);

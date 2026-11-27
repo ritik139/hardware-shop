@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /admin-panel/
+Disallow: /api/
 
 Sitemap: https://www.korraz.in/sitemap.xml

@@ -15,7 +15,7 @@
     address: '42/336, Ground Floor, Unnat Nagar No.4, M. G. Road, Goregaon (W), Mumbai',
     phone: '+91 90246 55202',
     phoneHref: 'tel:+919024655202',
-    waHref: 'https://wa.me/919024655202?text=Hi%2C%20I%27m%20interested%20in%20Koraaz%20brass%20hardware.',
+    waHref: 'https://wa.me/919024655202?text=Hi%2C%20I%27m%20interested%20in%20Korraz%20brass%20hardware.',
     email: 'korrasenterprises@gmail.com',
     mailHref: 'mailto:korrasenterprises@gmail.com'
   };
@@ -259,7 +259,7 @@
   .kai-chip{border:1px solid rgba(201,162,75,.5); color:var(--brass,#C9A24B); background:rgba(201,162,75,.08); font-family:Inter,sans-serif; font-size:0.72rem; font-weight:600;\
     padding:6px 12px; border-radius:20px; cursor:pointer; transition:all .2s ease; white-space:nowrap;}\
   .kai-chip:hover{background:var(--brass,#C9A24B); color:#18140b;}\
-  .kai-cta{display:inline-flex; align-items:center; gap:7px; margin-left:32px; margin-top:2px; background:#25D366; color:#0b3018; font-weight:700; font-size:0.78rem;\
+  .kai-cta{display:inline-flex; align-items:center; gap:7px; margin-left:32px; margin-top:2px; background:linear-gradient(135deg, var(--brass,#C9A24B), var(--brass-2,#a8843a)); color:#18140b; font-weight:700; font-size:0.78rem;\
     font-family:Inter,sans-serif; padding:8px 14px; border-radius:20px; text-decoration:none; width:fit-content; transition:transform .2s ease;}\
   .kai-cta:hover{transform:translateY(-2px);}\
   .kai-cta svg{width:14px; height:14px;}\
